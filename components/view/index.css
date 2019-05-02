@@ -39,9 +39,7 @@
   margin-left: var(--document-margin);
 }
 
-.View-link,
-.View-link:hover,
-.View-link:visited {
+.View-link {
   display: inline-block;
   margin: 0 0.2rem;
   padding: 0.2rem;
@@ -59,16 +57,12 @@
 }
 
 @media (min-width: 600px) {
-  .View-link--light,
-  .View-link--light:hover,
-  .View-link--light:visited {
+  .View-link--light {
     color: #fff;
   }
 }
 
-.View-link--highlighted,
-.View-link--highlighted:hover,
-.View-link--highlighted:visited {
+.View-link--highlighted {
   padding: 0.2em 0.6em 0.3em;
   background-color: rgb(var(--burkina-blue));
   color: #fff;
@@ -108,6 +102,12 @@
 
 .View-main {
   flex-grow: 1;
+}
+
+.View-space {
+  display: block;
+  margin-top: 7rem;
+  margin-bottom: 7rem;
 }
 
 /**

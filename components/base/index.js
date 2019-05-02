@@ -80,6 +80,13 @@ function i18n (source) {
   }
 }
 
+// generate id friendly id
+// str -> str
+exports.slugify = slugify
+function slugify (str) {
+  return str.toLowerCase().replace(/\s+/g, '-').replace(/[^-\w]+/g, '')
+}
+
 // get element offset top
 // Element -> num
 exports.offset = offset
@@ -159,7 +166,7 @@ function srcset (uri, sizes, opts = {}) {
   return sizes.map(function (size) {
     var transform = transforms
     if (Array.isArray(size)) {
-      transform = opts.transform ? size[1] + ',' + opts.transforms : size[1]
+      transform = opts.transforms ? size[1] + ',' + opts.transforms : size[1]
       if (!/c_/.test(transform)) transform += ',c_fill'
       if (!/f_/.test(transform)) transform += ',f_auto'
       if (!/q_/.test(transform)) transform += ',q_auto'

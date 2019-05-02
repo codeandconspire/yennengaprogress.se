@@ -50,7 +50,7 @@ function createView (view, meta) {
 
         if (next && next.title) {
           next['og:title'] = next.title
-          next.title = `${next.title} – ${title}`
+          if (next.title !== title) next.title = `${next.title} – ${title}`
         }
 
         var defaults = {
