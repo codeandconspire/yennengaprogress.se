@@ -18,19 +18,17 @@ function home (state, emit) {
         if (err) throw HTTPError(500, err)
         if (!doc) return Landing.loading()
 
-        var image = memo(function (url) {
-          if (!url) return null
-          return Object.assign({
-            alt: doc.data.image.alt || '',
-            src: srcset(url, [400]).split(' ')[0],
-            sizes: '50vw (min-width: 900px), 100vw',
-            srcset: srcset(url, [400, 600, 800, [1600, 'q_70']])
-          }, doc.data.image.dimensions)
-        }, [doc.data.image.url])
-
         return html`
           ${state.cache(Landing, 'homepage-landing').render({
-            image,
+            image: memo(function (url) {
+              if (!url) return null
+              return Object.assign({
+                alt: doc.data.image.alt || '',
+                src: srcset(url, [400]).split(' ')[0],
+                sizes: '50vw (min-width: 900px), 100vw',
+                srcset: srcset(url, [400, 600, 800, [1600, 'q_70']])
+              }, doc.data.image.dimensions)
+            }, [doc.data.image.url]),
             caption: doc.data.image.alt,
             title: asText(doc.data.title),
             link: doc.data.cta_link.id ? {
