@@ -33,11 +33,19 @@ module.exports = class Landing extends Component {
       var ratio = (scrollY - min) / max
       el.style.setProperty('--Landing-offset', ratio.toFixed(3))
     })
+    var onresize = nanoraf(function () {
+      top = offset(el)
+      height = el.offsetHeight
+      el.style.removeProperty('--Landing-offset')
+      onscroll()
+    })
 
     onscroll()
     window.addEventListener('scroll', onscroll, { passive: true })
+    window.addEventListener('resize', onresize)
     this.unload = function () {
       window.removeEventListener('scroll', onscroll)
+      window.removeEventListener('resize', onresize)
     }
   }
 
@@ -49,7 +57,7 @@ module.exports = class Landing extends Component {
     delete link.text
 
     return html`
-      <div class="Landing" id="${this.id}">
+      <div class="Landing u-container" id="${this.id}">
         <div class="Landing-heading">
           ${props.title ? html`<h1 class="Landing-title">${props.title}</h1>` : null}
           ${props.link ? html`<a class="Landing-button" ${link}>${props.link.text}</a>` : null}

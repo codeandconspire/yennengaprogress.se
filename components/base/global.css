@@ -21,7 +21,7 @@
   --document-color: 55, 55, 55;
 
   --document-width: 1800px;
-  --document-margin: 1rem;
+  --document-margin: 0.6rem;
 
   --container-large-width: var(--document-width);
   --container-medium-width: 43rem;
