@@ -1,0 +1,72 @@
+{
+  "name": "yennengaprogress.se",
+  "version": "1.0.0",
+  "description": "Offical webpage of Yennenga Progress",
+  "main": "index.js",
+  "scripts": {
+    "test": "standard",
+    "start": "node server.js",
+    "build": "jalla build index.js --sw sw.js"
+  },
+  "documentify": {
+    "transform": [
+      [
+        "./lib/document.js",
+        {
+          "order": "start"
+        }
+      ]
+    ]
+  },
+  "now": {
+    "alias": "next.yennengaprogress.se",
+    "env": {
+      "NODE_ENV": "production",
+      "CLOUDINARY_KEY": "@cloudinary-key",
+      "CLOUDINARY_SECRET": "@cloudinary-secret",
+      "PRISMIC_SECRET": "@prismic-yennengaprogress-secret",
+      "CLOUDFLARE_ZONE": "@cloudflare-yennengaprogress-zone",
+      "CLOUDFLARE_EMAIL": "@cloudflare-yennengaprogress-email",
+      "CLOUDFLARE_KEY": "@cloudflare-yennengaprogress-key",
+      "POLYFILL_FEATURES": "es2017"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/codeandconspire/yennengaprogress.se.git"
+  },
+  "author": "code and conspire",
+  "license": "CC-BY-SA-4.0",
+  "bugs": {
+    "url": "https://github.com/codeandconspire/yennengaprogress.se/issues"
+  },
+  "homepage": "https://github.com/codeandconspire/yennengaprogress.se#readme",
+  "devDependencies": {
+    "choo-devtools": "^2.5.1",
+    "standard": "^10.0.3"
+  },
+  "dependencies": {
+    "cccpurge": "^2.0.0",
+    "choo": "^6.13.3",
+    "choo-meta": "^2.0.0",
+    "choo-service-worker": "^2.4.0",
+    "cloudinary": "^1.14.0",
+    "dedent": "^0.7.0",
+    "dotenv": "^7.0.0",
+    "focus-visible": "^4.1.5",
+    "hstream": "^1.2.0",
+    "jalla": "^0.12.0-10",
+    "koa-body": "^4.1.0",
+    "koa-compose": "^4.1.0",
+    "koa-route": "^3.2.0",
+    "nanolru": "^1.0.0",
+    "nanoraf": "^3.1.0",
+    "normalize.css": "^8.0.1",
+    "postcss-custom-properties": "^8.0.10",
+    "postcss-focus-visible": "^4.0.0",
+    "postcss-url": "^8.0.0",
+    "prismic-element": "^1.0.0",
+    "prismic-javascript": "^2.0.3",
+    "prismic-richtext": "^0.4.2"
+  }
+}

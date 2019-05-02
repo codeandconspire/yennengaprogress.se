@@ -1,0 +1,74 @@
+@import "../global";
+
+/* @define utilities */
+.u-textBold {
+  font-weight: 600 !important;
+}
+
+.u-textRegular {
+  font-weight: normal !important;
+}
+
+.u-textItalic {
+  font-style: italic !important;
+}
+
+.u-textCenter {
+  text-align: center !important;
+}
+
+.u-textNowrap {
+  white-space: nowrap !important;
+}
+
+.u-textNowrap {
+  white-space: nowrap !important;
+}
+
+.u-textUnselectable {
+  user-select: none !important;
+}
+
+.u-textUppercase {
+  text-transform: uppercase !important;
+}
+
+.u-textLink {
+  display: inline-block;
+  padding: 0.1rem 0.3rem;
+  margin: -0.1rem -0.3rem;
+  border-radius: 2px;
+  transition: background 400ms var(--ease-out);
+}
+
+.u-textLink:hover,
+.u-textLink:active {
+  background: rgba(var(--color-lavender), 0.1);
+  transition: none;
+}
+
+/**
+ * Prevent text from wrapping onto multiple lines and truncate with an ellipsis.
+ * 1. Ensure that the node has a maximum width after which truncation can occur.
+ */
+
+.u-textTruncate {
+  display: block !important;
+  max-width: 100% !important; /* 1 */
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+/**
+ * Source: https://css-tricks.com/snippets/css/prevent-long-urls-from-breaking-out-of-container/
+ */
+
+.u-textBreakLongWords {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  -ms-word-break: break-all;
+  word-break: break-all;
+  word-break: break-word;
+  hyphens: auto;
+}

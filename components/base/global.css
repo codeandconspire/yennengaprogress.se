@@ -1,0 +1,69 @@
+:root {
+  --dark-blue: 31, 75, 162;
+  --burkina-blue: 0, 92, 215;
+  --sand: 213, 206, 186;
+  --umber: 186, 103, 64;
+  --light-grey: 240, 240, 240;
+
+  --color-muted: 0, 0, 0, 0.5;
+  --color-link: var(--dark-blue);
+
+  --heading-font-family: mono45-headline, monospace;
+  --heading-font-weight: 500;
+  --heading-font-style: normal;
+  --heading-line-height: 1;
+  --heading-font: var(--heading-font-style) var(--heading-font-weight) 1em/var(--heading-line-height) var(--heading-font-family);
+
+  --document-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --document-line-height: 1.5;
+
+  --document-background: var(--light-grey);
+  --document-color: 55, 55, 55;
+
+  --document-width: 1800px;
+  --document-margin: 1rem;
+
+  --container-large-width: var(--document-width);
+  --container-medium-width: 43rem;
+  --container-small-width: 30rem;
+
+  --loading-color: 0, 0, 0, 0.06;
+  --loading-color-solid: 235, 235, 235;
+
+  --focus-ring-width: 3px;
+  --focus-ring-color: var(--document-color);
+
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (min-width: 350px) {
+  :root {
+    --document-margin: 1.125rem;
+  }
+}
+
+@media (min-width: 400px) {
+  :root {
+    --document-margin: 1.5rem;
+  }
+}
+
+@media (min-width: 600px) {
+  :root {
+    --document-margin: 2.5rem;
+  }
+}
+
+@media (min-width: 1000px) {
+  :root {
+    --document-margin: 3.5rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  :root {
+    --document-margin: 5rem;
+  }
+}

@@ -1,0 +1,253 @@
+@import "https://use.typekit.net/ugl4huw.css";
+@import "normalize.css";
+@import "./global";
+@import "./utilities/colors";
+@import "./utilities/layout";
+@import "./utilities/loading";
+@import "./utilities/size";
+@import "./utilities/space";
+@import "./utilities/text";
+@import "./utilities/transitions";
+
+/**
+ * Document styles
+ * 1. Global box sizing
+ * 2. Guard for horizontal scrolling
+ * 3. Support sticky footer solutions
+ * 4. Simply feels better then global text cursor
+ * 5. Site should have a background in case it's iframed
+ * 6. Fabulous text rendering
+ * 7. Fabulous svg text sizing
+ */
+
+:root {
+  box-sizing: border-box; /* 1 */
+  width: 100%; /* 2 */
+  height: 100%; /* 3 */
+  overflow-x: hidden; /* 2 */
+  cursor: default; /* 4 */
+  font-family: var(--document-font-family);
+  background: rgb(var(--document-background)); /* 5 */
+  color: rgb(var(--document-color));
+  font-size: 100%;
+  line-height: var(--document-line-height);
+  -webkit-tap-highlight-color: transparent;
+  -webkit-font-smoothing: antialiased; /* 6 */
+  -moz-osx-font-smoothing: grayscale; /* 6 */
+  text-rendering: geometricPrecision; /* 7 */
+}
+
+@media (min-width: 1500px) {
+  :root {
+    font-size: 110%;
+  }
+}
+
+@media (min-width: 1800px) {
+  :root {
+    font-size: 120%;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit; /* 1 */
+}
+
+/**
+ * Text selection
+ */
+
+::selection {
+  background: rgba(var(--color-orange), 0.25);
+}
+
+/**
+ * Media elements
+ */
+
+svg,
+img,
+video,
+iframe {
+  display: inline-block;
+  vertical-align: bottom;
+}
+
+/**
+ * 1. Improve alt text rendering for broken images
+ */
+
+img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  font-size: 0.8rem; /* 1 */
+}
+
+/**
+ * Inline elements
+ */
+
+strong {
+  font-weight: 600;
+}
+
+/*
+ * Clickable elements
+ * 1. Remove the gray background on active links in IE 10.
+ * 2. Remove the tapping delay
+ */
+
+ a {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+a:hover,
+a:active {
+  background-color: transparent; /* 1 */
+}
+
+a,
+area,
+button,
+input,
+label,
+select,
+summary,
+textarea,
+[tabindex] {
+  -ms-touch-action: manipulation; /* 2 */
+  touch-action: manipulation; /* 2 */
+}
+
+input {
+  font-size: 1rem;
+}
+
+/**
+ * Reset a few styles
+ */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol,
+blockquote,
+iframe,
+figure {
+  font: inherit;
+  margin: 0;
+  border: 0;
+  list-style: none;
+  padding: 0;
+}
+
+/**
+ * Set sensible default ruler styles
+ */
+
+hr {
+  display: block;
+  width: 100%;
+  height: 1px;
+  border: 0;
+  background: rgba(var(--light-grey), 0.3);
+}
+
+/**
+ * Clean out browser button styles
+ */
+
+button {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  line-height: inherit;
+  cursor: default;
+}
+
+/**
+ * Pointer is for links, not for actions on the same page
+ */
+
+:root[scripting-enabled] [role="button"],
+:root[scripting-enabled] [role="tab"] {
+  cursor: default;
+}
+
+/**
+ * Remove default focus styles for mouse users if :focus-visible is supported on
+ * this platform, or polyfilled with https://github.com/WICG/focus-visible
+ */
+
+:focus:not(:focus-visible) {
+  outline: 0 !important;
+}
+
+/**
+ * Provide enhanced focus styles for keyboard focus
+ */
+
+:focus-visible {
+  outline: rgb(var(--focus-ring-color)) solid var(--focus-ring-width) !important;
+}
+
+/**
+ * Print styles
+ */
+
+@page {
+  margin: 2cm;
+}
+
+@media print {
+  a {
+    page-break-inside: avoid;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
+    page-break-after: avoid;
+    page-break-inside: avoid;
+  }
+
+  img {
+    page-break-inside: avoid;
+    page-break-after: avoid;
+  }
+
+  ul,
+  ol,
+  img {
+    page-break-before: avoid;
+  }
+
+  iframe {
+    display: none;
+  }
+
+  a,
+  a:link,
+  a:visited {
+    background: transparent;
+    text-decoration: underline;
+  }
+}

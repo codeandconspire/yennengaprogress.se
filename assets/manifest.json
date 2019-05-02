@@ -1,0 +1,14 @@
+{
+  "name": "Yennenga Progress",
+  "short_name": "Yennenga",
+  "start_url": "/",
+  "display": "minimal-ui",
+  "background_color": "#F0F0F0",
+  "theme_color": "#BA6740",
+  "icons": {
+    "16": "/tile-16.png",
+    "128": "/tile-128.png",
+    "256": "/tile-256.png",
+    "512": "/tile-512.png"
+  }
+}
