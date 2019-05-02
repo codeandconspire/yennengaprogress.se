@@ -3,6 +3,7 @@ var asElement = require('prismic-element')
 var view = require('../components/view')
 var method = require('../components/method')
 var banner = require('../components/banner')
+var recruit = require('../components/recruit')
 var Landing = require('../components/landing')
 var { i18n, memo, srcset, slugify, resolve, asText, HTTPError } = require('../components/base')
 
@@ -59,7 +60,7 @@ function home (state, emit) {
                 return {
                   href: link.url || resolve(link),
                   external: link.target === '_blank',
-                  text: link.data || link.data.cta ? link.data.cta : text`Read more`
+                  text: link.data && link.data.cta ? link.data.cta : text`Read more`
                 }
               }, [doc.data.banner_link]),
               image: memo(function (url) {
@@ -72,6 +73,21 @@ function home (state, emit) {
                 }, doc.data.banner_image.dimensions)
               }, [doc.data.banner_image.url])
             }) : null}
+          </div>
+          <div class="View-space u-container" id="${slugify(asText(doc.data.recruit_heading))}">
+            ${recruit({
+              title: asText(doc.data.recruit_heading),
+              body: asElement(doc.data.recruit_text),
+              actions: doc.data.recruit_actions.map(function ({ link, type }) {
+                if ((!link.id && !link.url) && link.isBroken) return null
+                return {
+                  type: type.toLowerCase(),
+                  href: link.url || resolve(link),
+                  external: link.target === '_blank',
+                  text: link.data && link.data.cta ? link.data.cta : text`Read more`
+                }
+              })
+            })}
           </div>
         `
       })}
