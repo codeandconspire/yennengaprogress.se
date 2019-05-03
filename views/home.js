@@ -1,13 +1,16 @@
 var html = require('choo/html')
+var parse = require('date-fns/parse')
 var asElement = require('prismic-element')
+var { Predicates } = require('prismic-javascript')
 var view = require('../components/view')
 var card = require('../components/card')
+var news = require('../components/news')
 var Zigzag = require('../components/zigzag')
 var method = require('../components/method')
 var banner = require('../components/banner')
 var recruit = require('../components/recruit')
 var Landing = require('../components/landing')
-var { i18n, memo, srcset, slugify, resolve, asText, HTTPError } = require('../components/base')
+var { i18n, memo, srcset, slugify, resolve, asText, loader, HTTPError } = require('../components/base')
 
 var text = i18n()
 
@@ -81,7 +84,7 @@ function home (state, emit) {
               actions: doc.data.recruit_actions.map(function ({ link, type }) {
                 if ((!link.id && !link.url) && link.isBroken) return null
                 return {
-                  type: type.toLowerCase(),
+                  primary: type.toLowerCase() === 'primary',
                   href: link.url || resolve(link),
                   external: link.target === '_blank',
                   text: link.data && link.data.cta ? link.data.cta : text`Read more`
@@ -118,6 +121,32 @@ function home (state, emit) {
                 href: resolve(doc),
                 text: doc.data.cta || text`Show all projects`
               }
+            }))}
+          </section>
+          <section class="View-space u-container" id="news">
+            ${news(state.prismic.getSingle('news_listing', function (err, doc) {
+              if (err) return null
+              var query = Predicates.at('document.type', 'news')
+              var opts = {
+                pageSize: 3,
+                orderings: '[document.first_publication_date desc]'
+              }
+              return state.prismic.get(query, opts, function (err, response) {
+                if (err) return null
+                return {
+                  title: doc ? asText(doc.data.title) : loader(5),
+                  link: doc ? {
+                    href: resolve(doc),
+                    text: doc.data.cta || text`All news`
+                  } : null,
+                  items: response ? response.results.map((doc) => ({
+                    title: asText(doc.data.title),
+                    body: asElement(doc.data.description, resolve),
+                    date: parse(doc.first_publication_date),
+                    href: resolve(doc)
+                  })) : null
+                }
+              })
             }))}
           </section>
         `
