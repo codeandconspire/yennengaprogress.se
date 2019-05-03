@@ -1,6 +1,8 @@
 var html = require('choo/html')
 var asElement = require('prismic-element')
 var view = require('../components/view')
+var card = require('../components/card')
+var Zigzag = require('../components/zigzag')
 var method = require('../components/method')
 var banner = require('../components/banner')
 var recruit = require('../components/recruit')
@@ -87,6 +89,37 @@ function home (state, emit) {
               })
             })}
           </div>
+          <section class="View-space" id="projects">
+            ${state.cache(Zigzag, 'homepage-projects').render(doc.data.featured_projects.map(function ({ link }, index) {
+              if (!link.id || link.isBroken) return null
+              return card({
+                label: link.data.label,
+                title: asText(link.data.title),
+                body: asElement(link.data.description),
+                theme: index % 3 ? card.themes[index % card.themes.length] : null,
+                image: index % 3 ? null : memo(function (url) {
+                  if (!url) return null
+                  return Object.assign({
+                    alt: link.data.image.alt || '',
+                    sizes: '50vw (min-width: 600px), 100vw',
+                    src: srcset(url, [600], { transforms: 'c_thumb' }).split(' ')[0],
+                    srcset: srcset(url, [400, 800, [1600, 'q_80'], [2600, 'q_70']], { transforms: 'c_thumb' })
+                  }, link.data.image.dimensions)
+                }, [(link.data.featured_image || link.data.image).url, 'card']),
+                link: {
+                  href: resolve(link),
+                  text: link.data.cta || text`Read more`,
+                  external: link.target === '_blank'
+                }
+              })
+            }).filter(Boolean), state.prismic.getSingle('project_listing', function (err, doc) {
+              if (err || !doc) return null
+              return {
+                href: resolve(doc),
+                text: doc.data.cta || text`Show all projects`
+              }
+            }))}
+          </section>
         `
       })}
     </main>

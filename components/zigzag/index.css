@@ -1,0 +1,65 @@
+@import "../base";
+
+:root {
+  --Zigzag-inview: 0;
+}
+
+/* @define Zigzag */
+.Zigzag {
+  width: 100%;
+  padding-top: 10vh;
+  margin-bottom: -10vh;
+}
+
+@media (min-width: 600px) {
+  .Zigzag-item {
+    float: left;
+    width: 50%;
+  }
+}
+
+@supports (display: grid) {
+  @media (min-width: 600px) {
+    .Zigzag {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto;
+    }
+
+    .Zigzag-item {
+      width: 100%;
+    }
+
+    .Zigzag-item:nth-child(2n+1),
+    .Zigzag-button:nth-child(2n+1) {
+      margin-top: -10vh;
+      transform: translateY(calc(10vh * (1 - var(--Zigzag-inview))));
+    }
+  }
+}
+
+.Zigzag-button,
+.Zigzag-button:hover {
+  display: block;
+  height: 10vh;
+  font: var(--heading-font);
+  font-size: 1.25rem;
+  line-height: 10vh;
+  white-space: nowrap;
+  color: rgb(var(--document-color));
+  background-color: #fff;
+  text-align: center;
+}
+
+.Zigzag-button::after {
+  content: "";
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  background: url("./chevron.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 0.45em;
+  position: relative;
+  top: 0.15em;
+}
