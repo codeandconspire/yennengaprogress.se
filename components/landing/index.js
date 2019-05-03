@@ -1,6 +1,7 @@
 var html = require('choo/html')
 var nanoraf = require('nanoraf')
 var Component = require('choo/component')
+var button = require('../button')
 var { loader, offset } = require('../base')
 
 module.exports = class Landing extends Component {
@@ -71,7 +72,7 @@ module.exports = class Landing extends Component {
       <div class="Landing u-container" id="${this.id}">
         <div class="Landing-heading">
           ${props.title ? html`<h1 class="Landing-title">${props.title}</h1>` : null}
-          ${props.link ? html`<a class="Landing-button" ${link}>${props.link.text}</a>` : null}
+          ${props.link ? button(Object.assign({ primary: true }, props.link)) : null}
         </div>
         ${background()}
         ${props.image ? html`

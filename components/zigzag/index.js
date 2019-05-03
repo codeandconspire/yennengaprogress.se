@@ -14,9 +14,7 @@ module.exports = class Zigzag extends Component {
   }
 
   load (el) {
-    var top = offset(el)
-    var height = el.offsetHeight
-    var viewport = vh()
+    var top, height, viewport
     var onscroll = nanoraf(function () {
       var { scrollY } = window
       var min = top
@@ -32,9 +30,12 @@ module.exports = class Zigzag extends Component {
       onscroll()
     })
 
-    onscroll()
-    window.addEventListener('scroll', onscroll, { passive: true })
-    window.addEventListener('resize', onresize)
+    window.requestAnimationFrame(function () {
+      onresize()
+      window.addEventListener('scroll', onscroll, { passive: true })
+      window.addEventListener('resize', onresize)
+    })
+
     this.unload = function () {
       window.removeEventListener('scroll', onscroll)
       window.removeEventListener('resize', onresize)

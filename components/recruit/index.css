@@ -50,17 +50,8 @@
   margin-top: 2rem;
 }
 
-.Recruit-action,
-.Recruit-action:hover {
-  display: inline-block;
-  padding: 0.7em 1em 0.6em;
+.Recruit-action {
   margin: 0 1rem 1rem 0;
-  white-space: nowrap;
-  font: var(--heading-font);
-  font-size: 1.25rem;
-  background-color: #fff;
-  color: rgb(var(--dark-blue));
-  border-radius: 4px;
 }
 
 .Recruit-action--primary,

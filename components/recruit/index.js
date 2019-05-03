@@ -1,4 +1,5 @@
 var html = require('choo/html')
+var button = require('../button')
 var { className } = require('../base')
 
 module.exports = recruit
@@ -29,27 +30,14 @@ function recruit (props) {
         ${props.body || null}
         ${props.actions ? html`
           <div class="Recruit-actions">
-            ${props.actions.map(button)}
+            ${props.actions.map((attrs) => html`
+              <span class="Recruit-action">
+                ${button(attrs)}
+              </span>
+            `)}
           </div>
         ` : null}
       </div>
     </div>
   `
-}
-
-function button (props) {
-  var attrs = Object.assign({
-    class: className('Recruit-action', {
-      [`Recruit-action--${props.type}`]: props.type
-    })
-  }, props)
-  delete attrs.text
-  delete props.type
-  if (props.external) {
-    delete attrs.external
-    attrs.rel = 'noopener noreferrer'
-    attrs.target = '_blank'
-  }
-  if (attrs.href) return html`<a ${attrs}>${props.text}</a>`
-  return html`<button ${attrs}>${props.text}</button>`
 }

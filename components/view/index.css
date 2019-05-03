@@ -43,6 +43,9 @@
   display: inline-block;
   margin: 0 0.2rem;
   padding: 0.2rem;
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
   color: rgb(var(--document-color));
   font-size: 0.8rem;
   white-space: nowrap;
@@ -64,31 +67,45 @@
 
 .View-link--highlighted {
   padding: 0.2em 0.6em 0.3em;
+  border-radius: 4px;
+}
+
+.View-link--highlighted,
+.View-link--highlighted:hover {
   background-color: rgb(var(--burkina-blue));
   color: #fff;
-  border-radius: 4px;
-  box-shadow: 0 0 0 rgba(0, 0, 0, 0.13);
-  transition:
-    box-shadow 150ms ease-out,
-    transform 150ms ease-out;
-  will-change: box-shadow, transform;
+}
+
+.View-link--highlighted::before {
+  content: "";
+  width: 120%;
+  height: 100%;
+  position: absolute;
+  left: -10%;
+  top: 0;
+  z-index: -1;
+  background-color: rgba(0, 0, 0, 0.17);
+  transform: skew(-25deg) translateX(-100%);
+  transition: transform 300ms cubic-bezier(0.215, 0.61, 0.355, 1);
+  will-change: transform;
+}
+
+.View-link--highlighted:hover::before {
+  transform: skew(-25deg) translateX(0%);
 }
 
 @media (min-width: 600px) {
   .View-link--highlighted {
     padding: 0.4em 1em 0.5em;
   }
-}
 
-.View-link--highlighted:hover {
-  transform: translate(-0.05em, -0.05em);
-  box-shadow: 0.3em 0.4em 1.5em rgba(0, 0, 0, 0.13);
-}
-
-@media (min-width: 600px) {
   .View-link--highlighted.View-link--light {
     background-color: #fff;
     color: rgb(var(--dark-blue));
+  }
+
+  .View-link--highlighted::before {
+    background-color: rgb(240, 245, 254);
   }
 }
 

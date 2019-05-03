@@ -178,7 +178,6 @@ function srcset (uri, sizes, opts = {}) {
   }).join(',')
 }
 
-
 // get HH:mm timestamp from date
 // Date -> str
 exports.timestamp = timestamp

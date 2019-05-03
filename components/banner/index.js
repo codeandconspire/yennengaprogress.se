@@ -1,4 +1,5 @@
 var html = require('choo/html')
+var button = require('../button')
 
 module.exports = banner
 
@@ -16,19 +17,7 @@ function banner (props) {
           ${props.title || null}
         </h2>
       ` : null}
-      ${props.button ? button(props.button) : null}
+      ${props.button ? button(Object.assign({ fill: true }, props.button)) : null}
     </div>
   `
-}
-
-function button (props) {
-  var attrs = Object.assign({ class: 'Banner-button' }, props)
-  delete attrs.text
-  if (props.external) {
-    delete attrs.external
-    attrs.rel = 'noopener noreferrer'
-    attrs.target = '_blank'
-  }
-  if (attrs.href) return html`<a ${attrs}>${props.text}</a>`
-  return html`<button ${attrs}>${props.text}</button>`
 }

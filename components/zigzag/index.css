@@ -8,7 +8,6 @@
 .Zigzag {
   width: 100%;
   padding-top: 10vh;
-  margin-bottom: -10vh;
 }
 
 @media (min-width: 600px) {
@@ -42,6 +41,8 @@
 .Zigzag-button:hover {
   display: block;
   height: 10vh;
+  position: relative;
+  overflow: hidden;
   font: var(--heading-font);
   font-size: 1.25rem;
   line-height: 10vh;
@@ -62,4 +63,22 @@
   background-size: 0.45em;
   position: relative;
   top: 0.15em;
+}
+
+.Zigzag-button::before {
+  content: "";
+  width: 120%;
+  height: 100%;
+  position: absolute;
+  left: -10%;
+  top: 0;
+  z-index: -1;
+  background-color: rgb(240, 245, 254);
+  transform: skew(-25deg) translateX(-100%);
+  transition: transform 400ms cubic-bezier(0.215, 0.61, 0.355, 1);
+  will-change: transform;
+}
+
+.Zigzag-button:hover::before {
+  transform: skew(-25deg) translateX(0%);
 }
