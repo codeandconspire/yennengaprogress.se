@@ -21,7 +21,7 @@
   --document-color: 55, 55, 55;
 
   --document-width: 1800px;
-  --document-margin: 0.6rem;
+  --document-margin: 0.5rem;
 
   --container-large-width: var(--document-width);
   --container-medium-width: 43rem;
@@ -30,8 +30,8 @@
   --loading-color: 0, 0, 0, 0.06;
   --loading-color-solid: 235, 235, 235;
 
-  --focus-ring-width: 3px;
-  --focus-ring-color: var(--document-color);
+  --focus-ring-width: 0.3rem;
+  --focus-ring-color: 255, 146, 0;
 
   --ease-in: cubic-bezier(0.4, 0, 1, 1);
   --ease-out: cubic-bezier(0, 0, 0.2, 1);
@@ -40,11 +40,17 @@
 
 @media (min-width: 350px) {
   :root {
-    --document-margin: 1.125rem;
+    --document-margin: 0.75rem;
   }
 }
 
 @media (min-width: 400px) {
+  :root {
+    --document-margin: 1rem;
+  }
+}
+
+@media (min-width: 500px) {
   :root {
     --document-margin: 1.5rem;
   }
@@ -53,6 +59,12 @@
 @media (min-width: 600px) {
   :root {
     --document-margin: 2.5rem;
+  }
+}
+
+@media (min-width: 800px) {
+  :root {
+    --document-margin: 3rem;
   }
 }
 

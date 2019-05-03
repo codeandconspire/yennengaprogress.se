@@ -13,24 +13,48 @@
  */
 
 .View-header {
-  display: flex;
-  align-items: center;
   position: absolute;
-  padding: var(--document-margin) 0;
-  left: 50%;
+  top: 0;
+  left: 0;
   z-index: 1;
-  transform: translateX(-50%);
+  width: 100%;
 }
 
-@media (min-width: 900px) {
-  .View-header {
-    padding: 3rem 0;
-  }
+.View-nav {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: var(--document-margin) 0;
 }
 
 .View-logo {
   display: block;
   margin-right: auto;
+  max-width: 6.8rem;
+}
+
+@media (min-width: 600px) {
+  .View-logo {
+    max-width: 8rem;
+  }
+}
+
+@media (min-width: 800px) {
+  .View-nav {
+    padding: 3rem 0;
+  }
+}
+
+@media (min-width: 800px) {
+  .View-logo {
+    max-width: 10rem;
+  }
+}
+
+@media (min-width: 1300px) {
+  .View-logo {
+    max-width: 12.3rem;
+  }
 }
 
 .View-menu {
@@ -40,6 +64,7 @@
 }
 
 .View-link {
+  position: relative;
   display: inline-block;
   margin: 0 0.2rem;
   padding: 0.2rem;
@@ -47,26 +72,31 @@
   overflow: hidden;
   z-index: 0;
   color: rgb(var(--document-color));
-  font-size: 0.8rem;
+  font-size: 0.875rem;
   white-space: nowrap;
+  font-weight: 500;
 }
 
-@media (min-width: 600px) {
-  .View-link {
-    font-size: 1rem;
-    margin: 0 0.5rem;
-    padding: 0.5rem;
-  }
+.View-link:not(.View-link--highlighted)::after {
+  content: "";
+  position: absolute;
+  bottom: 0.2em;
+  left: 0.2rem;
+  width: calc(100% - 0.4rem);
+  height: 1px;
+  background: currentColor;
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 300ms cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 
-@media (min-width: 900px) {
-  .View-link--light {
-    color: #fff;
-  }
+.View-link:not(.View-link--highlighted):hover::after {
+  transform: scaleX(1);
 }
 
 .View-link--highlighted {
   padding: 0.2em 0.6em 0.3em;
+  margin: 0 0.4rem;
   border-radius: 4px;
 }
 
@@ -94,9 +124,40 @@
   transform: skew(-25deg) translateX(0%);
 }
 
-@media (min-width: 900px) {
+@media (min-width: 500px) {
+  .View-link {
+    margin: 0 0.5rem;
+  }
+
   .View-link--highlighted {
-    padding: 0.4em 1em 0.5em;
+    margin: 0 1rem;
+  }
+}
+
+@media (min-width: 800px) {
+  .View-link {
+    font-size: 1rem;
+    margin: 0 0.5rem;
+    padding: 0.5rem;
+  }
+
+  .View-link:not(.View-link--highlighted)::after {
+    left: 0.5rem;
+    width: calc(100% - 1rem);
+    height: 2px;
+    bottom: 0.4em;
+  }
+
+  .View-link--highlighted {
+    padding: 0.4rem 1rem 0.5rem;
+    margin: 0 1rem;
+  }
+}
+
+
+@media (min-width: 1200px) {
+  .View-link--light {
+    color: #fff;
   }
 
   .View-link--highlighted.View-link--light {
