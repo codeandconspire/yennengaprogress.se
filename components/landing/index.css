@@ -33,7 +33,7 @@
 .Landing-background {
   display: flex;
   width: calc(100% + 100vh * 1/3);
-  height: 100%;
+  height: 125%;
   position: absolute;
   left: 0;
   top: 0;
@@ -42,7 +42,7 @@
 }
 
 .Landing:not(.is-loading) .Landing-background {
-  animation: Landing-background--reveal 600ms forwards cubic-bezier(0.19, 1, 0.22, 1);
+  animation: Landing-background--reveal 600ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 @keyframes Landing-background--reveal {
@@ -66,27 +66,69 @@
 @supports (transform: translatex(calc(100% * var(--Landing-offset)))) {
   .Landing-background {
     position: fixed;
+    transform: translateX(calc(115vw + 75vw * var(--Landing-offset)));
   }
 
   @keyframes Landing-background--reveal {
+    from {
+      transform: translateX(0vw);
+    }
+
     to {
-      transform: translateX(calc(65vw + 35vw * var(--Landing-offset)));
+      transform: translateX(115vw);
     }
   }
 
   @media (min-width: 900px) {
+    .Landing-background {
+      transform: translateX(calc(50% + 50% * var(--Landing-offset)));
+    }
+
     @keyframes Landing-background--reveal {
+      from {
+        transform: translateX(0%);
+      }
+
       to {
-        transform: translateX(calc(50vw + 50vw * var(--Landing-offset)));
+        transform: translateX(50%);
+      }
+    }
+  }
+
+  @media (min-width: 1400px) {
+    .Landing-background {
+      transform: translateX(calc(60% + 40% * var(--Landing-offset)));
+    }
+
+    @keyframes Landing-background--reveal {
+      from {
+        transform: translateX(0%);
+      }
+
+      to {
+        transform: translateX(60%);
       }
     }
   }
 }
 
-.Landing-angle {
-  width: auto;
-  height: 100%;
-  color: rgb(var(--umber));
+.Landing-background::before {
+  content: "";
+  display: block;
+  height: 125%;
+  width: 50%;
+  position: absolute;
+  right: 100%;
+  top: 0;
+  background-color: rgb(var(--umber));
+  transform-origin: 100% 0;
+  transform: translateX(100%) rotate(16deg);
+}
+
+@media (min-width: 900px) {
+  .Landing-background::before {
+    width: 25%;
+  }
 }
 
 .Landing-background::after {

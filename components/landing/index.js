@@ -14,7 +14,7 @@ module.exports = class Landing extends Component {
     return html`
       <div class="Landing is-loading">
         <div class="Landing-heading"></div>
-        ${background()}
+        <div class="Landing-background"></div>
         <figure class="Landing-figure">
           <div class="Landing-image"></div>
           <figcaption class="Landing-caption">${loader(20)}</figcaption>
@@ -74,7 +74,7 @@ module.exports = class Landing extends Component {
           ${props.title ? html`<h1 class="Landing-title">${props.title}</h1>` : null}
           ${props.link ? button(Object.assign({ primary: true }, props.link)) : null}
         </div>
-        ${background()}
+        <div class="Landing-background"></div>
         ${props.image ? html`
           <figure class="Landing-figure">
             <div class="Landing-image">
@@ -88,12 +88,3 @@ module.exports = class Landing extends Component {
   }
 }
 
-function background () {
-  return html`
-    <div class="Landing-background">
-      <svg class="Landing-angle" width="300" height="900" viewBox="0 0 300 900">
-        <path fill="currentColor" fill-rule="evenodd" d="M300 0v900H0z"/>
-      </svg>
-    </div>
-  `
-}

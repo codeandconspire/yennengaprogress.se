@@ -59,7 +59,7 @@
   }
 }
 
-@media (min-width: 600px) {
+@media (min-width: 900px) {
   .View-link--light {
     color: #fff;
   }
@@ -94,7 +94,7 @@
   transform: skew(-25deg) translateX(0%);
 }
 
-@media (min-width: 600px) {
+@media (min-width: 900px) {
   .View-link--highlighted {
     padding: 0.4em 1em 0.5em;
   }
