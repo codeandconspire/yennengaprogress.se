@@ -67,8 +67,6 @@
  * Media elements
  */
 
-svg,
-img,
 video,
 iframe {
   display: inline-block;
@@ -79,10 +77,15 @@ iframe {
  * 1. Improve alt text rendering for broken images
  */
 
+svg,
 img {
+  display: block;
   width: 100%;
   max-width: 100%;
   height: auto;
+}
+
+img {
   font-size: 0.8rem; /* 1 */
 }
 
@@ -100,7 +103,7 @@ strong {
  * 2. Remove the tapping delay
  */
 
- a {
+a {
   color: inherit;
   text-decoration: none;
   cursor: pointer;

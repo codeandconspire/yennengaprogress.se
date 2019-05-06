@@ -33,6 +33,15 @@
   max-width: 6.8rem;
 }
 
+.View-logo g {
+  transition: fill 190ms var(--ease);
+}
+
+.View-logo:hover g {
+  fill: rgb(var(--dark-umber));
+  transition: fill 120ms var(--ease-out);
+}
+
 @media (min-width: 600px) {
   .View-logo {
     max-width: 8rem;
