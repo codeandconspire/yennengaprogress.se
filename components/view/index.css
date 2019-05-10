@@ -44,11 +44,11 @@
   max-width: 6.8rem;
 }
 
-.View-logo g {
+.View-header .View-logo g {
   transition: fill 190ms var(--ease);
 }
 
-.View-logo:hover g {
+.View-header .View-logo:hover g {
   fill: rgb(var(--dark-umber));
   transition: fill 120ms var(--ease-out);
 }
@@ -174,7 +174,6 @@
   }
 }
 
-
 @media (min-width: 1200px) {
   .View-link--light {
     color: #fff;
@@ -212,16 +211,19 @@
  * Footer
  */
 
-.View-footer::before {
-  content: "";
-  height: 13vh;
-  display: block;
-  max-height: 7rem;
+.View-footer {
+  padding: var(--document-margin) 0;
+  overflow: hidden;
+  background: rgb(var(--burkina-blue));
+  color: #fff;
 }
 
-@media (min-width: 1000px) {
-  .View-footer::before {
-    max-height: none;
-    min-height: 8rem;
-  }
+.View-heading {
+  margin-bottom: 0.75rem;
+  font-weight: bold;
+}
+
+.View-shortcut {
+  display: inline-block;
+  padding: 0.3em 0;
 }
