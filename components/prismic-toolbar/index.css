@@ -9,8 +9,8 @@
   padding: 0.8rem 1rem 1rem;
   border: 2px solid rgb(var(--document-color));
   position: fixed;
-  bottom: var(--page-gutter);
-  right: var(--page-gutter);
+  bottom: var(--document-margin);
+  right: var(--document-margin);
   z-index: 1;
   background-color: #4356af;
   color: #fff;
