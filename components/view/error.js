@@ -15,7 +15,7 @@ module.exports = error
 
 function error (err, href) {
   return html`
-    <main class="View-main">
+    <main class="View-main u-flex u-alignCenter">
       <div class="u-container u-space2">
           <div class="Text">
             <h1>${text`Ouch`}</h1>

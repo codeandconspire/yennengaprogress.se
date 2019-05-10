@@ -20,6 +20,17 @@
   width: 100%;
 }
 
+.View-header--appear {
+  opacity: 0;
+  animation: View-header--appearing 600ms 700ms forwards cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+@keyframes View-header--appearing {
+  to {
+    opacity: 1;
+  }
+}
+
 .View-nav {
   display: flex;
   align-items: center;

@@ -86,9 +86,9 @@ function createView (view, meta) {
       // }, [doc && doc.id, 'footer'])
 
       return html`
-        <body class="View ${state.ui.openNavigation ? 'is-overlayed' : ''}" id="view">
+        <body class="View" id="view">
           <script type="application/ld+json">${raw(JSON.stringify(linkedData(state)))}</script>
-          <header class="View-header">
+          <header class="View-header ${state.href === '' ? 'View-header--appear' : ''}">
             <div class="u-container">
               <div class="View-nav">
                 <a class="View-logo" href="/">

@@ -42,7 +42,9 @@
 }
 
 .Landing:not(.is-loading) .Landing-background {
-  animation: Landing-background--reveal 600ms cubic-bezier(0.19, 1, 0.22, 1);
+  animation:
+    Landing-background--delay 700ms,
+    Landing-background--reveal 600ms 700ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 @keyframes Landing-background--reveal {
@@ -51,9 +53,19 @@
   }
 }
 
+@keyframes Landing-background--delay {
+  from {
+    transform: none;
+  }
+
+  to {
+    transform: none;
+  }
+}
+
 @media (min-width: 900px) {
   .Landing:not(.is-loading) .Landing-background {
-    animation-delay: 400ms;
+    /* animation-delay: 800ms; */
   }
 
   @keyframes Landing-background--reveal {
