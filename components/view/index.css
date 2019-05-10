@@ -214,7 +214,7 @@
 .View-footer {
   padding: var(--document-margin) 0;
   overflow: hidden;
-  background: rgb(var(--burkina-blue));
+  background: rgb(var(--dark-blue));
   color: #fff;
 }
 
