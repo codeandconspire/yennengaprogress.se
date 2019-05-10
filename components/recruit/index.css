@@ -7,19 +7,20 @@
   align-items: center;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 900px) {
   .Recruit {
     flex-wrap: nowrap;
   }
 }
 
 .Recruit-image {
+  flex: 0 1 375px;
   display: block;
   min-width: 20vw;
   height: auto;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 900px) {
   .Recruit-image {
     margin-right: 7rem;
   }
