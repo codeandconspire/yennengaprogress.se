@@ -64,10 +64,6 @@
 }
 
 @media (min-width: 900px) {
-  .Landing:not(.is-loading) .Landing-background {
-    /* animation-delay: 800ms; */
-  }
-
   @keyframes Landing-background--reveal {
     to {
       transform: translateX(50vw);
@@ -135,6 +131,7 @@
   background-color: rgb(var(--umber));
   transform-origin: 100% 0;
   transform: translateX(100%) rotate(16deg);
+  transform: translateX(100%) rotate(calc(16deg * (1 - var(--Landing-offset))));
 }
 
 @media (min-width: 900px) {
@@ -146,8 +143,10 @@
 .Landing-background::after {
   content: "";
   flex: 1 1 auto;
+  display: block;
+  height: 110%;
+  transform: translate(-1px, -10%);
   background: rgb(var(--umber));
-  transform: translateX(-1px);
 }
 
 .Landing-heading {
@@ -155,7 +154,7 @@
   margin: 21vh 0 10vh;
   opacity: 0;
   animation: var(--slide-up-animation);
-  animation-delay: 250ms;
+  animation-delay: 350ms;
   will-change: transform, opacity;
 }
 
@@ -208,7 +207,7 @@
   opacity: 0;
   font-size: 0.8rem;
   animation: var(--slide-up-animation);
-  animation-delay: 200ms;
+  animation-delay: 950ms;
   will-change: transform, opacity;
   color: #fff;
   color: rgba(255, 255, 255, calc(1 - var(--Landing-offset)));
@@ -233,7 +232,7 @@
   background-color: rgb(var(--light-grey));
   opacity: 0;
   animation: var(--slide-up-animation);
-  animation-delay: 100ms;
+  animation-delay: 750ms;
 }
 
 .Landing.is-loading .Landing-image {

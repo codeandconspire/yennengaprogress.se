@@ -7,7 +7,7 @@ module.exports = header
 
 function header (items, href) {
   return html`
-    <header class="View-header ${href === '' ? 'View-header--appear' : ''}">
+    <header class="View-header">
       <div class="u-container">
         <div class="View-nav">
           <a class="View-logo" href="/">

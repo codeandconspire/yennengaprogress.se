@@ -34,7 +34,7 @@ module.exports = class Landing extends Component {
     var onscroll = nanoraf(function () {
       var { scrollY } = window
       var min = top
-      var max = top + height / 2
+      var max = top + height / 3
       if (scrollY > max) {
         if (!isBellow) el.style.setProperty('--Landing-offset', 1)
         isBellow = true
