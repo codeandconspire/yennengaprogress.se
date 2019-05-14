@@ -4,9 +4,8 @@
 .Text {
   font-family: var(--document-font-family);
   line-height: var(--document-line-height);
-  font-size: 1rem;
-  text-align: left;
-  max-width: 39em;
+  font-size: 1em;
+  max-width: var(--container-small-width);
   margin-right: auto;
   margin-left: auto;
 }
@@ -28,17 +27,16 @@
  */
 
 .Text small {
-  font-size: 0.875rem;
+  font-size: 0.875em;
 }
 
 .Text a {
-  border-bottom: 2px solid currentColor;
-  font-weight: 600;
+  color: rgb(var(--burkina-blue));
   transition: color 100ms var(--ease-out);
 }
 
 .Text a:hover {
-  color: currentColor;
+  color: rgb(var(--dark-blue));
 }
 
 .Text a:active {
@@ -49,14 +47,28 @@
  * Block elements
  */
 
-.Text p,
-.Text ul,
-.Text ol,
-.Text h1,
-.Text h2,
-.Text h3,
-.Text h4 {
-  margin: 0.8em 0;
+.Text p:not(:first-child),
+.Text ul:not(:first-child),
+.Text ol:not(:first-child),
+.Text h1:not(:first-child),
+.Text h2:not(:first-child),
+.Text h3:not(:first-child),
+.Text h4:not(:first-child),
+.Text h5:not(:first-child),
+.Text h6:not(:first-child) {
+  margin-top: 0.8em;
+}
+
+.Text p:not(:last-child),
+.Text ul:not(:last-child),
+.Text ol:not(:last-child),
+.Text h1:not(:last-child),
+.Text h2:not(:last-child),
+.Text h3:not(:last-child),
+.Text h4:not(:last-child),
+.Text h5:not(:last-child),
+.Text h6:not(:last-child) {
+  margin-bottom: 0.8em;
 }
 
 .Text img {
@@ -68,7 +80,7 @@
 
 .Text-caption {
   margin: -1.2em 0 1.6em;
-  font-size: 1rem;
+  font-size: 1em;
   text-align: right;
   color: rgb(var(--color-lavender));
 }
@@ -88,11 +100,11 @@
 }
 
 .Text pre {
-  font-size: 0.8rem;
+  font-size: 0.8em;
   overflow: auto;
-  background: rgb(var(--color-royal));
+  background: rgb(var(--light-grey));
   color: rgb(255, 255, 255);
-  padding: 1rem;
+  padding: 1em;
   text-align: left;
 }
 
@@ -106,8 +118,7 @@
 }
 
 .Text ul {
-  list-style-type: disc;
-  list-style-position: inside;
+  list-style-type: none;
 }
 
 .Text ol {
@@ -116,8 +127,9 @@
 }
 
 .Text ul > li {
-  padding-left: 1.2em;
+  padding-left: 2.2em;
   position: relative;
+  background: url("./disc.svg") 0.9em 0.6em no-repeat;
 }
 
 .Text ol > li {
@@ -125,7 +137,7 @@
 }
 
 .Text li {
-  padding-top: 0.5em;
+  margin: 0.5em;
 }
 
 /**

@@ -2,6 +2,7 @@ var html = require('choo/html')
 var asElement = require('prismic-element')
 var view = require('../components/view')
 var hero = require('../components/hero')
+var vcard = require('../components/vcard')
 var serialize = require('../components/text/serialize')
 var { memo, src, srcset, asText, resolve, HTTPError } = require('../components/base')
 
@@ -34,13 +35,79 @@ function page (state, emit) {
             })}
           </div>
           <div class="View-space">
-            ${doc.data.body.map(function (slice) {
+            ${doc.data.body.map(function (slice, index) {
               switch (slice.slice_type) {
                 case 'text': return html`
-                  <div class="Text">
-                    ${asElement(slice.primary.text, resolve, serialize)}
+                  <div class="View-space u-container">
+                    <div class="Text">
+                      ${asElement(slice.primary.text, resolve, serialize)}
+                    </div>
                   </div>
                 `
+                case 'image': {
+                  var image = slice.primary.image
+                  if (!image.url) return null
+
+                  let source = image.url
+                  let attrs = Object.assign({ alt: image.alt || '' }, image.dimensions)
+                  if (!/\.(svg|gifv?)$/.test(image.url)) {
+                    attrs.sizes = '100vw'
+                    attrs.srcset = srcset(image.url, [400, 600, 800, 1200, [1800, 'q_70'], [2600, 'q_50']])
+                    source = src(image.url, 800)
+                  }
+
+                  let caption = []
+                  if (image.alt) caption.push(image.alt)
+                  if (image.copyright) caption.push(image.copyright)
+
+                  return html`
+                    <div class="View-space u-container">
+                      <div class="Text u-sizeFull">
+                        <figure>
+                          <img ${attrs} src="${source}">
+                          ${caption.length ? html`
+                            <figcaption class="Text-caption">${caption.join(' ')}</figcaption>
+                          ` : null}
+                        </figure>
+                      </div>
+                    </div>
+                  `
+                }
+                case 'contact_cards': {
+                  let items = slice.items.filter(function (item) {
+                    return item.name.length || item.description.length
+                  })
+                  if (!items.length) return null
+                  var heading = asText(slice.primary.heading)
+                  return html`
+                    <div class="View-space u-container u-small">
+                      ${heading ? html`
+                        <div class="Text u-spaceB4">
+                          <h2>${heading}</h2>
+                        </div>
+                      ` : null}
+                      ${items.map((item) => vcard({
+                        label: item.label,
+                        title: asText(item.name),
+                        body: html`
+                          <div class="Text u-sizeFull">
+                            ${asElement(item.description, resolve)}
+                          </div>
+                        `,
+                        image: memo(function (url) {
+                          if (!url) return null
+                          return Object.assign({
+                            sizes: '7.5em',
+                            alt: item.image.alt || '',
+                            src: src(url, 200, { transforms: 'c_thumb' }),
+                            srcset: srcset(url, [200, 400, 600], { transforms: 'c_thumb' })
+                          }, item.image.dimensions)
+                        }, [item.image.url, 'vcard'])
+                      }))}
+                    </div>
+                  `
+                }
+                default: return null
               }
             })}
           </div>
