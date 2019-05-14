@@ -52,8 +52,6 @@
 
 .Hero-body {
   position: relative;
-  margin: 0 var(--document-margin);
-  max-width: 39em;
 }
 
 .Hero-title {
@@ -87,14 +85,11 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin: 0 auto;
   }
 
   .Hero--image .Hero-body {
     flex: 0 1 50%;
-    margin: 0;
-    max-width: none;
-    padding: var(--document-margin);
+    margin-left: 0 !important;
   }
 
   .Hero-body::before {

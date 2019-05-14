@@ -15,7 +15,7 @@ function hero (props) {
           <img class="Hero-image" ${img} src="${props.image.src}">
         </figure>
       ` : null}
-      <div class="Hero-body">
+      <div class="Hero-body u-container u-small">
         <h1 class="Hero-title">
           ${props.label ? html`<span class="Hero-label">${props.label}</span>` : null}
           ${props.title}

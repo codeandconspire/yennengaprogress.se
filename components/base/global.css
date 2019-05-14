@@ -26,7 +26,7 @@
 
   --container-large-width: var(--document-width);
   --container-medium-width: 60rem;
-  --container-small-width: 39rem;
+  --container-small-width: 50rem;
 
   --loading-color: 0, 0, 0, 0.06;
   --loading-color-solid: 235, 235, 235;
@@ -73,7 +73,7 @@
   :root {
     --document-margin: 3.5rem;
     --container-medium-width: 70rem;
-    --container-small-width: 47rem;
+    --container-small-width: 55rem;
   }
 }
 
@@ -81,6 +81,6 @@
   :root {
     --document-margin: 5rem;
     --container-medium-width: 80rem;
-    --container-small-width: 55rem;
+    --container-small-width: 65rem;
   }
 }

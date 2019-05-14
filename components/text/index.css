@@ -129,7 +129,7 @@
 .Text ul > li {
   padding-left: 2.2em;
   position: relative;
-  background: url("./disc.svg") 0.9em 0.6em no-repeat;
+  background: url("./disc.svg") 0.9em 0.55em no-repeat;
 }
 
 .Text ol > li {

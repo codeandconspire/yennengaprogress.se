@@ -38,7 +38,7 @@ function page (state, emit) {
             ${doc.data.body.map(function (slice, index) {
               switch (slice.slice_type) {
                 case 'text': return html`
-                  <div class="View-space u-container">
+                  <div class="View-space u-container u-small">
                     <div class="Text">
                       ${asElement(slice.primary.text, resolve, serialize)}
                     </div>
