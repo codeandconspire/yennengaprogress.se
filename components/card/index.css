@@ -4,8 +4,13 @@
 .Card {
   display: flex;
   width: 100%;
+  height: 100%;
   position: relative;
   color: #fff;
+}
+
+.Card--large {
+  height: auto;
 }
 
 .Card::before {
@@ -28,9 +33,13 @@
 .Card-content {
   display: flex;
   flex-direction: column;
-  padding: var(--document-margin);
+  padding: 2rem;
   position: relative;
   z-index: 1;
+}
+
+.Card--large .Card-content {
+  padding: var(--document-margin);
 }
 
 .Card-content::before {
@@ -46,12 +55,20 @@
 .Card-title {
   margin-bottom: 2rem;
   font: var(--heading-font);
-  font-size: 1.8rem;
+  font-size: 1.25rem;
   text-decoration: underline;
+}
+
+.Card--large .Card-title {
+  font-size: 1.8rem;
 }
 
 @media (min-width: 600px) {
   .Card-title {
+    font-size: 1.875rem;
+  }
+
+  .Card--large .Card-title {
     font-size: 3rem;
   }
 }

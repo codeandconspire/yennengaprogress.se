@@ -2,9 +2,13 @@ var html = require('choo/html')
 var asElement = require('prismic-element')
 var view = require('../components/view')
 var hero = require('../components/hero')
+var card = require('../components/card')
+var grid = require('../components/grid')
 var vcard = require('../components/vcard')
 var serialize = require('../components/text/serialize')
-var { memo, src, srcset, asText, resolve, HTTPError } = require('../components/base')
+var { i18n, memo, src, srcset, asText, resolve, HTTPError } = require('../components/base')
+
+var text = i18n()
 
 module.exports = view(page, meta)
 
@@ -77,8 +81,10 @@ function page (state, emit) {
                   let items = slice.items.filter(function (item) {
                     return item.name.length || item.description.length
                   })
+
                   if (!items.length) return null
-                  var heading = asText(slice.primary.heading)
+                  let heading = asText(slice.primary.heading)
+
                   return html`
                     <div class="View-space u-container u-small">
                       ${heading ? html`
@@ -103,6 +109,48 @@ function page (state, emit) {
                             srcset: srcset(url, [200, 400, 600], { transforms: 'g_face', aspect: 1 })
                           }, item.image.dimensions)
                         }, [item.image.url, 'vcard'])
+                      }))}
+                    </div>
+                  `
+                }
+                case 'links': {
+                  let items = slice.items.filter(function (item) {
+                    return item.link.id && !item.link.isBroken
+                  })
+
+                  if (!items.length) return null
+                  let heading = asText(slice.primary.heading)
+
+                  return html`
+                    <div class="View-space u-container">
+                      ${heading ? html`
+                        <div class="Text u-sizeFull u-spaceB4">
+                          <h2>${heading}</h2>
+                        </div>
+                      ` : null}
+                      ${grid({ size: { sm: '1of2', md: '1of3' } }, items.map(function ({ link }) {
+                        var image = link.data.featured_image
+                        if (!image || !image.url) image = link.data.image
+                        return card({
+                          label: link.data.label,
+                          title: asText(link.data.title),
+                          body: link.data.description ? asElement(link.data.description) : null,
+                          theme: !image || !image.url ? card.themes[0] : null,
+                          image: memo(function (url) {
+                            if (!url) return null
+                            return Object.assign({
+                              alt: link.data.image.alt || '',
+                              src: src(url, 600, { transforms: 'c_thumb' }),
+                              sizes: '(min-width: 600px) 33.33vw, (min-width: 400px) 50vw, 100vw',
+                              srcset: srcset(url, [400, 800, [1600, 'q_80'], [2600, 'q_70']], { transforms: 'c_thumb' })
+                            }, link.data.image.dimensions)
+                          }, [image && image.url, doc.data.id]),
+                          link: {
+                            href: resolve(link),
+                            text: link.data.cta || text`Read more`,
+                            external: link.target === '_blank'
+                          }
+                        })
                       }))}
                     </div>
                   `

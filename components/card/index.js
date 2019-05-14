@@ -13,17 +13,17 @@ function card (props) {
   var body = props.body
   if (body) {
     if (typeof window === 'undefined') {
-      if (Array.isArray(body) || body[0] === '<') html`<div class="Card-text Text">${body}</div>`
+      if (Array.isArray(body) || body[0] === '<') html`<div class="Card-text">${body}</div>`
       else body = html`<p class="Card-text">${snippet(body, props.truncate || 170)}</p>`
     } else if (Array.isArray(body) || body instanceof window.Element) {
-      body = html`<div class="Card-text Text">${body}</div>`
+      body = html`<div class="Card-text">${body}</div>`
     } else {
       body = html`<p class="Card-text">${snippet(body, props.truncate || 170)}</p>`
     }
   }
 
   return html`
-    <div class="${className('Card', { [`Card--${props.theme}`]: props.theme })}">
+    <div class="${className('Card', { [`Card--${props.theme}`]: props.theme, 'Card--large': props.large })}">
       ${props.image ? html`<img class="Card-image" ${img} src="${props.image.src}">` : null}
       <div class="Card-content">
         ${props.label ? html`<span class="Card-label">${props.label}</span>` : null}

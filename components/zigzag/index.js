@@ -6,11 +6,11 @@ var { offset, vh } = require('../base')
 module.exports = class Zigzag extends Component {
   constructor (id, state, emit) {
     super(id)
-    this.id = id
+    this.local = state.components[id] = { id, inview: 0 }
   }
 
   update () {
-    return false
+    return true
   }
 
   load (el) {
@@ -44,7 +44,7 @@ module.exports = class Zigzag extends Component {
 
   createElement (children, opts) {
     return html`
-      <div class="Zigzag" id="${this.id}">
+      <div class="Zigzag" id="${this.local.id}" style="--Zigzag-inview: ${this.local.inview};">
         ${children.map((child) => html`<div class="Zigzag-item">${child}</div>`)}
         ${opts ? button(opts) : null}
       </div>

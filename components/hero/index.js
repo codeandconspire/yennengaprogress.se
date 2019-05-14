@@ -34,7 +34,7 @@ function loading (opts = {}) {
           <div class="Hero-image u-loading"></div>
         </figure>
       ` : null}
-      <div class="Hero-body">
+      <div class="Hero-body u-container u-small">
         <h1 class="Hero-title">
           <span class="Hero-label">${loader(5)}</span>
           ${loader(16)}

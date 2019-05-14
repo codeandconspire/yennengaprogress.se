@@ -117,9 +117,3 @@
     padding-right: calc(var(--document-margin) + env(safe-area-inset-right)) !important;
   }
 }
-
-font-size: 1rem;
-text-align: left;
-max-width: 39em;
-margin-right: auto;
-margin-left: auto;

@@ -95,7 +95,11 @@ function home (state, emit) {
           <section class="View-space" id="projects">
             ${state.cache(Zigzag, 'homepage-projects').render(doc.data.featured_projects.map(function ({ link }, index) {
               if (!link.id || link.isBroken) return null
+              var image = link.data.featured_image
+              if (!image || !image.url) image = link.data.image
+
               return card({
+                large: true,
                 label: link.data.label,
                 title: asText(link.data.title),
                 body: asElement(link.data.description),
@@ -104,11 +108,11 @@ function home (state, emit) {
                   if (!url) return null
                   return Object.assign({
                     alt: link.data.image.alt || '',
-                    sizes: '50vw (min-width: 600px), 100vw',
+                    sizes: '(min-width: 600px) 50vw, 100vw',
                     src: src(url, 600, { transforms: 'c_thumb' }),
                     srcset: srcset(url, [400, 800, [1600, 'q_80'], [2600, 'q_70']], { transforms: 'c_thumb' })
                   }, link.data.image.dimensions)
-                }, [(link.data.featured_image || link.data.image).url, 'card']),
+                }, [image && image.url, doc.data.id]),
                 link: {
                   href: resolve(link),
                   text: link.data.cta || text`Read more`,
