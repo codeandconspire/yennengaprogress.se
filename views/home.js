@@ -109,8 +109,8 @@ function home (state, emit) {
                   return Object.assign({
                     alt: link.data.image.alt || '',
                     sizes: '(min-width: 600px) 50vw, 100vw',
-                    src: src(url, 600, { transforms: 'c_thumb' }),
-                    srcset: srcset(url, [400, 800, [1600, 'q_80'], [2600, 'q_70']], { transforms: 'c_thumb' })
+                    src: src(url, 600),
+                    srcset: srcset(url, [400, 800, [1600, 'q_80'], [2600, 'q_70']])
                   }, link.data.image.dimensions)
                 }, [image && image.url, doc.data.id]),
                 link: {

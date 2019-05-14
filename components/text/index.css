@@ -113,7 +113,8 @@
  */
 
 .Text ul,
-.Text ol {
+.Text ol,
+.Text dl {
   margin: calc(1.2em - 0.5em) 0 1.2em;
 }
 
@@ -138,6 +139,22 @@
 
 .Text li {
   margin: 0.5em;
+}
+
+.Text dt {
+  display: block;
+  margin-bottom: 0.5em;
+  font-size: 1.25em;
+  font-weight: 600;
+}
+
+.Text dd {
+  padding: 0;
+  margin: 0;
+}
+
+.Text dd:not(:last-child) {
+  margin-bottom: 2em;
 }
 
 /**

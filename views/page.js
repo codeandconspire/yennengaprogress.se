@@ -4,6 +4,7 @@ var view = require('../components/view')
 var hero = require('../components/hero')
 var card = require('../components/card')
 var grid = require('../components/grid')
+var block = require('../components/block')
 var vcard = require('../components/vcard')
 var serialize = require('../components/text/serialize')
 var { i18n, memo, src, srcset, asText, resolve, HTTPError } = require('../components/base')
@@ -33,7 +34,7 @@ function page (state, emit) {
                   alt: doc.data.image.alt || '',
                   src: src(url, 800),
                   sizes: '(min-width: 900px) 50vw, 100vw',
-                  srcset: srcset(url, [400, 800, [1400, 'q_70'], [1800, 'q_70'], [2600, 'q_60']], { transforms: 'c_thumb' })
+                  srcset: srcset(url, [400, 800, [1400, 'q_70'], [1800, 'q_70'], [2600, 'q_60']])
                 }, doc.data.image.dimensions)
               }, [doc.data.image.url])
             })}
@@ -113,6 +114,45 @@ function page (state, emit) {
                     </div>
                   `
                 }
+                case 'blocks': {
+                  let items = slice.items.filter(function (item) {
+                    return item.image.url || item.title.length || item.body.length
+                  })
+
+                  if (!items.length) return null
+                  let heading = asText(slice.primary.heading)
+
+                  return html`
+                    <div class="View-space u-container">
+                      ${heading ? html`
+                        <div class="Text u-sizeFull u-spaceB4">
+                          <h2>${heading}</h2>
+                        </div>
+                      ` : null}
+                      ${grid({ size: { sm: '1of2', md: '1of3' } }, items.map(function (item) {
+                        return block({
+                          title: asText(item.title),
+                          body: item.body ? asElement(item.body) : null,
+                          image: memo(function (url) {
+                            if (!url) return null
+                            var attrs = Object.assign({
+                              alt: item.image.alt || '',
+                              src: url
+                            }, item.image.dimensions)
+
+                            if (!/\.(svg|gifv?)$/.test(url)) {
+                              attrs.sizes = '11rem'
+                              attrs.src = src(url, 600, { transforms: 'g_face' })
+                              attrs.srcset = srcset(url, [200, 400], { transforms: 'g_face' })
+                            }
+
+                            return attrs
+                          }, [item.image.url, doc.data.id])
+                        })
+                      }))}
+                    </div>
+                  `
+                }
                 case 'links': {
                   let items = slice.items.filter(function (item) {
                     return item.link.id && !item.link.isBroken
@@ -140,9 +180,9 @@ function page (state, emit) {
                             if (!url) return null
                             return Object.assign({
                               alt: link.data.image.alt || '',
-                              src: src(url, 600, { transforms: 'c_thumb' }),
+                              src: src(url, 600),
                               sizes: '(min-width: 600px) 33.33vw, (min-width: 400px) 50vw, 100vw',
-                              srcset: srcset(url, [400, 800, [1600, 'q_80'], [2600, 'q_70']], { transforms: 'c_thumb' })
+                              srcset: srcset(url, [400, 800, [1600, 'q_80'], [2600, 'q_70']])
                             }, link.data.image.dimensions)
                           }, [image && image.url, doc.data.id]),
                           link: {
@@ -152,6 +192,29 @@ function page (state, emit) {
                           }
                         })
                       }))}
+                    </div>
+                  `
+                }
+                case 'faq': {
+                  var items = slice.items.filter(function (item) {
+                    return item.question.length && item.answer.length
+                  })
+                  if (!items.length) return null
+                  let heading = asText(slice.primary.heading)
+                  return html`
+                    <div class="View-space u-container u-small">
+                      <div class="Text u-sizeFull">
+                        ${heading ? html`<h2 class="u-spaceB1">${heading}</h2>` : null}
+                        <dl>
+                          ${items.reduce(function (acc, item) {
+                            acc.push(
+                              html`<dt>${asText(item.question)}</dt>`,
+                              html`<dd>${asElement(item.answer, resolve, serialize)}</dd>`
+                            )
+                            return acc
+                          }, [])}
+                        </dl>
+                      </div>
                     </div>
                   `
                 }
