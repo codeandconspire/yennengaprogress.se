@@ -94,13 +94,9 @@ app.use(function (ctx, next) {
   if (!ctx.accepts('html')) return next()
   var previewCookie = ctx.cookies.get(Prismic.previewCookie)
   if (previewCookie) {
-    ctx.state.ref = previewCookie
     ctx.set('Cache-Control', 'no-cache, private, max-age=0')
   } else {
-    ctx.state.ref = null
-    if (app.env !== 'development') {
-      ctx.set('Cache-Control', `s-maxage=${60 * 60 * 24 * 30}, max-age=0`)
-    }
+    ctx.set('Cache-Control', `max-age=0, stale-while-revalidate=${60 * 60 * 24}`)
   }
 
   return next()

@@ -3,6 +3,15 @@ module.exports = ui
 function ui (state, emitter) {
   state.ui = state.ui || {}
   state.ui.isLoading = false
+  state.ui.isCovered = false
+
+  emitter.on('cover', function (value) {
+    state.ui.isCovered = value
+  })
+
+  emitter.on('navigate', function () {
+    state.ui.isCovered = false
+  })
 
   var requests = 0
   emitter.on('prismic:request', start)

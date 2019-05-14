@@ -31,15 +31,18 @@
   display: block;
   margin-right: auto;
   max-width: 6.8rem;
+  color: rgb(var(--umber));
+  transition: color 190ms var(--ease);
 }
 
-.View-header .View-logo g {
-  transition: fill 190ms var(--ease);
+.View-logo:hover {
+  color: rgb(var(--dark-umber));
+  transition: color 120ms var(--ease-out);
 }
 
-.View-header .View-logo:hover g {
-  fill: rgb(var(--dark-umber));
-  transition: fill 120ms var(--ease-out);
+.View--covered .View-logo,
+.View--covered .View-logo:hover {
+  color: #fff;
 }
 
 @media (min-width: 600px) {
@@ -84,6 +87,12 @@
   font-size: 0.875rem;
   white-space: nowrap;
   font-weight: 500;
+}
+
+@media (max-width: 900px) {
+  .View--covered .View-link {
+    color: #fff;
+  }
 }
 
 .View-link:not(.View-link--highlighted)::after {

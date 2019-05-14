@@ -7,7 +7,7 @@ var error = require('./error')
 var header = require('./header')
 var footer = require('./footer')
 var PrismicToolbar = require('../prismic-toolbar')
-var { i18n, asText, memo, resolve, HTTPError } = require('../base')
+var { i18n, asText, memo, resolve, className, HTTPError } = require('../base')
 
 var text = i18n()
 
@@ -90,7 +90,7 @@ function createView (view, meta) {
       }, [doc && doc.id, 'footer'])
 
       return html`
-        <body class="View" id="view">
+        <body class="${className('View', { 'View--covered': state.ui.isCovered })}" id="view">
           <script type="application/ld+json">${raw(JSON.stringify(linkedData(state)))}</script>
           ${header(menu, state.href)}
           ${children}

@@ -22,7 +22,7 @@ app.use(require('choo-meta')({ origin: app.state.origin }))
 app.use(require('choo-service-worker')('/sw.js'))
 
 app.route('/', require('./views/home'))
-app.route('/*', view(catchall))
+app.route('/:uid', require('./views/page'))
 
 try {
   module.exports = app.mount('body')
@@ -33,8 +33,4 @@ try {
     document.documentElement.removeAttribute('scripting-enabled')
     document.documentElement.setAttribute('scripting-initial-only', '')
   }
-}
-
-function catchall () {
-  throw new HTTPError(404, 'Page not found')
 }

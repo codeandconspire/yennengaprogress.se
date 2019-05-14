@@ -21,7 +21,7 @@ function home (state, emit) {
     <main class="View-main">
       ${state.prismic.getSingle('homepage', function (err, doc) {
         if (err) throw HTTPError(500, err)
-        if (!doc) return Landing.loading()
+        if (!doc) return html`<div class="View-space u-spaceT0">${Landing.loading()}</div>`
 
         return html`
           ${state.cache(Landing, 'homepage-landing').render({
