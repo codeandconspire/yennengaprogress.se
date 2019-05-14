@@ -70,9 +70,9 @@ function home (state, emit) {
                 if (!url) return null
                 return Object.assign({
                   alt: doc.data.banner_image.alt || '',
-                  src: src(url, 900),
+                  src: src(url, 900, { transforms: 'g_faces' }),
                   sizes: '100vw',
-                  srcset: srcset(url, [400, 600, 900, [1600, 'q_70'], [2500, 'q_50']], { transforms: 'c_thumb' })
+                  srcset: srcset(url, [400, 600, 900, [1600, 'q_70'], [2500, 'q_50']], { transforms: 'g_faces' })
                 }, doc.data.banner_image.dimensions)
               }, [doc.data.banner_image.url])
             }) : null}

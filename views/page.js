@@ -99,8 +99,8 @@ function page (state, emit) {
                           return Object.assign({
                             sizes: '7.5em',
                             alt: item.image.alt || '',
-                            src: src(url, 200, { transforms: 'c_thumb' }),
-                            srcset: srcset(url, [200, 400, 600], { transforms: 'c_thumb' })
+                            src: src(url, 200, { transforms: 'g_face', aspect: 1 }),
+                            srcset: srcset(url, [200, 400, 600], { transforms: 'g_face', aspect: 1 })
                           }, item.image.dimensions)
                         }, [item.image.url, 'vcard'])
                       }))}
