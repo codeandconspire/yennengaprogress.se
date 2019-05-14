@@ -6,6 +6,7 @@ var asElement = require('prismic-element')
 var error = require('./error')
 var header = require('./header')
 var footer = require('./footer')
+var player = require('../embed/player')
 var PrismicToolbar = require('../prismic-toolbar')
 var { i18n, asText, memo, resolve, className, HTTPError } = require('../base')
 
@@ -95,6 +96,7 @@ function createView (view, meta) {
           ${header(menu, state.href)}
           ${children}
           ${footer(doc ? asElement(doc.data.contact, resolve) : null, sections)}
+          ${player.render()}
           ${state.cache(PrismicToolbar, 'prismic-toolbar').placeholder(state.href)}
         </body>
       `

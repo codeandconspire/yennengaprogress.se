@@ -1,0 +1,198 @@
+@import "../base";
+
+/** @define Text */
+.Text {
+  font-family: var(--document-font-family);
+  line-height: var(--document-line-height);
+  font-size: 1rem;
+  text-align: left;
+  max-width: 39em;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media (min-width: 350px) {
+  .Text {
+    font-size: 1.125rem;
+  }
+}
+
+@media (min-width: 800px) and (min-height: 400px) {
+  .Text {
+    font-size: 1.25rem;
+  }
+}
+
+/**
+ * Inline elements
+ */
+
+.Text small {
+  font-size: 0.875rem;
+}
+
+.Text a {
+  border-bottom: 2px solid currentColor;
+  font-weight: 600;
+  transition: color 100ms var(--ease-out);
+}
+
+.Text a:hover {
+  color: currentColor;
+}
+
+.Text a:active {
+  opacity: 0.5;
+}
+
+/**
+ * Block elements
+ */
+
+.Text p,
+.Text ul,
+.Text ol,
+.Text h1,
+.Text h2,
+.Text h3,
+.Text h4 {
+  margin: 0.8em 0;
+}
+
+.Text img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 2.2em 0;
+}
+
+.Text-caption {
+  margin: -1.2em 0 1.6em;
+  font-size: 1rem;
+  text-align: right;
+  color: rgb(var(--color-lavender));
+}
+
+.Text-caption:empty {
+  display: none;
+}
+
+@media (min-width: 800px) and (min-height: 400px) {
+  .Text img {
+    margin: 4em 0;
+  }
+
+  .Text-caption {
+    margin: -2.5em 0 2.5em;
+  }
+}
+
+.Text pre {
+  font-size: 0.8rem;
+  overflow: auto;
+  background: rgb(var(--color-royal));
+  color: rgb(255, 255, 255);
+  padding: 1rem;
+  text-align: left;
+}
+
+/**
+ * Lists
+ */
+
+.Text ul,
+.Text ol {
+  margin: calc(1.2em - 0.5em) 0 1.2em;
+}
+
+.Text ul {
+  list-style-type: disc;
+  list-style-position: inside;
+}
+
+.Text ol {
+  list-style-type: decimal;
+  padding-left: 1.7em;
+}
+
+.Text ul > li {
+  padding-left: 1.2em;
+  position: relative;
+}
+
+.Text ol > li {
+  padding-left: 0.5em;
+}
+
+.Text li {
+  padding-top: 0.5em;
+}
+
+/**
+ * Headings
+ */
+
+.Text h1,
+.Text h2,
+.Text h3,
+.Text h4,
+.Text h5,
+.Text h6,
+.Text .Text-h1,
+.Text .Text-h2,
+.Text .Text-h3,
+.Text .Text-h4,
+.Text .Text-h5,
+.Text .Text-h6 {
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.Text h1,
+.Text .Text-h1 {
+  font: var(--heading-font);
+  font-size: 2.5em;
+}
+
+.Text h2,
+.Text .Text-h2 {
+  font: var(--heading-font);
+  font-size: 2em;
+  margin-top: 2em;
+}
+
+.Text h3,
+.Text .Text-h3 {
+  font-size: 1.625em;
+  margin-top: 1.4em;
+}
+
+.Text h4,
+.Text .Text-h4 {
+  font-size: 1.2em;
+  margin-top: 0.4em;
+}
+
+.Text h5,
+.Text .Text-h5 {
+  font-size: 1em;
+  margin-top: 0.4em;
+}
+
+.Text h6,
+.Text .Text-h6 {
+  font-size: 0.85em;
+  margin-top: 0.5em;
+}
+
+@media (min-width: 800px) and (min-height: 400px) {
+  .Text h1,
+  .Text .Text-h1 {
+    font-size: 3em;
+  }
+
+  .Text h2,
+  .Text .Text-h2 {
+    font-size: 2.5em;
+  }
+}

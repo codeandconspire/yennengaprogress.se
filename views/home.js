@@ -10,7 +10,7 @@ var method = require('../components/method')
 var banner = require('../components/banner')
 var recruit = require('../components/recruit')
 var Landing = require('../components/landing')
-var { i18n, memo, srcset, slugify, resolve, asText, loader, HTTPError } = require('../components/base')
+var { i18n, memo, src, srcset, slugify, resolve, asText, loader, HTTPError } = require('../components/base')
 
 var text = i18n()
 
@@ -29,7 +29,7 @@ function home (state, emit) {
               if (!url) return null
               return Object.assign({
                 alt: doc.data.image.alt || '',
-                src: srcset(url, [400]).split(' ')[0],
+                src: src(url, 400),
                 sizes: '50vw (min-width: 900px), 100vw',
                 srcset: srcset(url, [400, 600, 800, [1600, 'q_70']])
               }, doc.data.image.dimensions)
@@ -70,7 +70,7 @@ function home (state, emit) {
                 if (!url) return null
                 return Object.assign({
                   alt: doc.data.banner_image.alt || '',
-                  src: srcset(url, [900]).split(' ')[0],
+                  src: src(url, 900),
                   sizes: '100vw',
                   srcset: srcset(url, [400, 600, 900, [1600, 'q_70'], [2500, 'q_50']], { transforms: 'c_thumb' })
                 }, doc.data.banner_image.dimensions)
@@ -105,7 +105,7 @@ function home (state, emit) {
                   return Object.assign({
                     alt: link.data.image.alt || '',
                     sizes: '50vw (min-width: 600px), 100vw',
-                    src: srcset(url, [600], { transforms: 'c_thumb' }).split(' ')[0],
+                    src: src(url, 600, { transforms: 'c_thumb' }),
                     srcset: srcset(url, [400, 800, [1600, 'q_80'], [2600, 'q_70']], { transforms: 'c_thumb' })
                   }, link.data.image.dimensions)
                 }, [(link.data.featured_image || link.data.image).url, 'card']),
@@ -171,9 +171,9 @@ function meta (state) {
 
     var image = doc.data.featured_image
     if (image.url) {
-      props['og:image'] = image.url
-      props['og:image:width'] = image.dimensions.width
-      props['og:image:height'] = image.dimensions.height
+      props['og:image'] = src(image.url, 1200)
+      props['og:image:width'] = 1200
+      props['og:image:height'] = (image.dimensions.height / image.dimensions.width) * 1200
     }
 
     return props

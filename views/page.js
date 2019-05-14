@@ -2,7 +2,8 @@ var html = require('choo/html')
 var asElement = require('prismic-element')
 var view = require('../components/view')
 var hero = require('../components/hero')
-var { memo, srcset, asText, resolve, HTTPError } = require('../components/base')
+var serialize = require('../components/text/serialize')
+var { memo, src, srcset, asText, resolve, HTTPError } = require('../components/base')
 
 module.exports = view(page, meta)
 
@@ -25,11 +26,22 @@ function page (state, emit) {
                 if (!url) return null
                 return Object.assign({
                   alt: doc.data.image.alt || '',
-                  src: srcset(url, [800]).split(' ')[0],
+                  src: src(url, 800),
                   sizes: '(min-width: 900px) 50vw, 100vw',
                   srcset: srcset(url, [400, 800, [1400, 'q_70'], [1800, 'q_70'], [2600, 'q_60']], { transforms: 'c_thumb' })
                 }, doc.data.image.dimensions)
               }, [doc.data.image.url])
+            })}
+          </div>
+          <div class="View-space">
+            ${doc.data.body.map(function (slice) {
+              switch (slice.slice_type) {
+                case 'text': return html`
+                  <div class="Text">
+                    ${asElement(slice.primary.text, resolve, serialize)}
+                  </div>
+                `
+              }
             })}
           </div>
         `
@@ -53,9 +65,9 @@ function meta (state) {
     var image = doc.data.featured_image
     if (!image.url) image = doc.data.image
     if (image.url) {
-      props['og:image'] = image.url
-      props['og:image:width'] = image.dimensions.width
-      props['og:image:height'] = image.dimensions.height
+      props['og:image'] = src(image.url, 1200)
+      props['og:image:width'] = 1200
+      props['og:image:height'] = (image.dimensions.height / image.dimensions.width) * 1200
     }
 
     return props
