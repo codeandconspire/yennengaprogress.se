@@ -182,7 +182,7 @@
     color: rgb(var(--dark-blue));
   }
 
-  .View-link--highlighted::before {
+  .View-link--highlighted.View-link--light::before {
     background-color: rgb(240, 245, 254);
   }
 }
