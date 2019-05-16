@@ -7,17 +7,6 @@ var common = require('./lang.json')
 
 if (typeof window !== 'undefined') {
   require('focus-visible')
-  let scrollIntoView = window.Element.prototype.scrollIntoView
-  window.Element.prototype.scrollIntoView = function (opts) {
-    if (typeof opts === 'boolean') {
-      if (opts) opts = { block: 'start', inline: 'nearest' }
-      else opts = { block: 'end', inline: 'nearest' }
-    } else {
-      opts = { block: 'start' }
-    }
-    opts.behavior = opts.behavior || 'smooth'
-    return scrollIntoView.call(this, opts)
-  }
 }
 
 // resolve prismic document url

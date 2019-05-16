@@ -7,7 +7,7 @@ var grid = require('../components/grid')
 var block = require('../components/block')
 var vcard = require('../components/vcard')
 var serialize = require('../components/text/serialize')
-var { i18n, memo, src, srcset, asText, resolve, HTTPError } = require('../components/base')
+var { i18n, memo, src, srcset, asText, resolve, metaKey, HTTPError } = require('../components/base')
 
 var text = i18n()
 
@@ -18,7 +18,30 @@ function page (state, emit) {
     <main class="View-main">
       ${state.prismic.getByUID('page', state.params.uid, function (err, doc) {
         if (err) throw HTTPError(404, err)
-        if (!doc) return html`<div class="View-space u-spaceT0">${hero.loading()}</div>`
+        if (!doc) {
+          if (state.partial) {
+            doc = state.partial
+            return html`
+              <div class="View-space u-spaceT0">
+                ${hero({
+                  label: doc.data.label,
+                  title: asText(doc.data.title),
+                  description: asElement(doc.data.description, resolve),
+                  image: memo(function (url) {
+                    if (!url) return null
+                    return Object.assign({
+                      alt: doc.data.image.alt || '',
+                      src: src(url, 800),
+                      sizes: '(min-width: 900px) 50vw, 100vw',
+                      srcset: srcset(url, [400, 800, [1400, 'q_70'], [1800, 'q_70'], [2600, 'q_60']])
+                    }, doc.data.image.dimensions)
+                  }, [doc.data.image.url])
+                })}
+              </div>
+            `
+          }
+          return html`<div class="View-space u-spaceT0">${hero.loading()}</div>`
+        }
 
         emit('cover', Boolean(doc.data.image.url))
 
@@ -188,7 +211,12 @@ function page (state, emit) {
                           link: {
                             href: resolve(link),
                             text: link.data.cta || text`Read more`,
-                            external: link.target === '_blank'
+                            external: link.target === '_blank',
+                            onclick (event) {
+                              if (link.target === '_blank' || metaKey(event)) return
+                              emit('pushState', resolve(link), link)
+                              event.preventDefault()
+                            }
                           }
                         })
                       }))}

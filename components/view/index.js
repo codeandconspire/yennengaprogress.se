@@ -8,7 +8,7 @@ var header = require('./header')
 var footer = require('./footer')
 var player = require('../embed/player')
 var PrismicToolbar = require('../prismic-toolbar')
-var { i18n, asText, memo, resolve, className, HTTPError } = require('../base')
+var { i18n, asText, memo, resolve, metaKey, className, HTTPError } = require('../base')
 
 var text = i18n()
 
@@ -129,6 +129,7 @@ function createView (view, meta) {
 
     function onclick (doc) {
       return function (event) {
+        if (metaKey(event)) return
         emit('pushState', event.currentTarget.href, doc)
         event.preventDefault()
       }

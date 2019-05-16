@@ -21,7 +21,25 @@ function home (state, emit) {
     <main class="View-main">
       ${state.prismic.getSingle('homepage', function (err, doc) {
         if (err) throw HTTPError(500, err)
-        if (!doc) return html`<div class="View-space u-spaceT0">${Landing.loading()}</div>`
+        if (!doc) {
+          if (state.partial) {
+            doc = state.partial
+            return state.cache(Landing, 'homepage-landing').render({
+              image: memo(function (url) {
+                if (!url) return null
+                return Object.assign({
+                  alt: doc.data.image.alt || '',
+                  src: src(url, 400),
+                  sizes: '50vw (min-width: 900px), 100vw',
+                  srcset: srcset(url, [400, 600, 800, [1600, 'q_70']])
+                }, doc.data.image.dimensions)
+              }, [doc.data.image.url]),
+              caption: doc.data.image.alt,
+              title: asText(doc.data.title)
+            })
+          }
+          return html`<div class="View-space u-spaceT0">${Landing.loading()}</div>`
+        }
 
         return html`
           ${state.cache(Landing, 'homepage-landing').render({
