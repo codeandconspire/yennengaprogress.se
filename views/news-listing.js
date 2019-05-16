@@ -14,7 +14,7 @@ module.exports = view(home, meta)
 
 function home (state, emit) {
   return html`
-    <main class="View-main">
+    <main class="View-main View-main--background">
       <div class="View-space View-space--hero u-container">
         ${news(state.prismic.getSingle('news_listing', function (err, doc) {
           if (err) throw HTTPError(500, err)

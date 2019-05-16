@@ -197,6 +197,27 @@
 
 .View-main {
   flex-grow: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.View-main--background::before {
+  content: "";
+  width: 200%;
+  height: 100%;
+  position: absolute;
+  left: -25%;
+  top: 0;
+  transform: translateX(0%) skew(-25deg);
+  background-color: rgba(0, 0, 0, 0.02);
+  animation: View-main--appearing 800ms 350ms forwards cubic-bezier(0.19, 1, 0.22, 1);
+  will-change: transform;
+}
+
+@keyframes View-main--appearing {
+  to {
+    transform: translateX(45%) skew(-25deg);
+  }
 }
 
 .View-space {
