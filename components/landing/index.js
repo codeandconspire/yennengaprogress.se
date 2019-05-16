@@ -2,12 +2,12 @@ var html = require('choo/html')
 var nanoraf = require('nanoraf')
 var Component = require('choo/component')
 var button = require('../button')
-var { loader, offset } = require('../base')
+var { loader, offset, vh } = require('../base')
 
 module.exports = class Landing extends Component {
   constructor (id, state, emit) {
     super(id)
-    this.id = id
+    this.local = state.components[id] = { id }
   }
 
   static loading () {
@@ -30,27 +30,33 @@ module.exports = class Landing extends Component {
   load (el) {
     var top = offset(el)
     var height = el.offsetHeight
-    var isBellow = false
+    var isActive = false
+
     var onscroll = nanoraf(function () {
       var { scrollY } = window
       var min = top
-      var max = top + height / 3
-      if (scrollY > max) {
-        if (!isBellow) el.style.setProperty('--Landing-offset', 1)
-        isBellow = true
+      var max = top + height / 4
+      if (!inview()) {
+        el.classList.remove('is-inview')
+        isActive = false
         return
       }
-      if (scrollY < min) return
-      isBellow = false
+      if (!isActive) el.classList.add('is-inview')
+      isActive = true
       var ratio = Math.max(0, Math.min(1, (scrollY - min) / max))
       el.style.setProperty('--Landing-offset', ratio.toFixed(3))
     })
+
     var onresize = nanoraf(function () {
       top = offset(el)
       height = el.offsetHeight
-      if (!isBellow) el.style.removeProperty('--Landing-offset')
       onscroll()
     })
+
+    if (inview()) {
+      isActive = true
+      el.classList.add('is-inview')
+    }
 
     onscroll()
     window.addEventListener('scroll', onscroll, { passive: true })
@@ -58,6 +64,10 @@ module.exports = class Landing extends Component {
     this.unload = function () {
       window.removeEventListener('scroll', onscroll)
       window.removeEventListener('resize', onresize)
+    }
+
+    function inview () {
+      return top <= window.scrollY + vh() && top + height >= window.scrollY
     }
   }
 

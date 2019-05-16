@@ -32,7 +32,7 @@
 
 .Landing-background {
   display: flex;
-  width: calc(100% + 100vh * 1/3);
+  width: 100%;
   height: 125%;
   position: absolute;
   left: 0;
@@ -72,7 +72,7 @@
 }
 
 @supports (transform: translatex(calc(100% * var(--Landing-offset)))) {
-  .Landing-background {
+  .Landing.is-inview .Landing-background {
     position: fixed;
     transform: translateX(calc(115vw + 75vw * var(--Landing-offset)));
   }
@@ -88,8 +88,8 @@
   }
 
   @media (min-width: 900px) {
-    .Landing-background {
-      transform: translateX(calc(50% + 50% * var(--Landing-offset)));
+    .Landing.is-inview .Landing-background {
+      transform: translateX(calc(73% + 27% * var(--Landing-offset)));
     }
 
     @keyframes Landing-background--reveal {
@@ -98,14 +98,14 @@
       }
 
       to {
-        transform: translateX(50%);
+        transform: translateX(73%);
       }
     }
   }
 
   @media (min-width: 1400px) {
-    .Landing-background {
-      transform: translateX(calc(60% + 40% * var(--Landing-offset)));
+    .Landing.is-inview .Landing-background {
+      transform: translateX(calc(75% + 25% * var(--Landing-offset)));
     }
 
     @keyframes Landing-background--reveal {
@@ -114,7 +114,7 @@
       }
 
       to {
-        transform: translateX(60%);
+        transform: translateX(75%);
       }
     }
   }
@@ -132,12 +132,6 @@
   transform-origin: 100% 0;
   transform: translateX(100%) rotate(16deg);
   transform: translateX(100%) rotate(calc(16deg * (1 - var(--Landing-offset))));
-}
-
-@media (min-width: 900px) {
-  .Landing-background::before {
-    width: 25%;
-  }
 }
 
 .Landing-background::after {
