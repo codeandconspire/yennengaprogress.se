@@ -205,6 +205,12 @@
   margin-bottom: 7rem;
 }
 
+.View-space--hero::before {
+  content: "";
+  display: block;
+  height: 15vh;
+}
+
 /**
  * Footer
  */

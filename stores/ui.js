@@ -4,6 +4,7 @@ function ui (state, emitter) {
   state.ui = state.ui || {}
   state.ui.isLoading = false
   state.ui.isCovered = false
+  state.ui.isLandingPage = true
 
   emitter.on('cover', function (value) {
     state.ui.isCovered = value
@@ -11,6 +12,7 @@ function ui (state, emitter) {
 
   emitter.on('navigate', function () {
     state.ui.isCovered = false
+    state.ui.isLandingPage = false
   })
 
   var requests = 0

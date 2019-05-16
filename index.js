@@ -1,7 +1,5 @@
 var choo = require('choo')
 var app = choo({ hash: false })
-var view = require('./components/view')
-var { HTTPError } = require('./components/base')
 var middleware = require('./lib/prismic-middleware')
 var REPOSITORY = 'https://yennengaprogress.cdn.prismic.io/api/v2'
 
@@ -22,6 +20,7 @@ app.use(require('choo-meta')({ origin: app.state.origin }))
 app.use(require('choo-service-worker')('/sw.js'))
 
 app.route('/', require('./views/home'))
+app.route('/news', require('./views/news-listing'))
 app.route('/:uid', require('./views/page'))
 
 try {
