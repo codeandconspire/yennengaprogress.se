@@ -1,10 +1,11 @@
 var html = require('choo/html')
-var { snippet, className } = require('../base')
+var { snippet, className, loader } = require('../base')
 
 var THEMES = ['sand', 'umber', 'darkBlue']
 
 module.exports = card
 module.exports.themes = THEMES
+module.exports.loading = loading
 
 function card (props) {
   var img = Object.assign({}, props.image)
@@ -46,4 +47,16 @@ function link (props) {
   var children = html`<span class="u-hiddenVisually">${props.text}</span>`
   if (attrs.href) return html`<a ${attrs}>${children}</a>`
   return html`<button ${attrs}>${children}</button>`
+}
+
+function loading (opts) {
+  return html`
+    <div class="${className('Card', { 'Card--large': opts.large })} is-loading">
+      <div class="Card-content u-loading">
+        <span class="Card-label">${loader(5)}</span>
+        <h2 class="Card-title">${loader(12)}</h2>
+        <div class="Card-text">${loader(55)}</div>
+      </div>
+    </div>
+  `
 }

@@ -4,9 +4,10 @@ var asElement = require('prismic-element')
 var { Predicates } = require('prismic-javascript')
 var view = require('../components/view')
 var news = require('../components/news')
-var { i18n, src, resolve, asText, loader, HTTPError } = require('../components/base')
+var button = require('../components/button')
+var { i18n, src, metaKey, resolve, asText, loader, HTTPError } = require('../components/base')
 
-var PAGE_SIZE = 3
+var PAGE_SIZE = 9
 
 var text = i18n()
 
@@ -16,7 +17,7 @@ function home (state, emit) {
   return html`
     <main class="View-main View-main--background">
       <div class="View-space View-space--hero u-container">
-        ${news(state.prismic.getSingle('news_listing', function (err, doc) {
+        ${state.prismic.getSingle('news_listing', function (err, doc) {
           if (err) throw HTTPError(500, err)
           doc = doc || state.partial
 
@@ -29,11 +30,12 @@ function home (state, emit) {
           var total = response && response.total_pages
           var hasMore = total ? total > pages.length : false
 
-          return {
-            large: true,
-            title: doc ? asText(doc.data.title) : loader(5),
-            body: doc ? asElement(doc.data.description) : loader(48),
-            items: pages.reduce(function (acc, response, index) {
+          return html`
+            <div class="Text Text--narrow">
+              <h1>${doc ? asText(doc.data.title) : loader(5)}</h1>
+              ${doc ? asElement(doc.data.description) : html`<p>${loader(48)}</p>`}
+            </div>
+            ${news(pages.reduce(function (acc, response, index) {
               if (!response) {
                 for (let i = 0; i < 9; i++) acc.push(null)
                 return acc
@@ -45,13 +47,18 @@ function home (state, emit) {
                 date: parse(doc.first_publication_date),
                 href: resolve(doc)
               })))
-            }, []),
-            link: hasMore ? {
-              text: text`Show more`,
-              href: resolve(doc) + `?page=${page + 1}`
-            } : null
-          }
-        }))}
+            }, []))}
+            ${hasMore ? button({
+              text: text`Show more news`,
+              href: resolve(doc) + `?page=${page + 1}`,
+              onclick (event) {
+                if (metaKey(event)) return
+                emit('pushState', event.currentTarget.href, { preserveScroll: true })
+                event.preventDefault()
+              }
+            }) : null}
+          `
+        })}
       </div>
     </main>
   `

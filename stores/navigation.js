@@ -11,9 +11,11 @@ function navigation (state, emitter) {
     else state.partial = null
   })
 
-  function onnavigate (href) {
-    window.requestAnimationFrame(function () {
-      window.scrollTo(0, 0)
-    })
+  function onnavigate (href, opts = {}) {
+    if (!opts.preserveScroll) {
+      window.requestAnimationFrame(function () {
+        window.scrollTo(0, 0)
+      })
+    }
   }
 }

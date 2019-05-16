@@ -198,6 +198,7 @@
 .View-main {
   flex-grow: 1;
   position: relative;
+  z-index: 0;
   overflow: hidden;
 }
 
@@ -208,6 +209,7 @@
   position: absolute;
   left: -25%;
   top: 0;
+  z-index: -1;
   transform: translateX(0%) skew(-25deg);
   background-color: rgba(0, 0, 0, 0.02);
   animation: View-main--appearing 800ms 350ms forwards cubic-bezier(0.19, 1, 0.22, 1);

@@ -5,9 +5,9 @@
   font-family: var(--document-font-family);
   line-height: var(--document-line-height);
   font-size: 1em;
-  max-width: var(--container-small-width);
-  margin-right: auto;
-  margin-left: auto;
+  max-width: var(--container-medium-width);
+  /* margin-right: auto;
+  margin-left: auto; */
 }
 
 @media (min-width: 350px) {
@@ -20,6 +20,14 @@
   .Text {
     font-size: 1.25rem;
   }
+}
+
+.Text--narrow {
+  max-width: var(--container-small-width);
+}
+
+.Text--wide {
+  max-width: var(--container-large-width);
 }
 
 /**
@@ -102,8 +110,8 @@
 .Text pre {
   font-size: 0.8em;
   overflow: auto;
-  background: rgb(var(--light-grey));
-  color: rgb(255, 255, 255);
+  background: #000;
+  color: #fff;
   padding: 1em;
   text-align: left;
 }
@@ -180,7 +188,7 @@
 .Text h1,
 .Text .Text-h1 {
   font: var(--heading-font);
-  font-size: 2.5em;
+  font-size: 3em;
 }
 
 .Text h2,
@@ -217,7 +225,7 @@
 @media (min-width: 800px) and (min-height: 400px) {
   .Text h1,
   .Text .Text-h1 {
-    font-size: 3em;
+    font-size: 5.5em;
   }
 
   .Text h2,

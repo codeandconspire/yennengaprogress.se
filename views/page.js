@@ -66,7 +66,7 @@ function page (state, emit) {
             ${doc.data.body.map(function (slice, index) {
               switch (slice.slice_type) {
                 case 'text': return html`
-                  <div class="View-space u-container u-small">
+                  <div class="View-space u-container u-medium">
                     <div class="Text">
                       ${asElement(slice.primary.text, resolve, serialize)}
                     </div>
@@ -110,7 +110,7 @@ function page (state, emit) {
                   let heading = asText(slice.primary.heading)
 
                   return html`
-                    <div class="View-space u-container u-small">
+                    <div class="View-space u-container u-medium">
                       ${heading ? html`
                         <div class="Text u-spaceB4">
                           <h2>${heading}</h2>
@@ -230,7 +230,7 @@ function page (state, emit) {
                   if (!items.length) return null
                   let heading = asText(slice.primary.heading)
                   return html`
-                    <div class="View-space u-container u-small">
+                    <div class="View-space u-container u-medium">
                       <div class="Text u-sizeFull">
                         ${heading ? html`<h2 class="u-spaceB1">${heading}</h2>` : null}
                         <dl>

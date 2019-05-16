@@ -21,6 +21,7 @@ app.use(require('choo-service-worker')('/sw.js'))
 
 app.route('/', require('./views/home'))
 app.route('/news', require('./views/news-listing'))
+app.route('/projects', require('./views/project-listing'))
 app.route('/:uid', require('./views/page'))
 
 try {

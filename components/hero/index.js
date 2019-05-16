@@ -20,7 +20,11 @@ function hero (props) {
           ${props.label ? html`<span class="Hero-label">${props.label}</span>` : null}
           ${props.title}
         </h1>
-        <div class="Hero-description">${props.description}</div>
+        <div class="Hero-description">
+          <div class="Text">
+            ${props.description}
+          </div>
+        </div>
       </div>
     </div>
   `

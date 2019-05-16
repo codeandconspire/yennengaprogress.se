@@ -36,6 +36,7 @@ module.exports = class Zigzag extends Component {
       window.addEventListener('resize', onresize)
     })
 
+    this.afterupdate = onresize
     this.unload = function () {
       window.removeEventListener('scroll', onscroll)
       window.removeEventListener('resize', onresize)

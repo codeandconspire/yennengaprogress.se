@@ -25,8 +25,8 @@
   --document-margin: 0.5rem;
 
   --container-large-width: var(--document-width);
-  --container-medium-width: 60rem;
-  --container-small-width: 50rem;
+  --container-medium-width: 50rem;
+  --container-small-width: 30rem;
 
   --loading-color: 0, 0, 0, 0.06;
   --loading-color-solid: 235, 235, 235;
@@ -72,15 +72,15 @@
 @media (min-width: 900px) {
   :root {
     --document-margin: 3.5rem;
-    --container-medium-width: 70rem;
-    --container-small-width: 55rem;
+    --container-medium-width: 55rem;
+    --container-small-width: 35rem;
   }
 }
 
 @media (min-width: 1200px) {
   :root {
     --document-margin: 5rem;
-    --container-medium-width: 80rem;
-    --container-small-width: 65rem;
+    --container-medium-width: 65rem;
+    --container-small-width: 40rem;
   }
 }

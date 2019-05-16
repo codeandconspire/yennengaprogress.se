@@ -5,12 +5,13 @@ var { Predicates } = require('prismic-javascript')
 var view = require('../components/view')
 var card = require('../components/card')
 var news = require('../components/news')
+var button = require('../components/button')
 var Zigzag = require('../components/zigzag')
 var method = require('../components/method')
 var banner = require('../components/banner')
 var recruit = require('../components/recruit')
 var Landing = require('../components/landing')
-var { i18n, memo, src, srcset, slugify, resolve, asText, loader, HTTPError } = require('../components/base')
+var { i18n, memo, src, metaKey, srcset, slugify, resolve, asText, loader, HTTPError } = require('../components/base')
 
 var text = i18n()
 
@@ -130,7 +131,7 @@ function home (state, emit) {
                     src: src(url, 600),
                     srcset: srcset(url, [400, 800, [1600, 'q_80'], [2600, 'q_70']])
                   }, link.data.image.dimensions)
-                }, [image && image.url, doc.data.id]),
+                }, [image && image.url, link.id, 'card']),
                 link: {
                   href: resolve(link),
                   text: link.data.cta || text`Read more`,
@@ -146,30 +147,46 @@ function home (state, emit) {
             }))}
           </section>
           <section class="View-space u-container" id="news">
-            ${news(state.prismic.getSingle('news_listing', function (err, doc) {
+            ${state.prismic.getSingle('news_listing', function (err, doc) {
               if (err) return null
               var query = Predicates.at('document.type', 'news')
               var opts = {
                 pageSize: 3,
                 orderings: '[document.first_publication_date desc]'
               }
-              return state.prismic.get(query, opts, function (err, response) {
-                if (err) return null
-                return {
-                  title: doc ? asText(doc.data.title) : loader(5),
-                  link: doc ? {
-                    href: resolve(doc),
-                    text: doc.data.cta || text`All news`
-                  } : null,
-                  items: response ? response.results.map((doc) => ({
-                    title: asText(doc.data.title),
-                    body: asElement(doc.data.description, resolve),
-                    date: parse(doc.first_publication_date),
-                    href: resolve(doc)
-                  })) : null
-                }
-              })
-            }))}
+
+              return html`
+                <div class="Text">
+                  <h2>${doc ? asText(doc.data.title) : loader(5)}</h2>
+                </div>
+                ${state.prismic.get(query, opts, function (err, response) {
+                  if (err) return null
+
+                  var items = []
+                  if (!response) {
+                    for (let i = 0; i < 3; i++) items.push(null)
+                  } else {
+                    items = response.results.map((doc) => ({
+                      title: asText(doc.data.title),
+                      body: asElement(doc.data.description, resolve),
+                      date: parse(doc.first_publication_date),
+                      href: resolve(doc)
+                    }))
+                  }
+
+                  return news(items)
+                })}
+                ${doc ? button({
+                  href: resolve(doc),
+                  text: doc.data.cta || text`All news`,
+                  onclick (event) {
+                    if (metaKey(event)) return
+                    emit('pushState', resolve(doc), doc)
+                    event.preventDefault()
+                  }
+                }) : null}
+              `
+            })}
           </section>
         `
       })}
