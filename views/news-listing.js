@@ -35,7 +35,7 @@ function home (state, emit) {
               <h1>${doc ? asText(doc.data.title) : loader(5)}</h1>
               ${doc ? asElement(doc.data.description) : html`<p>${loader(48)}</p>`}
             </div>
-            ${news(pages.reduce(function (acc, response, index) {
+            ${news('news-listing', pages.reduce(function (acc, response, index) {
               if (!response) {
                 for (let i = 0; i < 9; i++) acc.push(null)
                 return acc
@@ -45,7 +45,12 @@ function home (state, emit) {
                 title: asText(doc.data.title),
                 body: asElement(doc.data.description, resolve),
                 date: parse(doc.first_publication_date),
-                href: resolve(doc)
+                href: resolve(doc),
+                onclick (event) {
+                  if (metaKey(event)) return
+                  emit('pushState', event.target.href, doc)
+                  event.preventDefault()
+                }
               })))
             }, []))}
             ${hasMore ? button({

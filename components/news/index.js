@@ -1,3 +1,4 @@
+var assert = require('assert')
 var html = require('choo/html')
 var format = require('date-fns/format')
 var { i18n, loader } = require('../base')
@@ -6,9 +7,10 @@ var text = i18n()
 
 module.exports = news
 
-function news (items = []) {
+function news (id, items = []) {
+  assert(typeof id === 'string', 'news: id should be type string')
   return html`
-    <div class="News">
+    <div class="News" id="${id}">
       ${items.map(function (item, index) {
         if (!item) return loading(index)
         return html`
@@ -18,7 +20,7 @@ function news (items = []) {
             </time>
             <h3 class="News-heading">${item.title}</h3>
             ${item.body}
-            <a class="News-link" href="${item.href}">
+            <a class="News-link" href="${item.href}" onclick=${item.onclick || null}>
               <span class="u-hiddenVisually">${text`Read more`}</span>
             </a>
           </article>
@@ -32,8 +34,8 @@ function loading (index) {
   return html`
     <article class="News-item is-loading u-slideUp">
       <time class="News-date">${loader(8)}</time>
-      <h3 class="News-heading">${loader([12, 16, 14][index % 3])}</h3>
-      <p>${loader([80, 110, 100][index % 3])}</p>
+      <h3 class="News-heading">${loader(8 + 4 * (index % 5))}</h3>
+      <p>${loader(60 + 15 * (index % 5))}</p>
     </article>
   `
 }

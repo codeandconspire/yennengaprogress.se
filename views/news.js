@@ -10,7 +10,7 @@ module.exports = view(page, meta)
 function page (state, emit) {
   return html`
     <main class="View-main">
-      ${state.prismic.getByUID('page', state.params.uid, function (err, doc) {
+      ${state.prismic.getByUID('news', state.params.uid, function (err, doc) {
         if (err) throw HTTPError(404, err)
         if (!doc) {
           if (state.partial) {
@@ -66,7 +66,7 @@ function page (state, emit) {
 }
 
 function meta (state) {
-  return state.prismic.getByUID('page', state.params.uid, function (err, doc) {
+  return state.prismic.getByUID('news', state.params.uid, function (err, doc) {
     if (err) throw HTTPError(404, err)
     if (!doc) return null
 

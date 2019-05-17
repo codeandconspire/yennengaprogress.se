@@ -147,7 +147,7 @@ function home (state, emit) {
             }))}
           </section>
           <section class="View-space u-container" id="news">
-            ${state.prismic.getSingle('news_listing', function (err, doc) {
+            ${state.prismic.getSingle('news_listing', function (err, listing) {
               if (err) return null
               var query = Predicates.at('document.type', 'news')
               var opts = {
@@ -157,7 +157,7 @@ function home (state, emit) {
 
               return html`
                 <div class="Text">
-                  <h2>${doc ? asText(doc.data.title) : loader(5)}</h2>
+                  <h2>${listing ? asText(listing.data.title) : loader(5)}</h2>
                 </div>
                 ${state.prismic.get(query, opts, function (err, response) {
                   if (err) return null
@@ -166,15 +166,20 @@ function home (state, emit) {
                   if (!response) {
                     for (let i = 0; i < 3; i++) items.push(null)
                   } else {
-                    items = response.results.map((doc) => ({
-                      title: asText(doc.data.title),
-                      body: asElement(doc.data.description, resolve),
-                      date: parse(doc.first_publication_date),
-                      href: resolve(doc)
+                    items = response.results.map((result) => ({
+                      title: asText(result.data.title),
+                      body: asElement(result.data.description, resolve),
+                      date: parse(result.first_publication_date),
+                      href: resolve(result),
+                      onclick (event) {
+                        if (metaKey(event)) return
+                        emit('pushState', event.target.href, result)
+                        event.preventDefault()
+                      }
                     }))
                   }
 
-                  return news(items)
+                  return news(`${doc.id}-news`, items)
                 })}
                 ${doc ? button({
                   href: resolve(doc),
