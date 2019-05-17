@@ -193,17 +193,6 @@ function asText (richtext) {
   return text
 }
 
-// get truncated snippet of text
-// (str, num?) = arr
-exports.snippet = snippet
-function snippet (str, maxlen = Infinity) {
-  if (!str || str.length < maxlen) return str
-  var words = str.split(' ')
-  var snipped = ''
-  while (snipped.length < maxlen) snipped += ' ' + words.shift()
-  return [snipped, ' ', html`<span class="u-textNowrap">${words[0]}…</span>`]
-}
-
 // create placeholder loading text of given length
 // (num, bool?) -> Element
 exports.loader = loader

@@ -35,16 +35,9 @@
   margin-bottom: calc(var(--Grid-gutter-vertical) * -1);
 }
 
-.Grid--slim {
-  --Grid-gutter: 0.6rem;
-  --Grid-gutter-vertical: 0.6rem;
-}
-
-@media (min-width: 600px), print {
-  .Grid--slim {
-    --Grid-gutter: 1.5rem;
-    --Grid-gutter-vertical: 1.5rem;
-  }
+.Grid--compact {
+  --Grid-gutter: 0rem;
+  --Grid-gutter-vertical: 0rem;
 }
 
 /**

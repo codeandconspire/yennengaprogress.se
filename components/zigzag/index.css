@@ -31,8 +31,7 @@
 
     .Zigzag-item:nth-child(2n+1),
     .Zigzag-button:nth-child(2n+1) {
-      margin-top: -10vh;
-      transform: translateY(calc(10vh * (1 - var(--Zigzag-inview))));
+      transform: translateY(calc(-10vh + 10vh * (1 - var(--Zigzag-inview))));
     }
   }
 }

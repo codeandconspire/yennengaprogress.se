@@ -67,11 +67,15 @@
   font-family: var(--document-font-family);
 }
 
+.Hero-description {
+  margin-bottom: 4rem;
+}
+
 /**
  * 50/50 Layout
  */
 
-@media (min-width: 900px) {
+@media (min-width: 900px) and (min-height: 600px) {
   .Hero--image {
     flex-direction: row;
   }
@@ -99,10 +103,14 @@
   }
 
   .Hero-title {
-    margin-bottom: 5rem;
+    margin-bottom: 20vh;
   }
 
   .Hero-label {
     margin-bottom: 3rem;
+  }
+
+  .Hero-description {
+    margin-bottom: 0;
   }
 }

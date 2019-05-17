@@ -6,19 +6,29 @@
   line-height: var(--document-line-height);
   font-size: 1em;
   max-width: var(--container-medium-width);
-  /* margin-right: auto;
-  margin-left: auto; */
+}
+
+.Text--small {
+  font-size: 0.8em;
 }
 
 @media (min-width: 350px) {
   .Text {
     font-size: 1.125rem;
   }
+
+  .Text--small {
+    font-size: 0.9em;
+  }
 }
 
 @media (min-width: 800px) and (min-height: 400px) {
   .Text {
     font-size: 1.25rem;
+  }
+
+  .Text--small {
+    font-size: 1em;
   }
 }
 
@@ -49,6 +59,10 @@
 
 .Text a:active {
   opacity: 0.5;
+}
+
+.Text-muted {
+  color: rgba(0, 0, 0, 0.3);
 }
 
 /**
@@ -116,6 +130,14 @@
   text-align: left;
 }
 
+.Text hr {
+  width: 100%;
+  height: 2px;
+  border: 0;
+  margin: 0.8em 0;
+  background: currentColor;
+}
+
 /**
  * Lists
  */
@@ -181,7 +203,7 @@
 .Text .Text-h4,
 .Text .Text-h5,
 .Text .Text-h6 {
-  font-weight: 600;
+  font-weight: normal;
   line-height: 1.25;
 }
 
@@ -232,4 +254,22 @@
   .Text .Text-h2 {
     font-size: 2.5em;
   }
+}
+
+.Text h1:first-child,
+.Text h2:first-child,
+.Text h3:first-child,
+.Text h4:first-child,
+.Text h5:first-child,
+.Text h6:first-child {
+  margin-top: 0;
+}
+
+.Text h1:last-child,
+.Text h2:last-child,
+.Text h3:last-child,
+.Text h4:last-child,
+.Text h5:last-child,
+.Text h6:last-child {
+  margin-bottom: 0;
 }
