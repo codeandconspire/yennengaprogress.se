@@ -52,7 +52,7 @@ function home (state, emit) {
                 ${doc ? asElement(doc.data.description) : html`<p>${loader(48)}</p>`}
               </div>
             </div>
-            ${state.cache(Zigzag, 'homepage-projects', { static: true }).render(projects.map(function (doc, index) {
+            ${state.cache(Zigzag, 'projects-listing', { static: true }).render(projects.map(function (doc, index) {
               var appear = page !== 1 &&
                 index >= (PAGE_SIZE * page) - PAGE_SIZE &&
                 !state.ui.isLandingPage

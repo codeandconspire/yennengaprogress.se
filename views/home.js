@@ -181,12 +181,12 @@ function home (state, emit) {
 
                   return news(`${doc.id}-news`, items)
                 })}
-                ${doc ? button({
-                  href: resolve(doc),
+                ${listing ? button({
+                  href: resolve(listing),
                   text: doc.data.cta || text`All news`,
                   onclick (event) {
                     if (metaKey(event)) return
-                    emit('pushState', resolve(doc), doc)
+                    emit('pushState', event.currentTarget.href, doc)
                     event.preventDefault()
                   }
                 }) : null}
