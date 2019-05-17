@@ -12,7 +12,7 @@ function card (props) {
   delete img.src
 
   return html`
-    <div class="${className('Card', { [`Card--${props.theme}`]: props.theme, 'Card--large': props.large })}">
+    <div class="${className('Card', { [`Card--${props.theme}`]: props.theme, 'Card--large': props.large, 'u-slideUp': props.appear })}">
       ${props.image ? html`<img class="Card-image" ${img} src="${props.image.src}">` : null}
       <div class="Card-content">
         ${props.link ? link(props.link) : null}
@@ -39,7 +39,7 @@ function link (props) {
 
 function loading (opts) {
   return html`
-    <div class="${className('Card', { 'Card--large': opts.large })} is-loading">
+    <div class="${className('Card', { 'Card--large': opts.large, 'u-slideUp': opts.appear })} is-loading">
       <div class="Card-content u-loading">
         <span class="Card-label">${loader(5)}</span>
         <h2 class="Card-title">${loader(12)}</h2>

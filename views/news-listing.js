@@ -27,8 +27,8 @@ function home (state, emit) {
           for (let i = 1; i <= page; i++) pages.push(getPage(i))
 
           var response = pages.find(Boolean)
-          var total = response && response.total_pages
-          var hasMore = total ? total > pages.length : false
+          var totalPages = response && response.total_pages
+          var hasMore = totalPages ? totalPages > pages.length : false
 
           return html`
             <div class="Text Text--narrow">

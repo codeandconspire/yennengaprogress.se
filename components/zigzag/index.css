@@ -7,7 +7,6 @@
 /* @define Zigzag */
 .Zigzag {
   width: 100%;
-  padding-top: 10vh;
 }
 
 @media (min-width: 600px) {
@@ -22,16 +21,23 @@
     .Zigzag {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      grid-template-rows: auto;
+      grid-template-rows: 1fr;
+      padding-top: 10vh;
     }
 
     .Zigzag-item {
       width: 100%;
+      height: 100%;
     }
 
     .Zigzag-item:nth-child(2n+1),
     .Zigzag-button:nth-child(2n+1) {
       transform: translateY(calc(-10vh + 10vh * (1 - var(--Zigzag-inview))));
+    }
+
+    .Zigzag--static .Zigzag-item:nth-child(2n+1),
+    .Zigzag--static .Zigzag-button:nth-child(2n+1) {
+      transform: translateY(-10vh);
     }
   }
 }

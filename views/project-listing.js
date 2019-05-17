@@ -32,8 +32,8 @@ function home (state, emit) {
           for (let i = 1; i <= page; i++) pages.push(getPage(i))
 
           var response = pages.find(Boolean)
-          var total = response && response.total_pages + featured.length
-          var hasMore = total ? total > pages.length : false
+          var totalPages = response && response.total_pages
+          var hasMore = totalPages ? totalPages > pages.length : false
 
           var projects = featured.concat(pages.reduce(function (acc, response) {
             if (response) return acc.concat(response.results)
@@ -46,18 +46,25 @@ function home (state, emit) {
           }
 
           return html`
-            <div class="Text Text--narrow">
-              <h1>${doc ? asText(doc.data.title) : loader(5)}</h1>
-              ${doc ? asElement(doc.data.description) : html`<p>${loader(48)}</p>`}
+            <div class="View-space u-spaceT0">
+              <div class="Text Text--narrow">
+                <h1>${doc ? asText(doc.data.title) : loader(5)}</h1>
+                ${doc ? asElement(doc.data.description) : html`<p>${loader(48)}</p>`}
+              </div>
             </div>
-            ${state.cache(Zigzag, 'homepage-projects').render(projects.map(function (doc, index) {
-              if (!doc) return card.loading({ large: true })
+            ${state.cache(Zigzag, 'homepage-projects', { static: true }).render(projects.map(function (doc, index) {
+              var appear = page !== 1 &&
+                index >= (PAGE_SIZE * page) - PAGE_SIZE &&
+                !state.ui.isLandingPage
+
+              if (!doc) return card.loading({ large: true, appear })
 
               var image = doc.data.featured_image
               if (!image || !image.url) image = doc.data.image
 
               return card({
                 large: true,
+                appear: appear,
                 label: doc.data.label,
                 title: asText(doc.data.title),
                 body: asElement(doc.data.description),
@@ -83,7 +90,7 @@ function home (state, emit) {
               })
             }), hasMore ? {
               href: resolve(doc) + `?page=${page + 1}`,
-              text: doc.data.cta || text`Show more projects`,
+              text: text`Show more projects`,
               onclick (event) {
                 if (metaKey(event)) return
                 emit('pushState', event.currentTarget.href, { preserveScroll: true })

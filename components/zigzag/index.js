@@ -1,19 +1,20 @@
 var html = require('choo/html')
 var nanoraf = require('nanoraf')
 var Component = require('choo/component')
-var { offset, vh } = require('../base')
+var { offset, vh, className } = require('../base')
 
 module.exports = class Zigzag extends Component {
-  constructor (id, state, emit) {
+  constructor (id, state, emit, opts = {}) {
     super(id)
-    this.local = state.components[id] = { id, inview: 0 }
+    this.local = state.components[id] = Object.assign({ id, inview: 0 }, opts)
+    if (!opts.static) this.load = this.init
   }
 
   update () {
     return true
   }
 
-  load (el) {
+  init (el) {
     var top, height, viewport
     var onscroll = nanoraf(function () {
       var { scrollY } = window
@@ -45,7 +46,7 @@ module.exports = class Zigzag extends Component {
 
   createElement (children, opts) {
     return html`
-      <div class="Zigzag" id="${this.local.id}" style="--Zigzag-inview: ${this.local.inview};">
+      <div class="${className('Zigzag', { 'Zigzag--static': this.local.static })}" id="${this.local.id}" style="--Zigzag-inview: ${this.local.inview};">
         ${children.map((child) => html`<div class="Zigzag-item">${child}</div>`)}
         ${opts ? button(opts) : null}
       </div>
