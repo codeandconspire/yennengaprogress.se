@@ -20,9 +20,11 @@ function home (state, emit) {
           if (err) throw HTTPError(500, err)
           doc = doc || state.partial
 
-          var featured = doc ? doc.data.featured_projects.filter(function (item) {
-            return item.link.id && !item.link.isBroken
-          }).map((item) => item.link) : []
+          var featured = doc && doc.data.featured_projects && !state.query.goal
+            ? doc.data.featured_projects.filter(function (item) {
+              return item.link.id && !item.link.isBroken
+            }).map((item) => item.link)
+            : []
 
           var pages = []
           var page = parseInt(state.query.page, 10)
@@ -68,13 +70,13 @@ function home (state, emit) {
                     src: src(url, 600),
                     srcset: srcset(url, [400, 800, [1600, 'q_80'], [2600, 'q_70']])
                   }, doc.data.image.dimensions)
-                }, [image && image.url, doc.data.id, 'card']),
+                }, [image && image.url, doc.id, 'card']),
                 link: {
                   href: resolve(doc),
                   text: doc.data.cta || text`Read more`,
                   onclick (event) {
                     if (metaKey(event)) return
-                    emit('pushState', resolve(doc), doc)
+                    emit('pushState', event.currentTarget.href, doc)
                     event.preventDefault()
                   }
                 }
@@ -96,6 +98,11 @@ function home (state, emit) {
               page: page,
               pageSize: PAGE_SIZE,
               orderings: '[document.first_publication_date desc]'
+            }
+
+            if (state.query.goal) {
+              let value = decodeURIComponent(state.query.goal)
+              query.push(Predicates.at('my.project.goals.goal', value))
             }
 
             for (let i = 0, len = featured.length; i < len; i++) {
