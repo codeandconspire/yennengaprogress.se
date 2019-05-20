@@ -81,7 +81,7 @@ function project (state, emit) {
                     </a>
                   `))}
                   <div class="Text">
-                    <small class="Text-muted">${text`Click on a target to view related projects.`}</small>
+                    <small class="Text-muted u-colorDefault">${text`Click on a target to view related projects.`}</small>
                   </div>
                 `
               }),

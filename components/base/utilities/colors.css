@@ -6,9 +6,13 @@
 .u-colorSand { color: rgb(var(--sand)) !important; }
 .u-colorUmber { color: rgb(var(--umber)) !important; }
 .u-colorLightGrey { color: rgb(var(--light-grey)) !important; }
+.u-colorWhite { color: rgb(255, 255, 255) !important; }
+.u-colorDefault { color: rgb(var(--document-color)) !important; }
 
 .u-bgDarkBlue { background-color: rgb(var(--dark-blue)) !important; }
 .u-bgBurkinaBlue { background-color: rgb(var(--burkina-blue)) !important; }
 .u-bgSand { background-color: rgb(var(--sand)) !important; }
 .u-bgUmber { background-color: rgb(var(--umber)) !important; }
 .u-bgLightGrey { background-color: rgb(var(--light-grey)) !important; }
+.u-bgWhite { background-color: rgb(255, 255, 255) !important; }
+.u-bgDefault { background-color: rgb(var(--document-background)) !important; }

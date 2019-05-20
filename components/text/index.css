@@ -61,8 +61,14 @@
   opacity: 0.5;
 }
 
+.Text--adapt a,
+.Text--adapt a:hover {
+  color: currentColor;
+  text-decoration: underline;
+}
+
 .Text-muted {
-  color: rgba(0, 0, 0, 0.3);
+  opacity: 0.6;
 }
 
 /**

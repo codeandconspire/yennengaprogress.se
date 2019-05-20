@@ -1,0 +1,78 @@
+@import "../base";
+
+/** @define Form */
+.Form {}
+
+.Form-error {
+  padding: 2rem;
+  border: 2px solid rgb(var(--color-goal-1));
+  position: relative;
+  overflow: hidden;
+}
+
+.Form-error::after {
+  content: "";
+  width: 15vw;
+  height: 15vw;
+  max-width: 4rem;
+  max-height: 4rem;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform: translate(50%, -50%) rotate(45deg);
+  background-color: rgb(var(--color-goal-1));
+}
+
+.Form-field {
+  display: block;
+  margin: 0 0 1.5em;
+  font-size: 1rem;
+  position: relative;
+}
+
+.Form-label {
+  display: block;
+  margin-bottom: 0.3em;
+  font: var(--heading-font);
+  font-size: 1.125rem;
+}
+
+.Form-control {
+  display: block;
+  width: 100%;
+  font-size: 1rem;
+  min-width: 0;
+  padding: 0.8rem 0.7rem;
+  border: 2px solid #fff;
+  background: #fff;
+  position: relative;
+  -webkit-appearance: none;
+  border-radius: 3px;
+  user-select: text;
+}
+
+.Form-control--textarea:not([rows]) {
+  height: 8.9rem;
+}
+
+.Form-control--textarea {
+  resize: none;
+}
+
+.Form-control::placeholder {
+  color: currentColor;
+  opacity: 0.5;
+}
+
+.Form-control:focus-visible {
+  outline: 0 !important;
+  border-color: currentColor;
+}
+
+/**
+ * Select
+ */
+
+.Form-control--select {
+  background: #fff url("./chevron.svg") right 0.8em center/0.6em no-repeat;
+}

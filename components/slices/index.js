@@ -11,7 +11,7 @@ var text = i18n()
 
 module.exports = slices
 
-function slices (slices, state, emit) {
+function slices (slices, state, emit, render = () => null) {
   return slices.map(function (slice, index) {
     switch (slice.slice_type) {
       case 'text': return html`
@@ -195,7 +195,7 @@ function slices (slices, state, emit) {
           </div>
         `
       }
-      default: return null
+      default: return render(slice, index, slices)
     }
   })
 }
