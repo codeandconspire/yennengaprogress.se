@@ -39,12 +39,14 @@ app.use(get('/media/:type/:transform/:uri(.+)', async function (ctx, type, trans
 app.use(post('/api/prismic-hook', compose([body(), function (ctx) {
   var secret = ctx.request.body && ctx.request.body.secret
   ctx.assert(secret === process.env.PRISMIC_SECRET, 403, 'Secret mismatch')
-  return new Promise(function (resolve, reject) {
-    purge(function (err, response) {
-      if (err) return reject(err)
-      ctx.type = 'application/json'
-      ctx.body = {}
-      resolve()
+  return queried().then(function (urls) {
+    return new Promise(function (resolve, reject) {
+      purge(urls.concat('/sw.js'), function (err, response) {
+        if (err) return reject(err)
+        ctx.type = 'application/json'
+        ctx.body = {}
+        resolve()
+      })
     })
   })
 }])))
@@ -107,8 +109,35 @@ app.use(function (ctx, next) {
  */
 app.listen(process.env.PORT || 8080, function () {
   if (process.env.NOW && app.env === 'production') {
-    purge(['/sw.js'], function (err) {
-      if (err) app.emit('error', err)
+    queried().then(function (urls) {
+      purge(urls.concat('/sw.js'), function (err) {
+        if (err) app.emit('error', err)
+      })
     })
   }
 })
+
+// get urls for all queried pages
+// () -> Promise
+async function queried () {
+  var urls = []
+  var api = await Prismic.api(REPOSITORY)
+
+  var [projects, news] = await Promise.all([api.query(
+    Prismic.Predicates.at('document.type', 'news'),
+    { pageSize: 10 }
+  ), api.query(
+    Prismic.Predicates.at('document.type', 'news'),
+    { pageSize: 9 }
+  )])
+
+  for (let i = 0; i < projects.total_pages; i++) {
+    urls.push(`/projects?page=${i + 1}`)
+  }
+
+  for (let i = 0; i < news.total_pages; i++) {
+    urls.push(`/news?page=${i + 1}`)
+  }
+
+  return urls
+}
