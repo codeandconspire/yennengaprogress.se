@@ -15,21 +15,22 @@ function page (state, emit) {
         if (!doc) {
           if (state.partial) {
             doc = state.partial
+            let { title, description, label, image } = doc.data
             return html`
               <div class="View-space u-spaceT0">
                 ${hero({
-                  label: doc.data.label,
-                  title: asText(doc.data.title),
-                  description: asElement(doc.data.description, resolve),
+                  label: label,
+                  title: title && asText(title),
+                  description: description && asElement(description, resolve),
                   image: memo(function (url) {
                     if (!url) return null
                     return Object.assign({
-                      alt: doc.data.image.alt || '',
+                      alt: image.alt || '',
                       src: src(url, 800),
                       sizes: '(min-width: 900px) 50vw, 100vw',
                       srcset: srcset(url, [400, 800, [1400, 'q_70'], [1800, 'q_70'], [2600, 'q_60']])
-                    }, doc.data.image.dimensions)
-                  }, [doc.data.image.url, doc.id])
+                    }, image.dimensions)
+                  }, [image && image.url, doc.id])
                 })}
               </div>
             `
