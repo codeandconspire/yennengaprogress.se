@@ -26,8 +26,8 @@
       "CLOUDINARY_SECRET": "@cloudinary-secret",
       "PRISMIC_SECRET": "@prismic-yennengaprogress-secret",
       "CLOUDFLARE_ZONE": "@cloudflare-yennengaprogress-zone",
-      "CLOUDFLARE_EMAIL": "@cloudflare-yennengaprogress-email",
-      "CLOUDFLARE_KEY": "@cloudflare-yennengaprogress-key",
+      "CLOUDFLARE_EMAIL": "@cloudflare-codeandconspire-email",
+      "CLOUDFLARE_KEY": "@cloudflare-codeandconspire-key",
       "POLYFILL_FEATURES": "es2017"
     }
   },
