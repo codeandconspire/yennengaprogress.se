@@ -6,7 +6,8 @@
   "scripts": {
     "test": "standard",
     "start": "node server.js",
-    "build": "jalla build index.js --sw sw.js"
+    "build": "jalla build index.js --sw sw.js",
+    "deploy": "npx now -T codeandconspire && now alias -T codeandconspire"
   },
   "documentify": {
     "transform": [
