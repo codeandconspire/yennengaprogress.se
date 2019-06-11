@@ -13,7 +13,6 @@ function grid (opts, children) {
   }
 
   var classes = className('Grid', {
-    'Grid--carousel': opts.carousel,
     'Grid--compact': opts.compact
   })
   if (opts.ordered) return html`<ol class="${classes}">${children.map(child)}</ol>`

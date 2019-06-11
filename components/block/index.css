@@ -33,6 +33,16 @@
   transform: translate(-50%, -50%);
 }
 
+.Block-image--landscape {
+  min-width: auto;
+  max-width: none;
+}
+
+.Block-image--portrait {
+  max-height: none;
+  min-height: auto;
+}
+
 @supports (object-fit: cover) {
   .Block-image {
     object-fit: cover;

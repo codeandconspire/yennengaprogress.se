@@ -102,7 +102,9 @@ function project (state, emit) {
                       href: resolve(doc.data.support_link),
                       onclick (event) {
                         if (metaKey(event)) return
-                        emit('pushState', event.currentTarget.href, doc.data.support_link)
+                        emit('pushState', event.currentTarget.href, {
+                          partial: doc.data.support_link
+                        })
                         event.preventDefault()
                       }
                     }) : null}

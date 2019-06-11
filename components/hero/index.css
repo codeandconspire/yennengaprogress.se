@@ -14,8 +14,10 @@
 
 .Hero-figure {
   flex: 0 0 80vh;
+  min-height: 80vh;
   margin-bottom: 2rem;
   position: relative;
+  overflow: hidden;
 }
 
 .Hero-figure::after {
@@ -37,6 +39,16 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+}
+
+.Hero-image--landscape {
+  min-width: auto;
+  max-width: none;
+}
+
+.Hero-image--portrait {
+  max-height: none;
+  min-height: auto;
 }
 
 @supports (object-fit: cover) {
@@ -82,7 +94,13 @@
 
   .Hero-figure {
     flex: 0 1 50%;
+    float: left;
+    width: 50%;
     margin: 0;
+  }
+
+  .Hero--image .Hero-figure {
+    min-height: 100vh;
   }
 
   .Hero-body {
@@ -93,6 +111,9 @@
 
   .Hero--image .Hero-body {
     flex: 0 1 50%;
+    float: left;
+    width: 50%;
+    min-height: 100vh;
     margin-left: 0 !important;
   }
 

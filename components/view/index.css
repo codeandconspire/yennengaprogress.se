@@ -27,49 +27,64 @@
   padding: var(--document-margin) 0;
 }
 
-.View-logo {
-  display: block;
-  margin-right: auto;
-  max-width: 6.8rem;
-  color: rgb(var(--umber));
-  transition: color 190ms var(--ease);
-}
-
-.View-logo:hover {
-  color: rgb(var(--dark-umber));
-  transition: color 120ms var(--ease-out);
-}
-
-.View--covered .View-logo,
-.View--covered .View-logo:hover {
-  color: #fff;
-}
-
-@media (min-width: 600px) {
-  .View-logo {
-    max-width: 8rem;
-  }
-}
-
-@media (min-width: 800px) {
+@media (min-width: 800px) and (min-height: 800px) {
   .View-nav {
     padding: 3rem 0;
   }
 }
 
+.View-home {
+  float: left;
+  flex: 0 1 auto;
+  width: 6.8rem;
+  height: 4rem;
+  display: block;
+  margin-right: auto;
+  position: relative;
+  color: rgb(var(--umber));
+  transition: color 190ms var(--ease);
+}
+
+.View-home:hover {
+  color: rgb(var(--dark-umber));
+  transition: color 120ms var(--ease-out);
+}
+
+.View--covered .View-home,
+.View--covered .View-home:hover {
+  color: #fff;
+}
+
+@media (min-width: 600px) {
+  .View-home {
+    width: 8rem;
+  }
+}
+
 @media (min-width: 800px) {
-  .View-logo {
-    max-width: 10rem;
+  .View-home {
+    width: 10rem;
   }
 }
 
 @media (min-width: 1300px) {
-  .View-logo {
-    max-width: 12.3rem;
+  .View-home {
+    width: 12.3rem;
   }
 }
 
+.View-logo {
+  display: block;
+  width: 100%;
+  height: auto;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
 .View-menu {
+  float: right;
   display: flex;
   align-items: baseline;
   margin-left: var(--document-margin);
@@ -89,7 +104,7 @@
   font-weight: 500;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 900px), (max-height: 600px) {
   .View--covered .View-link {
     color: #fff;
   }

@@ -10,7 +10,7 @@ function vcard (props) {
     <article class="VCard">
       ${props.image ? html`
         <figure class="VCard-figure">
-          <img class="VCard-image" ${img} src="${props.image.src}">
+          <img class="VCard-image VCard-image--${img.width > img.height ? 'landscape' : 'portrait'}" ${img} src="${props.image.src}">
         </figure>
       ` : null}
       <div class="VCard-body">

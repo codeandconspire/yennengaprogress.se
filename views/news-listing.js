@@ -48,7 +48,7 @@ function home (state, emit) {
                 href: resolve(doc),
                 onclick (event) {
                   if (metaKey(event)) return
-                  emit('pushState', event.target.href, doc)
+                  emit('pushState', event.target.href, { partial: doc })
                   event.preventDefault()
                 }
               })))
@@ -58,7 +58,7 @@ function home (state, emit) {
               href: resolve(doc) + `?page=${page + 1}`,
               onclick (event) {
                 if (metaKey(event)) return
-                emit('pushState', event.currentTarget.href, { preserveScroll: true })
+                emit('pushState', event.currentTarget.href, { preventScroll: true })
                 event.preventDefault()
               }
             }) : null}

@@ -5,6 +5,7 @@ var { Predicates } = require('prismic-javascript')
 var view = require('../components/view')
 var card = require('../components/card')
 var news = require('../components/news')
+var Anchor = require('../components/anchor')
 var button = require('../components/button')
 var Zigzag = require('../components/zigzag')
 var method = require('../components/method')
@@ -60,7 +61,8 @@ function home (state, emit) {
               text: doc.data.cta_text || doc.data.cta_link.data.cta || text`Read more`
             } : null
           })}
-          <section class="View-space u-spaceT0 u-container" id="${slugify(doc.data.method_label)}">
+          <section class="View-space u-container">
+            ${state.cache(Anchor, slugify(doc.data.method_label)).render()}
             ${method({
               label: doc.data.method_label,
               title: asText(doc.data.method_heading),
@@ -73,7 +75,8 @@ function home (state, emit) {
               })
             })}
           </section>
-          <div class="View-space" id="${slugify(doc.data.banner_label)}">
+          <div class="View-space">
+            ${state.cache(Anchor, slugify(doc.data.banner_label)).render()}
             ${doc.data.banner_image.url ? banner({
               label: doc.data.banner_label,
               title: asText(doc.data.banner_heading),
@@ -96,7 +99,8 @@ function home (state, emit) {
               }, [doc.data.banner_image.url])
             }) : null}
           </div>
-          <div class="View-space u-container" id="${slugify(asText(doc.data.recruit_heading))}">
+          <div class="View-space u-container">
+            ${state.cache(Anchor, slugify(asText(doc.data.recruit_heading))).render()}
             ${recruit({
               title: asText(doc.data.recruit_heading),
               body: asElement(doc.data.recruit_text),
@@ -111,7 +115,8 @@ function home (state, emit) {
               })
             })}
           </div>
-          <section class="View-space" id="projects">
+          <section class="View-space">
+            ${state.cache(Anchor, 'projects').render()}
             ${state.cache(Zigzag, 'homepage-projects').render(doc.data.featured_projects.map(function ({ link }, index) {
               if (!link.id || link.isBroken) return null
               var image = link.data.featured_image
@@ -146,7 +151,8 @@ function home (state, emit) {
               }
             }))}
           </section>
-          <section class="View-space u-container" id="news">
+          <section class="View-space u-container">
+            ${state.cache(Anchor, 'news').render()}
             ${state.prismic.getSingle('news_listing', function (err, listing) {
               if (err) return null
               var query = Predicates.at('document.type', 'news')
@@ -173,7 +179,7 @@ function home (state, emit) {
                       href: resolve(result),
                       onclick (event) {
                         if (metaKey(event)) return
-                        emit('pushState', event.target.href, result)
+                        emit('pushState', event.target.href, { partial: result })
                         event.preventDefault()
                       }
                     }))
@@ -186,7 +192,7 @@ function home (state, emit) {
                   text: doc.data.cta || text`All news`,
                   onclick (event) {
                     if (metaKey(event)) return
-                    emit('pushState', event.currentTarget.href, doc)
+                    emit('pushState', event.currentTarget.href, { partial: doc })
                     event.preventDefault()
                   }
                 }) : null}

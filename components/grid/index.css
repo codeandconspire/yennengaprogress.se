@@ -33,6 +33,7 @@
   width: calc(100% + var(--Grid-gutter));
   margin: 0 calc(var(--Grid-gutter) * -0.5);
   margin-bottom: calc(var(--Grid-gutter-vertical) * -1);
+  overflow: hidden;
 }
 
 .Grid--compact {
@@ -46,6 +47,7 @@
 
 .Grid-cell {
   flex: 0 0 100%;
+  float: left;
   display: flex;
   align-items: self-start;
   min-width: 0; /* 1 */
@@ -68,38 +70,5 @@
   to {
     opacity: 1;
     transform: translateY(0px);
-  }
-}
-
-/**
- * Carousel
- */
-
-@media (max-width: 599px) {
-  .Grid--carousel {
-    width: 100%;
-    margin: 0;
-    overflow-x: auto;
-    overflow-y: hidden;
-    flex-wrap: nowrap;
-    -webkit-overflow-scrolling: touch;
-    -webkit-scroll-snap-type: mandatory;
-    scroll-snap-type: x mandatory;
-    -webkit-scroll-snap-points-x: repeat(100%);
-    scroll-snap-points-x: repeat(100%);
-  }
-
-  .Grid--carousel .Grid-cell {
-    flex-basis: calc(100% - 2rem);
-    padding-left: var(--document-margin);
-    padding-right: 0;
-    margin-right: calc((var(--document-margin) * -1) + 1rem);
-    scroll-snap-align: start;
-    margin-bottom: 0;
-  }
-
-  .Grid--carousel .Grid-cell:last-child {
-    padding-right: var(--document-margin);
-    flex-basis: calc(100% - 1rem);
   }
 }

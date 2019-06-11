@@ -122,15 +122,16 @@ function createView (view, meta) {
       if (props.anchor) href += `#${props.anchor}`
       return Object.assign({}, props, {
         href: href,
-        onclick: onclick(props.link),
+        onclick: onclick,
         label: props.label || asText(props.link.data.title)
       })
-    }
 
-    function onclick (doc) {
-      return function (event) {
+      function onclick (event) {
         if (metaKey(event)) return
-        emit('pushState', event.currentTarget.href, doc)
+        emit('pushState', event.currentTarget.href, {
+          partial: props.link,
+          preventScroll: Boolean(props.anchor)
+        })
         event.preventDefault()
       }
     }

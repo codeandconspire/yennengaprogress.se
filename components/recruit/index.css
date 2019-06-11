@@ -14,7 +14,9 @@
 }
 
 .Recruit-image {
-  flex: 0 1 375px;
+  float: left;
+  flex: 0 1 auto;
+  width: 375px;
   display: block;
   min-width: 20vw;
   height: auto;
@@ -27,6 +29,7 @@
 }
 
 .Recruit-content {
+  float: left;
   flex: 1 1 auto;
   max-width: 38em;
 }

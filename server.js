@@ -14,7 +14,7 @@ var REPOSITORY = 'https://yennengaprogress.cdn.prismic.io/api/v2'
 
 var app = jalla('index.js', {
   sw: 'sw.js',
-  serve: process.env.NODE_ENV === 'production'
+  serve: Boolean(process.env.NOW) && process.env.NODE_ENV === 'production'
 })
 
 /**
@@ -94,11 +94,12 @@ app.use(get('/robots.txt', function (ctx, next) {
  */
 app.use(function (ctx, next) {
   if (!ctx.accepts('html')) return next()
+  ctx.append('Link', '<https://use.typekit.net/ugl4huw.css>; rel=preload; crossorigin=anonymous; as=style;')
   var previewCookie = ctx.cookies.get(Prismic.previewCookie)
   if (previewCookie) {
     ctx.set('Cache-Control', 'no-cache, private, max-age=0')
-  } else {
-    ctx.set('Cache-Control', `max-age=0, stale-while-revalidate=${60 * 60 * 24}`)
+  } else if (process.env.NODE_ENV !== 'development') {
+    ctx.set('Cache-Control', `max-age=0, s-maxage=${60 * 60 * 24 * 7}`)
   }
 
   return next()

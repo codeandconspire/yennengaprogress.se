@@ -12,17 +12,19 @@ function hero (props) {
     <div class="${className('Hero', { 'Hero--image': props.image })}">
       ${props.image ? html`
         <figure class="Hero-figure">
-          <img class="Hero-image" ${img} src="${props.image.src}">
+          <img class="Hero-image Hero-image--${img.width > img.height ? 'landscape' : 'portrait'}" ${img} src="${props.image.src}">
         </figure>
       ` : null}
-      <div class="Hero-body u-container u-medium">
-        <h1 class="Hero-title">
-          ${props.label ? html`<span class="Hero-label">${props.label}</span>` : null}
-          ${props.title}
-        </h1>
-        <div class="Hero-description">
-          <div class="Text">
-            ${props.description}
+      <div class="Hero-body">
+        <div class="u-container u-medium">
+          <h1 class="Hero-title">
+            ${props.label ? html`<span class="Hero-label">${props.label}</span>` : null}
+            ${props.title}
+          </h1>
+          <div class="Hero-description">
+            <div class="Text">
+              ${props.description}
+            </div>
           </div>
         </div>
       </div>

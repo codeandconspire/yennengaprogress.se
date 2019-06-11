@@ -4,6 +4,8 @@ var Component = require('choo/component')
 var button = require('../button')
 var { loader, offset, vh } = require('../base')
 
+var TEST = '(transform: translateX(calc(100% * var(--Landing-offset))))'
+
 module.exports = class Landing extends Component {
   constructor (id, state, emit) {
     super(id)
@@ -28,6 +30,8 @@ module.exports = class Landing extends Component {
   }
 
   load (el) {
+    if (!window.CSS || !window.CSS.supports(TEST)) return
+
     var top = offset(el)
     var height = el.offsetHeight
     var isActive = false
@@ -45,6 +49,7 @@ module.exports = class Landing extends Component {
       isActive = true
       var ratio = Math.max(0, Math.min(1, (scrollY - min) / max))
       el.style.setProperty('--Landing-offset', ratio.toFixed(3))
+      el.style.setProperty('--Landing-rotate', (16 * (1 - ratio)).toFixed(3) + 'deg')
     })
 
     var onresize = nanoraf(function () {
@@ -67,7 +72,7 @@ module.exports = class Landing extends Component {
     }
 
     function inview () {
-      return top <= window.scrollY + vh() && top + height >= window.scrollY
+      return top <= window.scrollY + vh() && top + height > window.scrollY
     }
   }
 
@@ -78,8 +83,15 @@ module.exports = class Landing extends Component {
     var link = Object.assign({}, props.link)
     delete link.text
 
+    var format
+    if (img.width === img.height) {
+      format = 'square'
+    } else {
+      format = img.width > img.height ? 'landscape' : 'portrait'
+    }
+
     return html`
-      <div class="Landing u-container" id="${this.id}">
+      <div class="Landing u-container" id="${this.local.id}">
         <div class="Landing-heading">
           ${props.title ? html`<h1 class="Landing-title">${props.title}</h1>` : null}
           ${props.link ? button(Object.assign({ primary: true }, props.link)) : null}
@@ -88,7 +100,7 @@ module.exports = class Landing extends Component {
         ${props.image ? html`
           <figure class="Landing-figure">
             <div class="Landing-image">
-              <img class="Landing-img" ${img} src="${props.image.src}">
+              <img class="Landing-img Landing-img--${format}" ${img} src="${props.image.src}">
             </div>
             ${props.caption ? html`<figcaption class="Landing-caption">${props.caption}</figcaption>` : null}
           </figure>

@@ -155,7 +155,7 @@ function slices (slices, state, emit, render = () => null) {
                     src: src(url, 600),
                     sizes: '(min-width: 600px) 33.33vw, (min-width: 400px) 50vw, 100vw',
                     srcset: srcset(url, [400, 800, [1600, 'q_80'], [2600, 'q_70']])
-                  }, link.data.image.dimensions)
+                  }, image.dimensions)
                 }, [image && image.url, state.href]),
                 link: {
                   href: resolve(link),
@@ -163,7 +163,7 @@ function slices (slices, state, emit, render = () => null) {
                   external: link.target === '_blank',
                   onclick (event) {
                     if (link.target === '_blank' || metaKey(event)) return
-                    emit('pushState', resolve(link), link)
+                    emit('pushState', resolve(link), { partial: link })
                     event.preventDefault()
                   }
                 }

@@ -16,8 +16,10 @@ function method (props) {
       ${props.items ? props.items.filter((item) => illustrations[item.image]).map((item) => html`
         <article class="Method-item">
           ${illustrations[item.image]()}
-          <h3 class="Method-heading">${item.heading}</h3>
-          ${item.body}
+          <div class="Method-content">
+            <h3 class="Method-heading">${item.heading}</h3>
+            ${item.body}
+          </div>
         </article>
       `).filter(Boolean) : null}
     </div>

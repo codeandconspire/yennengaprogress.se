@@ -2,6 +2,7 @@
 
 :root {
   --Landing-offset: 0;
+  --Landing-rotate: 16deg;
 }
 
 /* @define Landing */
@@ -11,22 +12,34 @@
   flex-wrap: wrap;
   width: 100%;
   min-height: 100vh;
-  padding-top: 20vh;
+  padding-top: 30vh;
   padding-bottom: 10vh;
   position: relative;
   overflow: hidden;
+}
+
+@media (min-height: 400px) {
+  .Landing {
+    padding-top: 20vh;
+  }
+}
+
+@media (min-height: 600px) {
+  .Landing {
+    padding-top: 10vh;
+  }
+}
+
+@media (min-height: 800px) {
+  .Landing {
+    padding-top: 0;
+  }
 }
 
 @media (min-width: 900px) {
   .Landing {
     flex-wrap: nowrap;
     padding-bottom: 0;
-  }
-}
-
-@media (min-height: 50vw) {
-  .Landing {
-    padding-top: 0;
   }
 }
 
@@ -43,13 +56,25 @@
 
 .Landing:not(.is-loading) .Landing-background {
   animation:
-    Landing-background--delay 700ms,
-    Landing-background--reveal 600ms 700ms cubic-bezier(0.19, 1, 0.22, 1);
+    Landing-background--delay 700ms forwards,
+    Landing-background--reveal 600ms 700ms forwards cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+@media (min-width: 900px) {
+  .Landing:not(.is-loading) .Landing-background {
+    animation-name: Landing-background--delay, Landing-background--revealLarge;
+  }
 }
 
 @keyframes Landing-background--reveal {
   to {
     transform: translateX(34vw);
+  }
+}
+
+@keyframes Landing-background--revealLarge {
+  to {
+    transform: translateX(70vw);
   }
 }
 
@@ -63,15 +88,11 @@
   }
 }
 
-@media (min-width: 900px) {
-  @keyframes Landing-background--reveal {
-    to {
-      transform: translateX(50vw);
-    }
+@supports (transform: translateX(calc(100% * var(--Landing-offset)))) {
+  :root[scripting-enabled] .Landing:not(.is-loading) .Landing-background {
+    animation-fill-mode: none, none;
   }
-}
 
-@supports (transform: translatex(calc(100% * var(--Landing-offset)))) {
   .Landing.is-inview .Landing-background {
     position: fixed;
     transform: translateX(calc(115vw + 75vw * var(--Landing-offset)));
@@ -130,8 +151,7 @@
   top: 0;
   background-color: rgb(var(--umber));
   transform-origin: 100% 0;
-  transform: translateX(100%) rotate(16deg);
-  transform: translateX(100%) rotate(calc(16deg * (1 - var(--Landing-offset))));
+  transform: translateX(100%) rotate(var(--Landing-rotate));
 }
 
 .Landing-background::after {
@@ -144,6 +164,7 @@
 }
 
 .Landing-heading {
+  float: left;
   flex: 1 1 auto;
   margin: 21vh 0 10vh;
   opacity: 0;
@@ -167,20 +188,21 @@
   color: rgb(var(--dark-blue));
 }
 
-@media (min-width: 400px) {
+@media (min-width: 400px) and (min-height: 600px) {
   .Landing-title {
     font-size: 3.8rem;
   }
 }
 
-@media (min-width: 900px) {
+@media (min-width: 900px) and (min-height: 800px) {
   .Landing-title {
     font-size: 5.5rem;
   }
 }
 
 .Landing-figure {
-  width: 100%;
+  float: right;
+  width: 50%;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -206,6 +228,8 @@
   color: #fff;
   color: rgba(255, 255, 255, calc(1 - var(--Landing-offset)));
   text-shadow: 0 0 0 rgb(var(--document-color));
+  --text-shadow: 0 0 0 rgb(var(--document-color));
+  text-shadow: var(--text-shadow);
 }
 
 @media (min-width: 900px) {
@@ -255,6 +279,16 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+}
+
+.Landing-img--landscape {
+  min-width: auto;
+  max-width: none;
+}
+
+.Landing-img--portrait {
+  max-height: none;
+  min-height: auto;
 }
 
 @supports (object-fit: cover) {

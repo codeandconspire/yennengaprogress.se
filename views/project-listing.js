@@ -83,7 +83,7 @@ function home (state, emit) {
                   text: doc.data.cta || text`Read more`,
                   onclick (event) {
                     if (metaKey(event)) return
-                    emit('pushState', event.currentTarget.href, doc)
+                    emit('pushState', event.currentTarget.href, { partial: doc })
                     event.preventDefault()
                   }
                 }
@@ -93,7 +93,7 @@ function home (state, emit) {
               text: text`Show more projects`,
               onclick (event) {
                 if (metaKey(event)) return
-                emit('pushState', event.currentTarget.href, { preserveScroll: true })
+                emit('pushState', event.currentTarget.href, { preventScroll: true })
                 event.preventDefault()
               }
             } : null)}

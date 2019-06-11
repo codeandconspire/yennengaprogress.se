@@ -16,6 +16,9 @@
 }
 
 .News-item {
+  flex: 0 1 auto;
+  float: left;
+  width: 100%;
   margin-bottom: calc(var(--document-margin) / 2);
   padding: 1.5rem calc(var(--document-margin) / 2);
   position: relative;
@@ -23,7 +26,7 @@
 
 @media (min-width: 600px) {
   .News-item {
-    flex: 0 1 33.333%;
+    width: 33.333%;
   }
 
   .News-item + .News-item {

@@ -8,8 +8,8 @@ function navigation (state, emitter) {
   emitter.prependListener('pushState', onnavigate)
   emitter.prependListener('replaceState', onnavigate)
 
-  emitter.prependListener('pushState', function (href, next) {
-    if (next) state.partial = next
+  emitter.prependListener('pushState', function (href, opts = {}) {
+    if (opts.partial) state.partial = opts.partial
     else state.partial = null
   })
 
@@ -24,7 +24,7 @@ function navigation (state, emitter) {
   })
 
   function onnavigate (href, opts = {}) {
-    if (!opts.preserveScroll) {
+    if (!opts.preventScroll) {
       window.requestAnimationFrame(function () {
         window.scrollTo(0, 0)
       })

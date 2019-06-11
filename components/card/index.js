@@ -13,7 +13,7 @@ function card (props) {
 
   return html`
     <div class="${className('Card', { [`Card--${props.theme}`]: props.theme, 'Card--large': props.large, 'u-slideUp': props.appear })}">
-      ${props.image ? html`<img class="Card-image" ${img} src="${props.image.src}">` : null}
+      ${props.image ? html`<img class="Card-image Card-image--${img.width > img.height ? 'landscape' : 'portrait'}" ${img} src="${props.image.src}">` : null}
       <div class="Card-content">
         ${props.link ? link(props.link) : null}
         ${props.label ? html`<span class="Card-label">${props.label}</span>` : null}
