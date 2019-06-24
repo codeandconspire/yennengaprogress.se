@@ -56,19 +56,19 @@
 }
 
 @media (min-width: 600px) {
-  .View-home {
+  .View-header .View-home {
     width: 8rem;
   }
 }
 
 @media (min-width: 800px) {
-  .View-home {
+  .View-header .View-home {
     width: 10rem;
   }
 }
 
 @media (min-width: 1300px) {
-  .View-home {
+  .View-header .View-home {
     width: 12.3rem;
   }
 }
