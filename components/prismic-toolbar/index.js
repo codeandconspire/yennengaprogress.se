@@ -17,7 +17,7 @@ module.exports = class PrismicToolbar extends Component {
       enabled: typeof window !== 'undefined'
     }
 
-    this.href = () => state.origin + '/api/prismic-preview'
+    this.href = () => state.origin + state.href
 
     if (state.query.token && typeof window !== 'undefined') {
       let expires = process.env.NODE_ENV === 'development'
