@@ -83,6 +83,12 @@
   margin-bottom: 4rem;
 }
 
+.Hero:not(.Hero--image) .Hero-body::before {
+  content: "";
+  display: block;
+  flex: 0 1 25vh;
+}
+
 /**
  * 50/50 Layout
  */

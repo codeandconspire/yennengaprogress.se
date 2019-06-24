@@ -14,7 +14,7 @@
 
 @media (min-width: 350px) {
   .Text {
-    font-size: 1.125rem;
+    font-size: 1.125em;
   }
 
   .Text--small {
@@ -24,7 +24,7 @@
 
 @media (min-width: 800px) and (min-height: 400px) {
   .Text {
-    font-size: 1.25rem;
+    font-size: 1.25em;
   }
 
   .Text--small {

@@ -21,7 +21,11 @@ function block (props) {
         </figure>
       ` : null}
       ${props.title ? html`<h3 class="Block-title">${props.title}</h3>` : null}
-      ${props.body ? html`<div class="Text">${props.body}</div>` : null}
+      ${props.body ? html`
+        <div class="Block-body">
+          <div class="Text">${props.body}</div>
+        </div>
+      ` : null}
     </article>
   `
 }

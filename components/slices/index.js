@@ -101,7 +101,7 @@ function slices (slices, state, emit, render = () => null) {
                 <h2>${heading}</h2>
               </div>
             ` : null}
-            ${grid({ size: { sm: '1of2', md: '1of3' } }, items.map(function (item) {
+            ${grid({ size: { sm: '1of2', lg: '1of3' } }, items.map(function (item) {
               return block({
                 title: asText(item.title),
                 body: item.body ? asElement(item.body) : null,

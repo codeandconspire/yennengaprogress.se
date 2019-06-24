@@ -71,15 +71,15 @@ function page (state, emit) {
                 <div class="u-bgDarkBlue u-colorWhite u-cf">
                   <form method="POST" action="/api/join" class="View-space u-container">
                     ${grid([
-                      grid.cell({ size: { md: '1of3' } }, html`
+                      grid.cell({ size: { md: '1of2', lg: '1of3' } }, html`
                         <div class="Text">
                           <h2>${asText(slice.primary.heading)}</h2>
                           ${asElement(slice.primary.description, resolve)}
                         </div>
                       `),
-                      grid.cell({ size: { md: '2of3' } }, html`
+                      grid.cell({ size: { md: '1of2', lg: '2of3' } }, html`
                         <div>
-                          ${grid({ size: { md: '1of2' } }, [
+                          ${grid({ size: { lg: '1of2' } }, [
                             html`
                               <div>
                                 ${form.input({ label: text`Your name`, type: 'text', name: 'TODO:NAME', id: 'TODO:NAME', required: true })}
@@ -94,7 +94,7 @@ function page (state, emit) {
                               </div>
                             `
                           ])}
-                          ${grid({ size: { md: '1of2' } }, [html`
+                          ${grid({ size: { lg: '1of2' } }, [html`
                             <div class="u-flex u-spaceT2">
                               <div class="u-spaceR2">
                                 ${button({ type: 'submit', text: text`Send`, fill: true })}

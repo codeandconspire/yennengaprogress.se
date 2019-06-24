@@ -75,15 +75,15 @@ function page (state, emit) {
                     <input type="hidden" name="projectid" value="7188">
                     ${purchase ? html`<input type="hidden" name="title" value="${purchase}">` : null}
                     ${grid([
-                      grid.cell({ size: { md: '1of3' } }, html`
+                      grid.cell({ size: { md: '1of2', lg: '1of3' } }, html`
                         <div class="Text">
                           <h2>${asText(heading)}</h2>
                           ${asElement(description, resolve)}
                         </div>
                       `),
-                      grid.cell({ size: { md: '2of3' } }, html`
+                      grid.cell({ size: { md: '1of2', lg: '2of3' } }, html`
                         <div>
-                          ${grid({ size: { md: '1of2' } }, [
+                          ${grid({ size: { lg: '1of2' } }, [
                             html`
                               <div>
                                 ${form.input({ label: text`First name`, type: 'text', name: 'firstname', id: 'firstname', required: true })}
@@ -97,7 +97,7 @@ function page (state, emit) {
                               </div>
                             `
                           ])}
-                          ${grid({ size: { md: '1of2' } }, [html`
+                          ${grid({ size: { lg: '1of2' } }, [html`
                             <div class="u-flex u-spaceT2">
                               <div class="u-spaceR2">
                                 ${button({ type: 'submit', text: text`Donate`, fill: true })}

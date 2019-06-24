@@ -3,13 +3,20 @@
 /* @define Block */
 .Block {
   height: 100%;
-  padding: 2.5rem;
+  padding: 1.2rem;
   background: #fff;
   text-align: center;
 }
 
+@media (min-width: 600px) {
+  .Block {
+    padding: 2.5rem;
+  }
+}
+
 .Block-figure {
   width: 11rem;
+  max-width: 100%;
   margin: 0 auto 2.25rem;
   position: relative;
   overflow: hidden;
@@ -58,5 +65,21 @@
   margin-bottom: 0.5em;
   color: rgb(var(--umber));
   font: var(--heading-font);
-  font-size: 1.875rem;
+  font-size: 1.3rem;
+}
+
+@media (min-width: 600px) {
+  .Block-title {
+    font-size: 1.875rem;
+  }
+}
+
+.Block-body {
+  font-size: 0.85rem;
+}
+
+@media (min-width: 600px) {
+  .Block-body {
+    font-size: 1rem;
+  }
 }
