@@ -123,7 +123,7 @@
     flex: 0 1 25vh;
   }
 
-  .Hero-title {
+  .Hero--image .Hero-title {
     margin-bottom: 20vh;
   }
 
