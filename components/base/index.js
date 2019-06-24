@@ -17,6 +17,7 @@ function resolve (doc) {
     case 'website':
     case 'homepage': return '/'
     case 'join': return '/join'
+    case 'donate': return '/donate'
     case 'news': return `/news/${doc.uid}`
     case 'news_listing': return '/news'
     case 'page': return `/${doc.uid}`

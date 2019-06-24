@@ -128,12 +128,13 @@
 }
 
 .Text pre {
-  font-size: 0.8em;
+  display: inline-block;
+  font-size: 1.1em;
   overflow: auto;
-  background: #000;
-  color: #fff;
+  background: rgb(var(--sand));
   padding: 1em;
   text-align: left;
+  border-radius: 4px;
 }
 
 .Text hr {

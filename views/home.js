@@ -81,7 +81,7 @@ function home (state, emit) {
               label: doc.data.banner_label,
               title: asText(doc.data.banner_heading),
               button: memo(function (link) {
-                if ((!link.id && !link.url) && link.isBroken) return null
+                if ((!link.id && !link.url) || link.isBroken) return null
                 return {
                   href: link.url || resolve(link),
                   external: link.target === '_blank',
@@ -105,14 +105,14 @@ function home (state, emit) {
               title: asText(doc.data.recruit_heading),
               body: asElement(doc.data.recruit_text),
               actions: doc.data.recruit_actions.map(function ({ link, type }) {
-                if ((!link.id && !link.url) && link.isBroken) return null
+                if ((!link.id && !link.url) || link.isBroken) return null
                 return {
                   primary: type.toLowerCase() === 'primary',
                   href: link.url || resolve(link),
                   external: link.target === '_blank',
                   text: link.data && link.data.cta ? link.data.cta : text`Read more`
                 }
-              })
+              }).filter(Boolean)
             })}
           </div>
           <section class="View-space">

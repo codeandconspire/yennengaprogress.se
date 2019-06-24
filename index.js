@@ -21,6 +21,7 @@ app.use(require('choo-service-worker')('/sw.js'))
 
 app.route('/', require('./views/home'))
 app.route('/join', require('./views/join'))
+app.route('/donate', require('./views/donate'))
 app.route('/news', require('./views/news-listing'))
 app.route('/news/:uid', require('./views/news'))
 app.route('/projects', require('./views/project-listing'))
