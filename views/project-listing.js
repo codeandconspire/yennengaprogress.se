@@ -4,6 +4,7 @@ var { Predicates } = require('prismic-javascript')
 var view = require('../components/view')
 var card = require('../components/card')
 var Zigzag = require('../components/zigzag')
+var recruit = require('../components/recruit')
 var { i18n, src, srcset, memo, metaKey, resolve, asText, loader, HTTPError } = require('../components/base')
 
 var PAGE_SIZE = 10
@@ -97,6 +98,21 @@ function home (state, emit) {
                 event.preventDefault()
               }
             } : null)}
+            <div class="View-space u-container">
+              ${doc && doc.data.recruit_heading.length ? recruit({
+                title: asText(doc.data.recruit_heading),
+                body: asElement(doc.data.recruit_text),
+                actions: doc.data.recruit_actions.map(function ({ link, type }) {
+                  if ((!link.id && !link.url) || link.isBroken) return null
+                  return {
+                    primary: type.toLowerCase() === 'primary',
+                    href: link.url || resolve(link),
+                    external: link.target === '_blank',
+                    text: link.data && link.data.cta ? link.data.cta : text`Read more`
+                  }
+                }).filter(Boolean)
+              }) : null}
+            </div>
           `
 
           function getPage (page = 1) {
