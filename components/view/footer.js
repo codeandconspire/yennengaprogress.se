@@ -6,10 +6,13 @@ var text = i18n()
 
 module.exports = footer
 
-function footer (contact, sections) {
+function footer (contact, support, sections) {
   return html`
     <footer class="View-footer">
-      <div class="u-container">
+      <div class="View-support u-container u-textCenter">
+        ${support}
+      </div>
+      <div class="View-space u-container">
         ${grid({ size: { md: '1of2', lg: '1of4' } }, [
           html`
             <address>

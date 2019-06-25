@@ -254,7 +254,6 @@
  */
 
 .View-footer {
-  padding: var(--document-margin) 0;
   overflow: hidden;
   background: rgb(var(--dark-blue));
   color: #fff;
@@ -272,4 +271,49 @@
 
 .View-footer .View-home {
   float: none;
+}
+
+.View-support {
+  padding: var(--document-margin) 0;
+  text-transform: uppercase;
+  font: var(--heading-font);
+  font-size: 1.5rem;
+  background-color: rgb(var(--burkina-blue));
+}
+
+.View-support h2 {
+  margin-bottom: 0.1em;
+  line-height: 1.25;
+  font-size: 1.5em;
+}
+
+@media (min-width: 800px) and (min-height: 400px) {
+  .View-support h2 {
+    font-size: 2em;
+  }
+}
+
+.View-support :link,
+.View-support :link:active,
+.View-support :link:visited {
+  color: currentColor;
+  position: relative;
+  padding-right: 1.25em;
+}
+
+.View-support :link::after {
+  content: "";
+  width: 0.5em;
+  height: 0.5em;
+  position: absolute;
+  right: 0.5em;
+  top: 50%;
+  transform: translate(0, -55%);
+  transition: transform 150ms var(--ease-out);
+  will-change: transform;
+  background: url("./chevron.svg") center no-repeat;
+}
+
+.View-support :link:hover::after {
+  transform: translate(0.2em, -55%);
 }

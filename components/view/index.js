@@ -95,7 +95,7 @@ function createView (view, meta) {
           <script type="application/ld+json">${raw(JSON.stringify(linkedData(state)))}</script>
           ${header(menu, state.href)}
           ${children}
-          ${footer(doc ? asElement(doc.data.contact, resolve) : null, sections)}
+          ${footer(doc ? asElement(doc.data.contact, resolve) : null, doc ? asElement(doc.data.support, resolve) : null, sections)}
           ${player.render()}
           ${state.cache(PrismicToolbar, 'prismic-toolbar').placeholder(state.href)}
         </body>
