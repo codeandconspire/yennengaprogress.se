@@ -14,6 +14,7 @@ if (process.env.NODE_ENV === 'development' && typeof window !== 'undefined') {
 
 app.use(require('./stores/reset'))
 app.use(require('./stores/ui'))
+app.use(require('./stores/join'))
 app.use(require('./stores/navigation'))
 app.use(require('./stores/prismic')({ repository: REPOSITORY, middleware }))
 app.use(require('choo-meta')({ origin: app.state.origin }))

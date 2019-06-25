@@ -3,19 +3,90 @@ if (!process.env.NOW) require('dotenv/config')
 var jalla = require('jalla')
 var dedent = require('dedent')
 var body = require('koa-body')
+var mailgun = require('mailgun-js')
 var compose = require('koa-compose')
 var { get, post } = require('koa-route')
+var asElement = require('prismic-element')
 var Prismic = require('prismic-javascript')
 var purge = require('./lib/purge')
-var { resolve } = require('./components/base')
 var imageproxy = require('./lib/cloudinary-proxy')
+var { resolve, asText } = require('./components/base')
 
 var REPOSITORY = 'https://yennengaprogress.cdn.prismic.io/api/v2'
+var NOTIFICATION_RECEIVER = process.env.NODE_ENV === 'development'
+  ? 'null@codeandconspire.com'
+  : 'stina@yennengaprogress.se'
+var MAILGUN_DOMAIN = 'mg.yennengaprogress.se'
+var MAILGUN_HOST = 'api.eu.mailgun.net'
 
 var app = jalla('index.js', {
   sw: 'sw.js',
   serve: Boolean(process.env.NOW) && process.env.NODE_ENV === 'production'
 })
+
+app.use(post('/api/join', compose([body({ multipart: true }), async function (ctx, next) {
+  var { name, email, info, linkedin, skill } = ctx.request.body
+
+  try {
+    ctx.assert(name && email && info, 400)
+
+    var origin = process.env.NODE_ENV === 'development'
+      ? 'http://localhost:8080'
+      : 'https://' + process.env.npm_package_now_alias
+    var api = await Prismic.api(REPOSITORY, { req: ctx.req })
+    var message = await api.getByUID('email', 'join')
+    var notification = await api.getByUID('email', 'notification')
+    var client = mailgun({
+      apiKey: process.env.MAILGUN_KEY,
+      domain: MAILGUN_DOMAIN,
+      host: MAILGUN_HOST
+    })
+
+    await Promise.all([
+      client.messages().send({
+        from: `${message.data.sender_name} <${message.data.sender_email}>`,
+        to: email,
+        subject: format(asText(message.data.subject)),
+        text: format(asText(message.data.body)),
+        html: format(asElement(message.data.body, (doc) => origin + resolve(doc)))
+      }),
+      client.messages().send({
+        from: `${notification.data.sender_name} <${notification.data.sender_email}>`,
+        to: NOTIFICATION_RECEIVER,
+        subject: format(asText(notification.data.subject)),
+        text: format(asText(notification.data.body)),
+        html: format(asElement(notification.data.body, (doc) => origin + resolve(doc)))
+      })
+    ])
+
+    if (ctx.accepts('html')) {
+      ctx.redirect('back')
+    } else {
+      ctx.body = {}
+      ctx.type = 'application/json'
+    }
+  } catch (err) {
+    app.emit('error', err)
+    if (ctx.accepts('html')) {
+      ctx.redirect('back')
+    } else {
+      ctx.type = 'application/json'
+      ctx.status = err.status || 500
+      ctx.body = { error: err.message }
+    }
+  }
+
+  function format (str) {
+    if (Array.isArray(str)) str = str.join('')
+    str = str.toString()
+    return str
+      .replace(/{{\s?name\s?}}/ig, name)
+      .replace(/{{\s?info\s?}}/ig, info)
+      .replace(/{{\s?email\s?}}/ig, email)
+      .replace(/{{\s?skill\s?}}/ig, skill)
+      .replace(/{{\s?linkedin\s?}}/ig, linkedin)
+  }
+}])))
 
 /**
  * Proxy image transform requests to Cloudinary

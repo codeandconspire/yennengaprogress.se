@@ -69,7 +69,7 @@ function page (state, emit) {
               if (!slice.slice_type === 'form') return null
               return html`
                 <div class="u-bgDarkBlue u-colorWhite u-cf">
-                  <form method="POST" action="/api/join" class="View-space u-container">
+                  <form method="POST" action="/api/join" class="View-space u-container" onsubmit=${onsubmit}>
                     ${grid([
                       grid.cell({ size: { md: '1of2', lg: '1of3' } }, html`
                         <div class="Text">
@@ -79,25 +79,32 @@ function page (state, emit) {
                       `),
                       grid.cell({ size: { md: '1of2', lg: '2of3' } }, html`
                         <div>
+                          ${state.join.error ? html`
+                            <div class="Text u-spaceB4">
+                              <h3>${text`Oops`}</h3>
+                              <p>${text`Something went wrong. Please, ensure that everything is filled in correctly before trying again.`}</p>
+                              ${process.env.NODE_ENV === 'development' ? html`<pre>${state.join.error.stack}</pre>` : null}
+                            </div>
+                          ` : null}
                           ${grid({ size: { lg: '1of2' } }, [
                             html`
                               <div>
-                                ${form.input({ label: text`Your name`, type: 'text', name: 'TODO:NAME', id: 'TODO:NAME', required: true })}
-                                ${form.input({ label: text`LinkedIn profile`, type: 'url', name: 'TODO:LINKEDIN', id: 'TODO:LINKEDIN' })}
-                                ${form.input({ label: text`Email`, type: 'email', name: 'TODO:EMAIL', id: 'TODO:EMAIL', required: true })}
+                                ${form.input({ label: text`Your name`, type: 'text', value: getValue('name'), name: 'name', id: 'name', required: true })}
+                                ${form.input({ label: text`LinkedIn profile`, type: 'url', value: getValue('linkedin'), name: 'linkedin', id: 'linkedin' })}
+                                ${form.input({ label: text`Email`, type: 'email', value: getValue('email'), name: 'email', id: 'email', required: true })}
                               </div>
                             `,
                             html`
                               <div>
-                                ${form.select({ label: text`Select your skill`, name: 'TODO:SKILL', id: 'TODO:SKILL', required: true, options: [DEFAULT_SKILL].concat(asOptions(slice.primary.skills)) })}
-                                ${form.textarea({ label: text`Further info`, name: 'TODO:INFO', id: 'TODO:INFO', placeholder: text`Please let us know why you’re interested in joining the network`, required: true })}
+                                ${form.select({ label: text`Select your skill`, value: getValue('skill'), name: 'skill', id: 'skill', options: [DEFAULT_SKILL].concat(asOptions(slice.primary.skills)) })}
+                                ${form.textarea({ label: text`Further info`, value: getValue('info'), name: 'info', id: 'info', placeholder: text`Please let us know why you’re interested in joining the network`, required: true })}
                               </div>
                             `
                           ])}
                           ${grid({ size: { lg: '1of2' } }, [html`
                             <div class="u-flex u-spaceT2">
                               <div class="u-spaceR2">
-                                ${button({ type: 'submit', text: text`Send`, fill: true })}
+                                ${button({ type: 'submit', text: text`Send`, fill: true, disabled: state.join.isLoading })}
                               </div>
                               <div class="Text Text--small Text--adapt">
                                 ${asElement(slice.primary.terms, resolve, function (type, node, content, children) {
@@ -119,6 +126,22 @@ function page (state, emit) {
       })}
     </main>
   `
+
+  function getValue (key) {
+    if (!state.join.data || !state.join.data.has(key)) return ''
+    return state.join.data.get(key)
+  }
+
+  function onsubmit (event) {
+    if (!this.checkValidity()) {
+      this.reportValidity()
+      event.preventDefault()
+      return
+    }
+    var data = new window.FormData(this)
+    emit('join', data)
+    event.preventDefault()
+  }
 }
 
 function asOptions (text) {

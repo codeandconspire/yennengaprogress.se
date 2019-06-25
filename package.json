@@ -29,6 +29,7 @@
       "CLOUDFLARE_ZONE": "@cloudflare-yennengaprogress-zone",
       "CLOUDFLARE_EMAIL": "@cloudflare-codeandconspire-email",
       "CLOUDFLARE_KEY": "@cloudflare-codeandconspire-key",
+      "MAILGUN_KEY": "@mailgun-yennengaprogress-key",
       "POLYFILL_FEATURES": "es2017"
     }
   },
@@ -61,6 +62,7 @@
     "koa-body": "^4.1.0",
     "koa-compose": "^4.1.0",
     "koa-route": "^3.2.0",
+    "mailgun-js": "^0.22.0",
     "nanolru": "^1.0.0",
     "nanoraf": "^3.1.0",
     "normalize.css": "^8.0.1",

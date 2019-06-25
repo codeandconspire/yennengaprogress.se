@@ -32,7 +32,11 @@
   will-change: transform;
 }
 
-.Button:hover::before {
+.Button:disabled {
+  opacity: 0.6;
+}
+
+.Button:not(:disabled):hover::before {
   transform: skew(-25deg) translateX(0%);
 }
 
