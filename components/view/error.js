@@ -18,7 +18,7 @@ function error (err, href) {
     <main class="View-main View-main--background u-flex u-alignCenter">
       <div class="View-space View-space--hero u-container u-spaceV2">
           <div class="Text">
-            <h1>${text`Ouch`}</h1>
+            <h1>${text`Oops`}</h1>
             ${message(err.status)}
             ${DEBUG ? html`<pre>${err.stack}</pre>` : null}
           </div>

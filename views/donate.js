@@ -124,26 +124,6 @@ function page (state, emit) {
   `
 }
 
-function asOptions (text) {
-  var reg = /^[^\w_]\s?/
-  var options = []
-  var parent = options
-  var rows = text.split('\n')
-  for (let i = 0, len = rows.length; i < len; i++) {
-    if (!rows[i].trim()) continue
-    if (reg.test(rows[i])) {
-      parent = options
-      let group = { label: rows[i].replace(reg, ''), options: [] }
-      parent.push(group)
-      parent = group.options
-    } else {
-      parent.push({ label: rows[i], value: rows[i] })
-    }
-  }
-
-  return options
-}
-
 function meta (state) {
   return state.prismic.getSingle('donate', function (err, doc) {
     if (err) throw HTTPError(404, err)
