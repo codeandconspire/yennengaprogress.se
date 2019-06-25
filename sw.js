@@ -58,7 +58,7 @@ self.addEventListener('fetch', function onfetch (event) {
         function onerror (err) {
           if (cached) return cached
           if (sameOrigin && acceptHTML) return render()
-          throw err
+          return err
         }
       })
     })
