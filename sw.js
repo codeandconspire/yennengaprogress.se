@@ -13,7 +13,13 @@ self.addEventListener('install', function oninstall (event) {
 })
 
 self.addEventListener('activate', function onactivate (event) {
-  event.waitUntil(clear().then(() => self.clients.claim()))
+  event.waitUntil(clear().then(function () {
+    if (!self.registration.navigationPreload) return self.clients.claim()
+    // enable navigation preloads
+    self.registration.navigationPreload.enable().then(function () {
+      return self.clients.claim()
+    })
+  }))
 })
 
 self.addEventListener('fetch', function onfetch (event) {
@@ -29,15 +35,31 @@ self.addEventListener('fetch', function onfetch (event) {
           return cached
         }
 
-        return self.fetch(req).then(function (response) {
-          if (!response.ok) return cached || response
-          else cache.put(req, response.clone())
+        if (event.preloadResponse) {
+          return event.preloadResponse.then(function (response) {
+            return response || self.fetch(req)
+          }).then(onresponse).catch(onerror)
+        }
+
+        return self.fetch(req).then(onresponse).catch(onerror)
+
+        // handle network response
+        // Response -> Response
+        function onresponse (response) {
+          if (!response.ok) throw response
+          if (req.method.toUpperCase() === 'GET') {
+            return cache.put(req, response.clone()).then(() => response)
+          }
           return response
-        }, function (err) {
+        }
+
+        // handle fetch error
+        // Response -> Response
+        function onerror (err) {
           if (cached) return cached
           if (sameOrigin && acceptHTML) return render()
-          return err
-        })
+          throw err
+        }
       })
     })
   )
