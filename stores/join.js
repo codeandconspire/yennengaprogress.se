@@ -1,3 +1,5 @@
+/* global gtag */
+
 module.exports = join
 
 function join (state, emitter) {
@@ -28,6 +30,7 @@ function join (state, emitter) {
         state.join.success = true
         state.join.data = null
         emitter.emit('render')
+        gtag('event', 'sign_up', { method: 'Join form' })
       })
     }).catch(function (err) {
       state.join.isLoading = true

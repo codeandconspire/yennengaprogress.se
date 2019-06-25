@@ -7,11 +7,12 @@ var grid = require('../components/grid')
 var form = require('../components/form')
 var button = require('../components/button')
 var slices = require('../components/slices')
+var serialize = require('../components/text/serialize')
 var { i18n, memo, src, srcset, asText, resolve, HTTPError } = require('../components/base')
 
 var text = i18n()
 
-var DEFAULT_SKILL = { label: text`Select one`, disabled: true, selected: true }
+var DEFAULT_SKILL = { label: text`Select one`, disabled: true }
 
 module.exports = view(page, meta)
 
@@ -84,20 +85,28 @@ function page (state, emit) {
                               <h3>${text`Oops`}</h3>
                               <p>${text`Something went wrong. Please, ensure that everything is filled in correctly before trying again.`}</p>
                               ${process.env.NODE_ENV === 'development' ? html`<pre>${state.join.error.stack}</pre>` : null}
+                              <hr>
+                            </div>
+                          ` : null}
+                          ${state.join.success && slice.primary.success_message.length ? html`
+                            <div class="Text u-spaceB4">
+                              ${asElement(slice.primary.success_message, resolve, serialize)}
+                              <hr>
                             </div>
                           ` : null}
                           ${grid({ size: { lg: '1of2' } }, [
                             html`
                               <div>
-                                ${form.input({ label: text`Your name`, type: 'text', value: getValue('name'), name: 'name', id: 'name', required: true })}
+                                ${form.input({ label: text`First name`, type: 'text', value: getValue('given_name'), name: 'given_name', id: 'given_name', required: true })}
+                                ${form.input({ label: text`Last name`, type: 'text', value: getValue('family_name'), name: 'family_name', id: 'family_name', required: true })}
                                 ${form.input({ label: text`LinkedIn profile`, type: 'url', value: getValue('linkedin'), name: 'linkedin', id: 'linkedin' })}
                                 ${form.input({ label: text`Email`, type: 'email', value: getValue('email'), name: 'email', id: 'email', required: true })}
                               </div>
                             `,
                             html`
-                              <div>
-                                ${form.select({ label: text`Select your skill`, value: getValue('skill'), name: 'skill', id: 'skill', options: [DEFAULT_SKILL].concat(asOptions(slice.primary.skills)) })}
-                                ${form.textarea({ label: text`Further info`, value: getValue('info'), name: 'info', id: 'info', placeholder: text`Please let us know why you’re interested in joining the network`, required: true })}
+                              <div class="u-flex u-flexCol">
+                                ${form.select({ label: text`Select your skill`, name: 'skill', id: 'skill', options: asOptions(slice.primary.skills) })}
+                                ${form.textarea({ label: text`Further info`, class: 'u-sizeFill', value: getValue('info'), name: 'info', id: 'info', placeholder: text`Please let us know why you’re interested in joining the network`, required: true })}
                               </div>
                             `
                           ])}
@@ -142,26 +151,32 @@ function page (state, emit) {
     emit('join', data)
     event.preventDefault()
   }
-}
 
-function asOptions (text) {
-  var reg = /^[^\w_]\s?/
-  var options = []
-  var parent = options
-  var rows = text.split('\n')
-  for (let i = 0, len = rows.length; i < len; i++) {
-    if (!rows[i].trim()) continue
-    if (reg.test(rows[i])) {
-      parent = options
-      let group = { label: rows[i].replace(reg, ''), options: [] }
-      parent.push(group)
-      parent = group.options
-    } else {
-      parent.push({ label: rows[i], value: rows[i] })
+  function asOptions (text) {
+    var reg = /^[^\w_]\s?/
+    var options = []
+    var parent = options
+    var hasSelected = false
+    var rows = text.split('\n')
+
+    for (let i = 0, len = rows.length; i < len; i++) {
+      if (!rows[i].trim()) continue
+      if (reg.test(rows[i])) {
+        parent = options
+        let group = { label: rows[i].replace(reg, ''), options: [] }
+        parent.push(group)
+        parent = group.options
+      } else {
+        let isSelected = getValue('skill') === rows[i]
+        if (isSelected) hasSelected = true
+        parent.push({ label: rows[i], value: rows[i], selected: isSelected })
+      }
     }
-  }
 
-  return options
+    options.unshift(Object.assign({}, DEFAULT_SKILL, { selected: !hasSelected }))
+
+    return options
+  }
 }
 
 function meta (state) {

@@ -1,5 +1,6 @@
 if (!process.env.NOW) require('dotenv/config')
 
+var got = require('got')
 var jalla = require('jalla')
 var dedent = require('dedent')
 var body = require('koa-body')
@@ -8,6 +9,7 @@ var compose = require('koa-compose')
 var { get, post } = require('koa-route')
 var asElement = require('prismic-element')
 var Prismic = require('prismic-javascript')
+var { URL, URLSearchParams } = require('url')
 var purge = require('./lib/purge')
 var imageproxy = require('./lib/cloudinary-proxy')
 var { resolve, asText } = require('./components/base')
@@ -25,10 +27,11 @@ var app = jalla('index.js', {
 })
 
 app.use(post('/api/join', compose([body({ multipart: true }), async function (ctx, next) {
-  var { name, email, info, linkedin, skill } = ctx.request.body
+  var { given_name: givenName, family_name: familyName, email, info, linkedin, skill } = ctx.request.body
+  var name = `${givenName} ${familyName}`
 
   try {
-    ctx.assert(name && email && info, 400)
+    ctx.assert(givenName && familyName && email && info, 400)
 
     var origin = process.env.NODE_ENV === 'development'
       ? 'http://localhost:8080'
@@ -42,7 +45,19 @@ app.use(post('/api/join', compose([body({ multipart: true }), async function (ct
       host: MAILGUN_HOST
     })
 
+    var url = new URL('http://yennengaprogress.info/otto/handlers/form_handler.php')
+    url.search = new URLSearchParams({
+      firstname: givenName,
+      lastname: familyName,
+      email: email,
+      seq: 6,
+      sender: 1,
+      a: 'sub',
+      ref: 'none'
+    })
+
     await Promise.all([
+      got(url.toString()),
       client.messages().send({
         from: `${message.data.sender_name} <${message.data.sender_email}>`,
         to: email,
@@ -80,6 +95,8 @@ app.use(post('/api/join', compose([body({ multipart: true }), async function (ct
     if (Array.isArray(str)) str = str.join('')
     str = str.toString()
     return str
+      .replace(/{{\s?givenName\s?}}/ig, givenName)
+      .replace(/{{\s?familyName\s?}}/ig, familyName)
       .replace(/{{\s?name\s?}}/ig, name)
       .replace(/{{\s?info\s?}}/ig, info)
       .replace(/{{\s?email\s?}}/ig, email)

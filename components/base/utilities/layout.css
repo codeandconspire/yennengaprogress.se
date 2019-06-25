@@ -65,6 +65,9 @@
 .u-justifyCenter { justify-content: center !important; }
 .u-justifySpaceBetween { justify-content: space-between !important; }
 
+.u-flexCol { flex-direction: column !important; }
+.u-flexRow { flex-direction: row !important; }
+
 /**
  * Aspect ratio
  */

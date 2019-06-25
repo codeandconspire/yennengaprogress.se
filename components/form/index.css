@@ -24,7 +24,8 @@
 }
 
 .Form-field {
-  display: block;
+  display: flex;
+  flex-direction: column;
   margin: 0 0 1.5em;
   font-size: 1rem;
   position: relative;
@@ -38,6 +39,7 @@
 }
 
 .Form-control {
+  flex: 1 1 auto;
   display: block;
   width: 100%;
   font-size: 1rem;
