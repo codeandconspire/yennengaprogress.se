@@ -23,7 +23,7 @@ var MAILGUN_HOST = 'api.eu.mailgun.net'
 
 var app = jalla('index.js', {
   sw: 'sw.js',
-  serve: Boolean(process.env.NOW) && process.env.NODE_ENV === 'production'
+  serve: Boolean(process.env.NOW)
 })
 
 app.use(post('/api/join', compose([body({ multipart: true }), async function (ctx, next) {
