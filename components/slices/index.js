@@ -104,7 +104,7 @@ function slices (slices, state, emit, render = () => null) {
             ${grid({ size: { sm: '1of2', lg: '1of3' } }, items.map(function (item) {
               return block({
                 title: asText(item.title),
-                body: item.body ? asElement(item.body) : null,
+                body: item.body ? asElement(item.body, resolve) : null,
                 image: memo(function (url) {
                   if (!url) return null
                   var attrs = Object.assign({
