@@ -60,21 +60,9 @@
     Landing-background--reveal 600ms 700ms forwards cubic-bezier(0.19, 1, 0.22, 1);
 }
 
-@media (min-width: 900px) {
-  .Landing:not(.is-loading) .Landing-background {
-    animation-name: Landing-background--delay, Landing-background--revealLarge;
-  }
-}
-
 @keyframes Landing-background--reveal {
   to {
     transform: translateX(34vw);
-  }
-}
-
-@keyframes Landing-background--revealLarge {
-  to {
-    transform: translateX(70vw);
   }
 }
 
@@ -85,6 +73,14 @@
 
   to {
     transform: none;
+  }
+}
+
+@media (min-width: 900px) {
+  @keyframes Landing-background--reveal {
+    to {
+      transform: translateX(70vw);
+    }
   }
 }
 
@@ -201,9 +197,8 @@
 }
 
 .Landing-figure {
-  float: right;
-  width: 50%;
   display: flex;
+  width: 100%;
   flex-direction: column;
   align-items: flex-end;
   position: relative;
@@ -211,6 +206,8 @@
 
 @media (min-width: 900px) {
   .Landing-figure {
+    float: right;
+    width: 50%;
     flex: 1 1 100vw;
   }
 }
