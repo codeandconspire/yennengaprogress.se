@@ -85,7 +85,7 @@ function createView (view, meta) {
         return doc.data.footer.map(function (slice) {
           return {
             heading: asText(slice.primary.heading),
-            items: slice.items.map(link)
+            items: slice.items.map(link).filter(Boolean)
           }
         })
       }, [doc && doc.id, 'footer'])
@@ -117,19 +117,21 @@ function createView (view, meta) {
     // construct menu branch
     // obj -> obj
     function link (props) {
-      if (!props.link.id || props.link.isBroken) return null
-      var href = resolve(props.link)
+      var { link } = props
+      if (!(link.id || link.url) || link.isBroken) return null
+      var href = resolve(link)
       if (props.anchor) href += `#${props.anchor}`
       return Object.assign({}, props, {
         href: href,
         onclick: onclick,
-        label: props.label || asText(props.link.data.title)
+        external: link.target === '_blank',
+        label: props.label || asText(link.data.title)
       })
 
       function onclick (event) {
         if (metaKey(event)) return
         emit('pushState', event.currentTarget.href, {
-          partial: props.link,
+          partial: link,
           preventScroll: Boolean(props.anchor)
         })
         event.preventDefault()

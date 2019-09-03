@@ -32,7 +32,17 @@ function footer (contact, support, sections) {
             <ul>
               ${section.items.map((props) => html`
                 <li>
-                  <a class="View-shortcut" href="${props.href}" onclick=${props.onclick}>${props.label}</a>
+                  <a class="View-shortcut" href="${props.href}" onclick=${props.onclick}>
+                    ${props.label}
+                    ${props.external ? html`
+                      <svg class="View-symbol" width="19" height="19" viewBox="0 0 19 19" aria-hidden="true">
+                        <g fill="currentColor" fill-rule="evenodd">
+                          <path class="View-arrow" d="M14.4 4.7l-6.7 6.7-.7-.7L13.7 4H9.4V3h6v6h-1V4.7z"/>
+                          <path d="M15 16v-3h1v4H2V3h4v1H3v12h12z"/>
+                        </g>
+                      </svg>
+                    ` : null}
+                  </a>
                 </li>
               `)}
             </ul>

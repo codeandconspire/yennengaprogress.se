@@ -60,19 +60,19 @@
     "focus-visible": "^4.1.5",
     "got": "^9.6.0",
     "hstream": "^1.2.0",
-    "jalla": "^0.12.0-7",
-    "koa-body": "^4.1.0",
+    "jalla": "^0.12.0-14",
+    "koa-body": "^4.1.1",
     "koa-compose": "^4.1.0",
     "koa-route": "^3.2.0",
     "mailgun-js": "^0.22.0",
     "nanolru": "^1.0.0",
     "nanoraf": "^3.1.0",
     "normalize.css": "^8.0.1",
-    "postcss-custom-properties": "^8.0.10",
+    "postcss-custom-properties": "^8.0.11",
     "postcss-focus-visible": "^4.0.0",
     "postcss-url": "^8.0.0",
     "prismic-element": "^1.0.0",
-    "prismic-javascript": "^2.0.3",
+    "prismic-javascript": "^2.1.1",
     "prismic-richtext": "^0.4.2"
   }
 }
