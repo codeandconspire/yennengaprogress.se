@@ -109,4 +109,3 @@ module.exports = class Landing extends Component {
     `
   }
 }
-

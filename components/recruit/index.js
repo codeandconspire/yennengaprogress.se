@@ -1,6 +1,5 @@
 var html = require('choo/html')
 var button = require('../button')
-var { className } = require('../base')
 
 module.exports = recruit
 

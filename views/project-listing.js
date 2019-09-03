@@ -50,7 +50,7 @@ function home (state, emit) {
             <div class="View-space u-spaceT0">
               <div class="Text Text--narrow">
                 <h1>${doc ? asText(doc.data.title) : loader(5)}</h1>
-                ${doc ? asElement(doc.data.description) : html`<p>${loader(48)}</p>`}
+                ${doc ? asElement(doc.data.description, resolve) : html`<p>${loader(48)}</p>`}
               </div>
             </div>
             ${state.cache(Zigzag, 'projects-listing', { static: true }).render(projects.map(function (doc, index) {
