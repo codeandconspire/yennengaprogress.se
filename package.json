@@ -21,7 +21,7 @@
     ]
   },
   "now": {
-    "alias": "next.yennengaprogress.se",
+    "alias": "www.yennengaprogress.se",
     "env": {
       "NODE_ENV": "production",
       "CLOUDINARY_KEY": "@cloudinary-key",
