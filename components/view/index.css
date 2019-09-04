@@ -342,3 +342,10 @@
 .View-support :link:hover::after {
   transform: translate(0.2em, -55%);
 }
+
+.View-90 {
+  display: block;
+  width: 9rem;
+  height: auto;
+  margin: 2rem 0;
+}
