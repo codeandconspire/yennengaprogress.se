@@ -18,6 +18,7 @@
   margin-bottom: 2rem;
   position: relative;
   overflow: hidden;
+  background: rgba(0, 0, 0, 0.2);
 }
 
 .Hero-figure::after {
@@ -27,7 +28,7 @@
   position: absolute;
   left: 0;
   top: 0;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.78), rgba(0, 0, 0, 0) 20%);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0) 20%);
 }
 
 .Hero-image {

@@ -8,12 +8,19 @@
   justify-content: center;
   width: 100%;
   min-height: 90vh;
-  padding: 10vh var(--document-margin);
+  padding: 8vh var(--document-margin);
   position: relative;
   overflow: hidden;
   z-index: 0;
   color: #fff;
   text-align: center;
+  margin: 6rem 0;
+}
+
+@media (min-width: 1000px) {
+  .Banner {
+    margin: 8rem 0 10rem;
+  }
 }
 
 .Banner::before {
@@ -24,19 +31,31 @@
   left: 0;
   top: 0;
   z-index: -1;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 .Banner-title {
   max-width: 11em;
-  margin-bottom: 2rem;
+  margin: -1rem 0 2rem;
   font: var(--heading-font);
-  font-size: 3rem;
+  font-size: 2rem;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 500px) {
   .Banner-title {
-    font-size: 6rem;
+    font-size: 3rem;
+  }
+}
+
+@media (min-width: 900px) {
+  .Banner-title {
+    font-size: 4.5rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .Banner-title {
+    font-size: 5.5rem;
   }
 }
 

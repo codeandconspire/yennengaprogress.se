@@ -16,6 +16,7 @@
   color: rgb(var(--dark-blue));
   background-color: transparent;
   border-radius: 4px;
+  vertical-align: top;
 }
 
 .Button::before {

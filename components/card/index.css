@@ -22,7 +22,7 @@
   left: 0;
   top: 0;
   z-index: 1;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7));
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.8));
 }
 
 .Card.is-loading::before {
@@ -45,7 +45,7 @@
 }
 
 .Card--large .Card-content {
-  padding: var(--document-margin);
+  padding: var(--document-margin) var(--document-margin) calc(var(--document-margin) * 2);
 }
 
 .Card-content::before {
@@ -56,6 +56,7 @@
 
 .Card-label {
   margin-bottom: 1.5rem;
+  font-weight: 500;
 }
 
 .Card-title {
@@ -69,16 +70,34 @@
 }
 
 .Card--large .Card-title {
-  font-size: 1.8rem;
+  font-size: 2rem;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 400px) {
   .Card-title {
     font-size: 1.875rem;
   }
 
   .Card--large .Card-title {
     font-size: 3rem;
+  }
+}
+
+@media (min-width: 600px) {
+  .Card--large .Card-title {
+    font-size: 1.875rem;
+  }
+}
+
+@media (min-width: 800px) {
+  .Card--large .Card-title {
+    font-size: 2.5rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .Card--large .Card-title {
+    font-size: 4rem;
   }
 }
 

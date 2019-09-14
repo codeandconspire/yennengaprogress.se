@@ -163,7 +163,7 @@ function home (state, emit) {
 
               return html`
                 <div class="Text">
-                  <h2>${listing ? asText(listing.data.title) : loader(5)}</h2>
+                  <h1>${listing ? asText(listing.data.title) : loader(5)}</h1>
                 </div>
                 ${state.prismic.get(query, opts, function (err, response) {
                   if (err) return null

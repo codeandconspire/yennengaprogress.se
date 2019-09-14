@@ -21,7 +21,7 @@
   --document-color: 55, 55, 55;
 
   --document-width: 1800px;
-  --document-margin: 0.5rem;
+  --document-margin: 0.8rem;
 
   --container-large-width: var(--document-width);
   --container-medium-width: 50rem;
@@ -40,19 +40,19 @@
 
 @media (min-width: 350px) {
   :root {
-    --document-margin: 0.75rem;
+    --document-margin: 1rem;
   }
 }
 
 @media (min-width: 400px) {
   :root {
-    --document-margin: 1rem;
+    --document-margin: 1.5rem;
   }
 }
 
 @media (min-width: 500px) {
   :root {
-    --document-margin: 1.5rem;
+    --document-margin: 1.75rem;
   }
 }
 

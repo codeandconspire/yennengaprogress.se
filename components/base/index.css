@@ -84,6 +84,11 @@ img {
   height: auto;
 }
 
+address {
+  font-style: normal;
+  line-height: 1.2;
+}
+
 img {
   font-size: 0.8rem; /* 1 */
 }
