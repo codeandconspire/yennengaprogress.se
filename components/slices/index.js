@@ -140,7 +140,7 @@ function slices (slices, state, emit, render = () => null) {
                 <h2>${heading}</h2>
               </div>
             ` : null}
-            ${grid({ size: { sm: '1of2', md: '1of3' } }, items.map(function ({ link }) {
+            ${grid({ size: { md: '1of2', lg: '1of3' } }, items.map(function ({ link }) {
               var image = link.data.featured_image
               if (!image || !image.url) image = link.data.image
               return card({
@@ -181,7 +181,7 @@ function slices (slices, state, emit, render = () => null) {
         return html`
           <div class="View-space u-container u-medium">
             <div class="Text u-sizeFull">
-              ${heading ? html`<h2 class="u-spaceB1">${heading}</h2>` : null}
+              ${heading ? html`<h2 class="Text-h1 u-spaceB1">${heading}</h2>` : null}
               <dl>
                 ${items.reduce(function (acc, item) {
                   acc.push(

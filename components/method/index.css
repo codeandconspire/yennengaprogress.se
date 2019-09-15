@@ -6,11 +6,13 @@
   flex-wrap: wrap;
   text-align: center;
   width: 100%;
+  margin-top: -4rem;
+  padding-top: 3rem
 }
 
 .Method-title {
   width: 100%;
-  margin-bottom: 1rem;
+  margin-bottom: 0rem;
   font: var(--heading-font);
   font-size: 3.5rem;
 }
@@ -22,6 +24,9 @@
 }
 
 @media (min-width: 1000px) {
+  .Method {
+    margin-top: -6rem;
+  }
   .Method-title {
     font-size: 5rem;
   }
@@ -53,7 +58,7 @@
   max-width: 80%;
   height: auto;
   margin: 0 auto 1rem;
-  max-width: 19rem;
+  max-width: 21rem;
 }
 
 .Method-content {

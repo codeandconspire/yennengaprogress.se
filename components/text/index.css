@@ -45,7 +45,7 @@
  */
 
 .Text small {
-  font-size: 0.875em;
+  font-size: 0.875rem;
 }
 
 .Text a {
@@ -132,7 +132,7 @@
   font-size: 1.1em;
   overflow: auto;
   background: rgb(var(--sand));
-  padding: 1em;
+  padding: 0.5em 1.2rem 0.6em;
   text-align: left;
   border-radius: 4px;
 }
@@ -217,49 +217,61 @@
 .Text h1,
 .Text .Text-h1 {
   font: var(--heading-font);
-  font-size: 3em;
+  font-size: 3rem;
 }
 
 .Text h2,
 .Text .Text-h2 {
   font: var(--heading-font);
-  font-size: 2em;
-  margin-top: 2em;
+  font-size: 2rem;
+  margin-top: 2rem;
 }
 
 .Text h3,
 .Text .Text-h3 {
-  font-size: 1.625em;
-  margin-top: 1.4em;
+  font-size: 1.625rem;
+  margin-top: 1.4rem;
 }
 
 .Text h4,
 .Text .Text-h4 {
-  font-size: 1.2em;
-  margin-top: 0.4em;
+  font-size: 1.2rem;
+  margin-top: 0.4rem;
 }
 
 .Text h5,
 .Text .Text-h5 {
-  font-size: 1em;
-  margin-top: 0.4em;
+  font-size: 1rem;
+  margin-top: 0.4rem;
 }
 
 .Text h6,
 .Text .Text-h6 {
-  font-size: 0.85em;
-  margin-top: 0.5em;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
 }
 
 @media (min-width: 800px) and (min-height: 400px) {
   .Text h1,
   .Text .Text-h1 {
-    font-size: 4.5em;
+    font-size: 3.5rem;
   }
 
   .Text h2,
   .Text .Text-h2 {
-    font-size: 2.5em;
+    font-size: 2.5rem;
+  }
+}
+
+@media (min-width: 1200px) and (min-height: 400px) {
+  .Text h1,
+  .Text .Text-h1 {
+    font-size: 4.5rem;
+  }
+
+  .Text h2,
+  .Text .Text-h2 {
+    font-size: 3.5rem;
   }
 }
 

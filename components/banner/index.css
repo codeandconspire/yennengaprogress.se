@@ -14,13 +14,6 @@
   z-index: 0;
   color: #fff;
   text-align: center;
-  margin: 6rem 0;
-}
-
-@media (min-width: 1000px) {
-  .Banner {
-    margin: 8rem 0 10rem;
-  }
 }
 
 .Banner::before {

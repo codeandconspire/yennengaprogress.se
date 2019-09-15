@@ -25,6 +25,7 @@
   align-items: center;
   width: 100%;
   padding: var(--document-margin) 0;
+  user-select: none;
 }
 
 @media (min-width: 800px) {
@@ -198,7 +199,7 @@
   }
 
   .View-link--highlighted.View-link--light::before {
-    background-color: rgb(240, 245, 254);
+    background-color: rgb(156, 199, 255);
   }
 }
 
@@ -245,8 +246,8 @@
 
 @media (min-width: 1200px) {
   .View-space {
-    margin-top: 6rem;
-    margin-bottom: 6rem;
+    margin-top: 9rem;
+    margin-bottom: 9rem;
   }
 }
 
@@ -264,12 +265,6 @@
   overflow: hidden;
   background: rgb(var(--dark-blue));
   color: #fff;
-}
-
-@media (min-width: 800px) and (min-height: 400px) {
-  .View-footer {
-    margin-top: 3rem;
-  }
 }
 
 .View-heading {
@@ -318,6 +313,7 @@
   font-size: 1.3rem;
   background-color: rgb(var(--burkina-blue));
   position: relative;
+  user-select: none;
 }
 
 .View-support a::before {

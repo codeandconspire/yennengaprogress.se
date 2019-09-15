@@ -7,13 +7,15 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  padding-top: 1.5rem;
+  padding: calc(var(--document-margin) * 2) var(--document-margin);
   overflow: hidden;
   background-color: #fff;
+  font-size: 0.875rem;
 }
 
 @media (min-width: 600px) {
   .VCard {
+    padding: var(--document-margin);
     flex-wrap: nowrap;
   }
 }
@@ -25,11 +27,19 @@
 .VCard-figure {
   flex: 0 0 auto;
   float: left;
-  width: 7.5rem;
-  margin: 0 1.5rem 1.5rem;
+  width: 11rem;
+  max-width: 100%;
+  margin: 0 auto 2.25rem;
   position: relative;
   overflow: hidden;
   border-radius: 100%;
+}
+
+@media (min-width: 600px) {
+  .VCard-figure {
+    margin-right: var(--document-margin);
+    margin-bottom: 0;
+  }
 }
 
 .VCard-figure::before {
@@ -72,7 +82,6 @@
 
 .VCard-body {
   flex: 1 1 100%;
-  margin: 0 1.5rem 1.5rem;
   text-align: center;
 }
 
@@ -84,16 +93,24 @@
 }
 
 .VCard-header {
-  font-size: 1.25rem;
+  font-size: 1.5rem !important;
+  font: var(--heading-font);
 }
 
 .VCard-header:not(:last-child) {
-  margin-bottom: 0.15em;
+  margin-bottom: 0.9rem;
+}
+
+@media (min-width: 400px) {
+  .VCard-header {
+    font-size: 2rem !important;
+  }
 }
 
 .VCard-label {
   display: block;
-  margin-bottom: 0.5em;
-  font: var(--heading-font);
+  margin-bottom: 1rem;
+  font-family: var(--document-font-family);
   font-size: 1rem;
+  font-weight: 500;
 }

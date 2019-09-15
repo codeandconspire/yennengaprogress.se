@@ -8,7 +8,7 @@
 
   --color-link: var(--dark-blue);
 
-  --heading-font-family: mono45-headline, monospace;
+  --heading-font-family: mono45-headline, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   --heading-font-weight: 500;
   --heading-font-style: normal;
   --heading-line-height: 1;
@@ -79,7 +79,7 @@
 @media (min-width: 1200px) {
   :root {
     --document-margin: 3rem;
-    --container-medium-width: 65rem;
+    --container-medium-width: 55rem;
     --container-small-width: 40rem;
   }
 }

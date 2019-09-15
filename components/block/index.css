@@ -3,7 +3,7 @@
 /* @define Block */
 .Block {
   height: 100%;
-  padding: 1.2rem;
+  padding: calc(var(--document-margin) * 2) var(--document-margin);
   background: #fff;
   text-align: center;
 }
@@ -65,7 +65,7 @@
   margin-bottom: 0.5em;
   color: rgb(var(--umber));
   font: var(--heading-font);
-  font-size: 1.3rem;
+  font-size: 1.5rem;
 }
 
 @media (min-width: 600px) {
@@ -75,11 +75,5 @@
 }
 
 .Block-body {
-  font-size: 0.85rem;
-}
-
-@media (min-width: 600px) {
-  .Block-body {
-    font-size: 1rem;
-  }
+  font-size: 0.875rem;
 }

@@ -13,8 +13,8 @@
 }
 
 .Hero-figure {
-  flex: 0 0 80vh;
-  min-height: 80vh;
+  flex: 0 0 70vh;
+  min-height: 70vh;
   margin-bottom: 2rem;
   position: relative;
   overflow: hidden;
@@ -60,6 +60,7 @@
     left: 0;
     top: 0;
     transform: none;
+    object-position: top;
   }
 }
 
@@ -68,20 +69,20 @@
 }
 
 .Hero-title {
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   font: var(--heading-font);
-  font-size: 3.875rem;
+  font-size: 3.5rem;
 }
 
 .Hero-label {
   display: block;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   font-size: 1rem;
   font-family: var(--document-font-family);
 }
 
 .Hero-description {
-  margin-bottom: 4rem;
+  margin-bottom: 2rem;
 }
 
 .Hero:not(.Hero--image) .Hero-body::before {
@@ -94,7 +95,7 @@
  * 50/50 Layout
  */
 
-@media (min-width: 900px) and (min-height: 600px) {
+@media (min-width: 600px) and (min-height: 600px) {
   .Hero--image {
     flex-direction: row;
   }
@@ -124,14 +125,26 @@
     margin-left: 0 !important;
   }
 
-  .Hero-body::before {
+  .Hero--image .Hero-body > div {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: center;
+  }
+
+  /* .Hero-body::before {
     content: "";
     display: block;
     flex: 0 1 25vh;
-  }
+  } */
 
   .Hero--image .Hero-title {
-    margin-bottom: 20vh;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 7rem 0 2rem;
+    font-size: 3rem;
   }
 
   .Hero-label {
@@ -139,6 +152,18 @@
   }
 
   .Hero-description {
-    margin-bottom: 0;
+    margin-bottom: var(--document-margin);
+  }
+}
+
+@media (min-width: 800px) and (min-height: 600px) {
+  .Hero--image .Hero-title {
+    font-size: 3.5rem;
+  }
+}
+
+@media (min-width: 1200px) and (min-height: 600px) {
+  .Hero--image .Hero-title {
+    font-size: 4rem;
   }
 }

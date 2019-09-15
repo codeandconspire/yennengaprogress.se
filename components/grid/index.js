@@ -13,7 +13,8 @@ function grid (opts, children) {
   }
 
   var classes = className('Grid', {
-    'Grid--compact': opts.compact
+    'Grid--compact': opts.compact,
+    'Grid--square': opts.square
   })
   if (opts.ordered) return html`<ol class="${classes}">${children.map(child)}</ol>`
   return html`<div class="${classes}">${children.map(child)}</div>`

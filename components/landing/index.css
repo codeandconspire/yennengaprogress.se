@@ -171,7 +171,7 @@
 
 @media (min-width: 900px) {
   .Landing-heading {
-    margin: 0;
+    margin: 0 0 -2rem;
     padding-right: 5vw;
     animation-delay: 650ms;
   }

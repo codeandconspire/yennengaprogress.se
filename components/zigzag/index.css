@@ -8,7 +8,6 @@
 .Zigzag {
   width: 100%;
   overflow: hidden;
-  margin: 6rem 0;
 }
 
 @media (min-width: 600px) {
@@ -26,6 +25,7 @@
       grid-template-columns: 1fr 1fr;
       grid-template-rows: 1fr;
       padding-top: 10vh;
+      margin-bottom: -3rem;
     }
 
     .Zigzag-item {
@@ -54,18 +54,21 @@
   overflow: hidden;
   font: var(--heading-font);
   font-size: 1.5rem;
-  line-height: 6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   white-space: nowrap;
   color: rgb(var(--document-color));
   background-color: #fff;
   text-align: center;
+  min-height: 2.5rem;
+  user-select: none;
 }
 
 @media (min-width: 1000px) {
   .Zigzag-button,
   .Zigzag-button:hover {
     height: 10vh;
-    line-height: 10vh;
   }
 }
 
@@ -79,7 +82,8 @@
   background-position: center;
   background-size: 0.45em;
   position: relative;
-  top: 0.15em;
+  align-self: center;
+  top: -0.05em;
 }
 
 .Zigzag-button::before {
@@ -90,7 +94,7 @@
   left: -10%;
   top: 0;
   z-index: -1;
-  background-color: rgb(240, 245, 254);
+  background-color: rgb(156, 199, 255);
   transform: skew(-25deg) translateX(-100%);
   transition: transform 400ms cubic-bezier(0.215, 0.61, 0.355, 1);
   will-change: transform;

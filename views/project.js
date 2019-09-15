@@ -63,56 +63,54 @@ function project (state, emit) {
               ${grid({ size: { md: '1of3' } }, FACTS_LABELS.map((label) => html`
                 <div class="Text u-textCenter">
                   <h2 class="Text-h3 u-colorDarkBlue u-spaceB0">${text(label)}</h2>
-                  <p class="u-spaceT1">${doc.data[label.toLowerCase()]}</p>
+                  <p class="u-spaceT0">${doc.data[label.toLowerCase()]}</p>
                 </div>
               `))}
             </div>
           </div>
-          <div class="u-container">
-            ${grid({ size: { md: '1of2' }, compact: true }, [
-              card({
-                large: true,
-                theme: 'white',
-                label: text`Contributing to these`,
-                title: text`Global Goals`,
-                body: html`
-                  ${grid({ size: { lg: '1of4', xs: '1of2' } }, doc.data.goals.map(({ goal }, index) => html`
-                    <a href="/projects?goal=${encodeURIComponent(goal)}" class="u-spaceR2 u-spaceB2">
-                      <img src="/goal-${goal.match(/^(\d+)/)[1]}.svg" alt="${goal}">
-                    </a>
-                  `))}
-                  <div class="Text">
-                    <small class="Text-muted u-colorDefault">${text`Click on a target to view related projects.`}</small>
-                  </div>
-                `
-              }),
-              card({
-                large: true,
-                theme: 'umber',
-                label: doc.data.support_label,
-                title: asText(doc.data.support_heading),
-                body: html`
-                  <div class="Text Text--small">
-                    ${asElement(doc.data.support_text, resolve)}
-                    <hr class="u-spaceT6">
-                    <p>${doc.data.support_cta}</p>
-                    ${doc.data.support_link.id && !doc.data.support_link.isBroken ? button({
-                      fill: true,
-                      text: doc.data.support_link.data.cta || text`Read more`,
-                      href: resolve(doc.data.support_link),
-                      onclick (event) {
-                        if (metaKey(event)) return
-                        emit('pushState', event.currentTarget.href, {
-                          partial: doc.data.support_link
-                        })
-                        event.preventDefault()
-                      }
-                    }) : null}
-                  </div>
-                `
-              })
-            ])}
-          </div>
+          ${grid({ size: { md: '1of2' }, compact: true }, [
+            card({
+              large: true,
+              theme: 'white',
+              label: text`Contributing to these`,
+              title: text`Global Goals`,
+              body: html`
+                ${grid({ size: { xs: '1of2', lg: '1of3', xl: '1of4' }, square: true }, doc.data.goals.map(({ goal }, index) => html`
+                  <a href="/projects?goal=${encodeURIComponent(goal)}">
+                    <img src="/goal-${goal.match(/^(\d+)/)[1]}.svg" alt="${goal}">
+                  </a>
+                `))}
+                <div class="Text u-spaceT2">
+                  <small class="Text-muted u-colorDefault">${text`Click on a target to view related projects.`}</small>
+                </div>
+              `
+            }),
+            card({
+              large: true,
+              theme: 'umber',
+              label: doc.data.support_label,
+              title: asText(doc.data.support_heading),
+              body: html`
+                <div class="Text Text--small">
+                  ${asElement(doc.data.support_text, resolve)}
+                  <hr class="u-spaceT6">
+                  <p>${doc.data.support_cta}</p>
+                  ${doc.data.support_link.id && !doc.data.support_link.isBroken ? button({
+                    fill: true,
+                    text: doc.data.support_link.data.cta || text`Read more`,
+                    href: resolve(doc.data.support_link),
+                    onclick (event) {
+                      if (metaKey(event)) return
+                      emit('pushState', event.currentTarget.href, {
+                        partial: doc.data.support_link
+                      })
+                      event.preventDefault()
+                    }
+                  }) : null}
+                </div>
+              `
+            })
+          ])}
           <div class="View-space">
             ${slices(doc.data.body, state, emit)}
           </div>
