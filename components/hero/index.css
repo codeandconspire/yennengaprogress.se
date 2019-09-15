@@ -3,11 +3,13 @@
 /* @define Hero */
 .Hero {
   width: 100%;
+  padding-top: 9rem;
 }
 
 .Hero--image {
   display: flex;
   flex-direction: column;
+  padding-top: 0;
   min-height: 100%;
   min-height: 100vh;
 }
