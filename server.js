@@ -1,4 +1,4 @@
-if (!process.env.NOW) require('dotenv/config')
+if (!process.env.HEROKU) require('dotenv/config')
 
 var got = require('got')
 var jalla = require('jalla')
@@ -23,7 +23,7 @@ var MAILGUN_HOST = 'api.eu.mailgun.net'
 
 var app = jalla('index.js', {
   sw: 'sw.js',
-  serve: Boolean(process.env.NOW)
+  serve: Boolean(process.env.HEROKU)
 })
 
 app.use(post('/api/join', compose([body({ multipart: true }), async function (ctx, next) {
@@ -35,7 +35,7 @@ app.use(post('/api/join', compose([body({ multipart: true }), async function (ct
 
     var origin = process.env.NODE_ENV === 'development'
       ? 'http://localhost:8080'
-      : 'https://' + process.env.npm_package_now_alias
+      : 'https://' + process.env.HOST
     var api = await Prismic.api(REPOSITORY, { req: ctx.req })
     var message = await api.getByUID('email', 'join')
     var notification = await api.getByUID('email', 'notification')
@@ -197,7 +197,7 @@ app.use(function (ctx, next) {
  * Purge Cloudflare cache when starting production server
  */
 app.listen(process.env.PORT || 8080, function () {
-  if (process.env.NOW && app.env === 'production') {
+  if (process.env.HEROKU && app.env === 'production') {
     queried().then(function (urls) {
       purge(urls.concat('/sw.js'), function (err) {
         if (err) app.emit('error', err)

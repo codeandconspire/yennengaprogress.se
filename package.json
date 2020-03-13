@@ -8,7 +8,6 @@
     "start": "node server.js",
     "build": "jalla build index.js --sw sw.js",
     "purge": "node -r dotenv/config -e \"require('./lib/purge')(['/sw.js', '/sw.js.map'], console.log)\"",
-    "deploy": "npx now -T codeandconspire && npx now alias -T codeandconspire"
   },
   "documentify": {
     "transform": [
@@ -19,20 +18,6 @@
         }
       ]
     ]
-  },
-  "now": {
-    "alias": "www.yennengaprogress.se",
-    "env": {
-      "NODE_ENV": "production",
-      "CLOUDINARY_KEY": "@cloudinary-key",
-      "CLOUDINARY_SECRET": "@cloudinary-secret",
-      "PRISMIC_SECRET": "@prismic-yennengaprogress-secret",
-      "CLOUDFLARE_ZONE": "@cloudflare-yennengaprogress-zone",
-      "CLOUDFLARE_EMAIL": "@cloudflare-codeandconspire-email",
-      "CLOUDFLARE_KEY": "@cloudflare-codeandconspire-key",
-      "MAILGUN_KEY": "@mailgun-yennengaprogress-key",
-      "POLYFILL_FEATURES": "es2017"
-    }
   },
   "repository": {
     "type": "git",
