@@ -53,6 +53,11 @@
   transition: color 100ms var(--ease-out);
 }
 
+.u-colorWhite .Text a {
+  color: rgb(255, 255, 255) !important;
+  text-decoration: underline;
+}
+
 .Text a:hover {
   color: rgb(var(--dark-blue));
 }
