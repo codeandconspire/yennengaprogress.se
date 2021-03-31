@@ -1,6 +1,9 @@
 {
   "name": "yennengaprogress.se",
-  "version": "1.0.3",
+  "version": "1.0.4",
+  "engines": {
+    "node": "15.0.1"
+  },
   "description": "Offical webpage of Yennenga Progress",
   "main": "index.js",
   "scripts": {
