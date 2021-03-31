@@ -68,7 +68,7 @@ function page (state, emit) {
               var { heading, description, terms, email_subject, recipient_email, callback } = slice.primary
 
               return html`
-                <div class="u-bgDarkBlue u-colorWhite u-cf" id="donation">
+                <div class="u-bgDarkBlue u-colorWhite u-cf">
                   <form method="POST" action="/api/donate" class="View-space u-container">
                     <input type="hidden" name="email_subject" value="${email_subject}">
                     <input type="hidden" name="recipient_email" value="${recipient_email}">
