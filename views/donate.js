@@ -65,15 +65,14 @@ function page (state, emit) {
           <div class="View-space">
             ${slices(doc.data.body, state, emit, function (slice) {
               if (!slice.slice_type === 'form') return null
-              var { callback, heading, description, terms, purchase } = slice.primary
+              var { heading, description, terms, email_subject, recipient_email, callback } = slice.primary
+
               return html`
-                <div class="u-bgDarkBlue u-colorWhite u-cf">
-                  <form method="POST" action="https://old.yennengaprogress.se/projekt/yennenga-progress/?page=donate" class="View-space u-container">
+                <div class="u-bgDarkBlue u-colorWhite u-cf" id="donation">
+                  <form method="POST" action="/api/donate" class="View-space u-container">
+                    <input type="hidden" name="email_subject" value="${email_subject}">
+                    <input type="hidden" name="recipient_email" value="${recipient_email}">
                     <input type="hidden" name="callback_url" value="${state.origin + (callback.id && !callback.isBroken ? resolve(slice.primary.callback) : state.href)}">
-                    <input type="hidden" name="shop_url" value="${state.origin + state.href}">
-                    <input type="hidden" name="language" value="${doc.lang.split('-')[0]}">
-                    <input type="hidden" name="projectid" value="7188">
-                    ${purchase ? html`<input type="hidden" name="title" value="${purchase}">` : null}
                     ${grid([
                       grid.cell({ size: { md: '1of2', lg: '1of3' } }, html`
                         <div class="Text">
@@ -86,21 +85,33 @@ function page (state, emit) {
                           ${grid({ size: { lg: '1of2' } }, [
                             html`
                               <div>
-                                ${form.input({ label: text`First name`, type: 'text', name: 'firstname', id: 'firstname', required: true })}
-                                ${form.input({ label: text`Last name`, type: 'text', name: 'lastname', id: 'lastname', required: true })}
+                                ${form.input({ label: text`Förnamn`, type: 'text', name: 'firstname', id: 'firstname', required: true })}
+                                ${form.input({ label: text`Efternamn`, type: 'text', name: 'lastname', id: 'lastname', required: true })}
                               </div>
-                              `,
+                            `,
                             html`
                               <div>
-                                ${form.input({ label: text`How much would you like to donate?`, value: 100, min: 0, type: 'number', name: 'donation', id: 'donation', required: true })}
-                                ${form.input({ label: text`Email`, type: 'email', name: 'email', id: 'email', required: true })}
+                                ${form.input({ label: text`E-post`, type: 'email', name: 'email', id: 'email', required: true })}
+                                ${form.input({ label: text`Personnummer`, type: 'text', placeholder: 'ÅÅÅÅMMDD-XXXX', name: 'ssn', id: 'ssn', required: true })}
+                              </div>
+                            `,
+                            html`
+                              <div>
+                                ${form.input({ label: text`Bank`, type: 'text', name: 'bank', id: 'bank', required: true })}
+                                ${form.input({ label: text`Kontonummer`, type: 'text', name: 'account', id: 'account', required: true })}
+                              </div>
+                            `,
+                            html`
+                              <div>
+                                ${form.input({ label: text`Clearingnummer`, type: 'text', name: 'clearing', id: 'clearing', required: true })}
+                                ${form.input({ label: text`Hur mycket vill du donera?`, value: 100, min: 0, type: 'number', name: 'donation', id: 'donation', required: true })}
                               </div>
                             `
                           ])}
                           ${grid({ size: { lg: '1of2' } }, [html`
                             <div class="u-flex u-spaceT2">
                               <div class="u-spaceR2">
-                                ${button({ type: 'submit', text: text`Donate`, fill: true })}
+                                ${button({ type: 'submit', text: text`Skicka`, fill: true })}
                               </div>
                               <div class="Text Text--small Text--adapt">
                                 ${asElement(terms, resolve, function (type, node, content, children) {

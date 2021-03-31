@@ -33,5 +33,14 @@
   "Donate": "Donate",
   "First name": "First name",
   "Last name": "Last name",
-  "Something went wrong. Please, ensure that everything is filled in correctly before trying again.": "Something went wrong. Please, ensure that everything is filled in correctly before trying again."
+  "Something went wrong. Please, ensure that everything is filled in correctly before trying again.": "Something went wrong. Please, ensure that everything is filled in correctly before trying again.",
+  "Förnamn": "Förnamn",
+  "Efternamn": "Efternamn",
+  "E-post": "E-post",
+  "Personnummer": "Personnummer",
+  "Bank": "Bank",
+  "Kontonummer": "Kontonummer",
+  "Clearingnummer": "Clearingnummer",
+  "Hur mycket vill du donera?": "Hur mycket vill du donera?",
+  "Skicka": "Skicka"
 }

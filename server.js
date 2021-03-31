@@ -140,6 +140,51 @@ app.use(post('/api/prismic-hook', compose([body(), function (ctx) {
 }])))
 
 /**
+ * Send donation requests as email 
+ */
+ app.use(post('/api/donate', compose([body(), function (ctx) {
+  var {
+    firstname,
+    lastname,
+    email,
+    ssn,
+    bank,
+    account,
+    clearing,
+    donation,
+    email_subject,
+    recipient_email,
+    callback_url
+  } = ctx.request.body;
+
+  var fullName = `${firstname} ${lastname}`
+
+  var body = `Förnamn: ${firstname}
+Efternamn: ${lastname}
+E-post: ${email}
+Personnummer: ${ssn}
+Bank: ${bank}
+Kontonummer: ${account}
+Clearingnummer: ${clearing}
+Donation: ${donation} kr`;
+
+  const client = mailgun({
+    apiKey: process.env.MAILGUN_KEY,
+    domain: MAILGUN_DOMAIN,
+    host: MAILGUN_HOST
+  });
+
+  client.messages().send({
+    from: `${fullName} <${email}>`,
+    to: recipient_email,
+    subject: email_subject,
+    text: body
+  });
+
+  ctx.redirect(callback_url)
+}])))
+
+/**
  * Handle Prismic previews
  * Capture the preview token, setting it as a cookie and redirect to the
  * document being previewed. The Prismic library will pick up the cookie and use
