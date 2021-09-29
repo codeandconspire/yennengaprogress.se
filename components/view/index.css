@@ -373,3 +373,26 @@
   height: auto;
   margin: 2rem 0;
 }
+
+.View-link--flag {
+  font-size: 0;
+  color: transparent;
+  padding: 0.4rem;
+  align-self: center;
+  margin: -0.4rem 0 -0.4rem 0.5rem !important;
+  flex-shrink: 0;
+}
+
+.View-link--flag svg {
+  display: block;
+  width: 1.5rem;
+  height: auto;
+  border: 1px solid #fff6;
+}
+
+@media (min-width: 500px) {
+  .View-link--flag {
+    padding: 0.9rem;
+    margin: -0.4rem -0.4rem -0.4rem 0.7rem !important;
+  }
+}
