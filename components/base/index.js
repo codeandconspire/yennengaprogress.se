@@ -150,8 +150,8 @@ function src (uri, size, opts = {}) {
   if (!/q_/.test(transforms)) transforms += ',q_auto'
 
   // trim prismic domain from uri
-  var parts = uri.split('yennengaprogress.cdn.prismic.io/yennengaprogress/')
-  uri = parts[parts.length - 1]
+  var parts = uri.split('images.prismic.io/yennengaprogress/')
+  uri = encodeURIComponent(parts[parts.length - 1])
 
   return `/media/${type}/${transforms ? transforms + ',' : ''}w_${size}/${uri}`
 }
