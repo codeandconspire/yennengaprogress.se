@@ -103,6 +103,9 @@
   font-size: 0.875rem;
   white-space: nowrap;
   font-weight: 500;
+
+  /* Override all the color logics since we have to many items now anyways */
+  color: #000 !important;
 }
 
 @media (max-width: 900px), (max-height: 600px) {
@@ -394,5 +397,19 @@
   .View-link--flag {
     padding: 0.9rem;
     margin: -0.4rem -0.4rem -0.4rem 0.7rem !important;
+  }
+}
+
+@media (max-width: 625px) {
+  .View-nav {
+    flex-wrap: wrap;
+  }
+
+  .View-home {
+    margin: 0 auto;
+  }
+
+  .View-menu {
+    margin: 0 auto;
   }
 }

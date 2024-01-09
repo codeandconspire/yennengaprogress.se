@@ -19,6 +19,11 @@ function header (items, href) {
             <div class="u-hiddenVisually">${text`Home page`},</div>
           </a>
           <nav class="View-menu">
+            <span>
+              <a href="https://whistlesecure.com/yennengaprogress" target="_blank" rel="noopener noreferrer" class="${className('View-link', { 'View-link--light': href === ''})}">
+                Whistleblowing
+              </a>
+            </span>
             ${items.map((props, index) => html`
               <span>
                 <a href="${props.href}" class="${className('View-link', { 'View-link--light': href === '', [`View-link--${props.type.toLowerCase()}`]: props.type })}" onclick=${props.onclick}>

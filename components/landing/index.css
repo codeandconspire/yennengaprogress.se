@@ -162,7 +162,7 @@
 .Landing-heading {
   float: left;
   flex: 1 1 auto;
-  margin: 14vh 0 10vh;
+  margin: max(14vh, 200px) 0 10vh;
   opacity: 0;
   animation: var(--slide-up-animation);
   animation-delay: 350ms;
